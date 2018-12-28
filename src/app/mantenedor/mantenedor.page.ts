@@ -2,10 +2,11 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-mantenedor',
-  templateUrl: 'mantenedor.page.html',
-  styleUrls: ['mantenedor.page.scss']
+  templateUrl: './mantenedor.page.html',
+  styleUrls: ['./mantenedor.page.scss'],
 })
 export class MantenedorPage implements OnInit {
+
   private selectedItem: any;
   private icons = [
     'flask',
@@ -32,8 +33,5 @@ export class MantenedorPage implements OnInit {
 
   ngOnInit() {
   }
-  // add back when alpha.4 is out
-  // navigate(item) {
-  //   this.router.navigate(['/mantenedor', JSON.stringify(item)]);
-  // }
+
 }

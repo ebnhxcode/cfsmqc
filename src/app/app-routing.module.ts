@@ -14,7 +14,8 @@ const routes: Routes = [
   {
     path: 'mantenedor',
     loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule'
-  }
+  },
+  { path: 'mantenedor', loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule' }
 ];
 
 @NgModule({
