@@ -15,7 +15,8 @@ const routes: Routes = [
     path: 'mantenedor',
     loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule'
   },
-  { path: 'mantenedor', loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule' }
+  { path: 'mantenedor', loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' }
 ];
 
 @NgModule({
