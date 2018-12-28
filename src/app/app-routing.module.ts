@@ -11,9 +11,13 @@ const routes: Routes = [
     path: 'home',
     loadChildren: './home/home.module#HomePageModule'
   },
-  {
+  /*{
     path: 'list',
     loadChildren: './list/list.module#ListPageModule'
+  },*/
+  {
+    path: 'mantenedor',
+    loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule'
   }
 ];
 
