@@ -17,7 +17,10 @@ const routes: Routes = [
   },
   { path: 'mantenedor', loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'autoayuda', loadChildren: './autoayuda/autoayuda.module#AutoayudaPageModule' }
+  { path: 'autoayuda', loadChildren: './autoayuda/autoayuda.module#AutoayudaPageModule' },
+  { path: 'reportes', loadChildren: './reportes/reportes.module#ReportesPageModule' },
+  { path: 'controlescalidad', loadChildren: './controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
+  { path: 'opciones', loadChildren: './opciones/opciones.module#OpcionesPageModule' }
 ];
 
 @NgModule({
