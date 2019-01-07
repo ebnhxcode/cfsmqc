@@ -12,12 +12,12 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/home',
+      url: '/componentes/home',
       icon: 'home'
     },
     {
       title: 'Mantenedor',
-      url: '/mantenedor',
+      url: '/componentes/mantenedor',
       icon: 'cog'
     }
   ];

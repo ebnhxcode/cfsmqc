@@ -1,0 +1,154 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Control de Calidad</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-item>
+    <ion-label position="stacked">Calculo prueba</ion-label>
+    <ion-input
+      class="success"
+      type="text" 
+      [(ngModel)]="control.calculo_total"
+      [ngModelOptions]="{standalone: true}">
+    </ion-input>
+
+  </ion-item>
+
+  <form novalidate>
+
+    <ion-item>
+      <ion-label position="stacked">Región</ion-label>
+
+      <ion-select
+        type="select" 
+        placeholder="Región"
+        [(ngModel)]="control.region"
+        [ngModelOptions]="{standalone: true}">
+
+        <ion-option *ngFor="let region of regiones" value="region.region_id">
+          {{region.region_nombre}}
+        </ion-option>
+
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Productor</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Productor"
+        [(ngModel)]="control.productor_id"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Especie</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Especie"
+        [(ngModel)]="control.especie_id"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+
+
+    <ion-item>
+      <ion-label position="stacked">Variedad</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Variedad"
+        [(ngModel)]="control.variedad_id"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Calibre</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Calibre"
+        [(ngModel)]="control.calibre"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+
+
+
+
+
+
+    <ion-item>
+      <ion-label position="stacked">Categoría</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Categoría"
+        [(ngModel)]="control.categoria_id"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label position="stacked">Embalaje</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Embalaje"
+        [(ngModel)]="control.embalaje_id"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+
+
+
+    <ion-item>
+      <ion-label position="stacked">Etiqueta</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Etiqueta"
+        [(ngModel)]="control.etiqueta_id"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label position="stacked">Peso</ion-label>
+
+      <ion-input
+        type="select" 
+        placeholder="Peso"
+        [(ngModel)]="control.peso"
+        [ngModelOptions]="{standalone: true}">
+      </ion-input>
+    </ion-item>
+
+
+
+    <ion-button fill="solid" expand="block" color="primary" (click)="guardarContinuar()">
+      Guardar y Continuar
+    </ion-button>
+
+    <ion-button fill="solid" expand="block" color="light" (click)="irHome()">
+      Volver
+    </ion-button>
+
+  </form>
+
+
+
+</ion-content>

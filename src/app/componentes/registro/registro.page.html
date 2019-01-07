@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Registro</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- View content -->
+<ion-content padding hide-tabs>
+    <!-- 
+      ##########################################################
+              REGISTRO CON CREDENCIALES LOCALSTORAGE || FIREBASE
+      ##########################################################
+    -->
+  
+    <form novalidate>
+  
+      <ion-item>
+        <ion-label position="stacked">Usuario</ion-label>
+  
+        <ion-input
+          type="email" 
+          placeholder="Usuario o correo"
+          [(ngModel)]="usuario">
+        </ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Clave</ion-label>
+  
+        <ion-input
+          type="password"
+          placeholder="Clave"
+          [(ngModel)]="clave">
+        </ion-input>
+      </ion-item>
+
+      <ion-item>
+          <ion-label position="stacked">Repetir Clave</ion-label>
+    
+          <ion-input
+            type="password"
+            placeholder="La clave nuevamente"
+            [(ngModel)]="rclave">
+          </ion-input>
+        </ion-item>
+
+      <ion-button fill="solid" expand="block" color="primary" (click)="registrar()">
+        Registrar
+      </ion-button>
+
+      <ion-button fill="solid" expand="block" color="light" href="/login">
+        Volver
+      </ion-button>
+  
+    </form>
+  
+  </ion-content>	

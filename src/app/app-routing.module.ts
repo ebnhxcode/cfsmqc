@@ -7,20 +7,15 @@ const routes: Routes = [
     redirectTo: 'login',
     pathMatch: 'full'
   },
-  {
-    path: 'login',
-    loadChildren: './login/login.module#LoginPageModule'
-  },
-  {
-    path: 'mantenedor',
-    loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule'
-  },
-  { path: 'mantenedor', loadChildren: './mantenedor/mantenedor.module#MantenedorPageModule' },
-  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
-  { path: 'autoayuda', loadChildren: './autoayuda/autoayuda.module#AutoayudaPageModule' },
-  { path: 'reportes', loadChildren: './reportes/reportes.module#ReportesPageModule' },
-  { path: 'controlescalidad', loadChildren: './controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
-  { path: 'opciones', loadChildren: './opciones/opciones.module#OpcionesPageModule' }
+  { path: 'login', loadChildren: './componentes/login/login.module#LoginPageModule' },
+  { path: 'mantenedor', loadChildren: './componentes/mantenedor/mantenedor.module#MantenedorPageModule' },
+  { path: 'login', loadChildren: './componentes/login/login.module#LoginPageModule' },
+  { path: 'home', loadChildren: './componentes/home/home.module#HomePageModule' },
+  { path: 'autoayuda', loadChildren: './componentes/autoayuda/autoayuda.module#AutoayudaPageModule' },
+  { path: 'reportes', loadChildren: './componentes/reportes/reportes.module#ReportesPageModule' },
+  { path: 'controlescalidad', loadChildren: './componentes/controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
+  { path: 'opciones', loadChildren: './componentes/opciones/opciones.module#OpcionesPageModule' },
+  { path: 'registro', loadChildren: './componentes/registro/registro.module#RegistroPageModule' }
 ];
 
 @NgModule({

@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Login</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<!-- View content -->
+<ion-content padding hide-tabs>
+    <ion-img src="/assets/imgs/uvanegra.jpg"></ion-img>
+ 
+    <!-- 
+      ##########################################################
+              LOGIN CON CREDENCIALES LOCALSTORAGE || FIREBASE
+      ##########################################################
+    -->
+  
+    <form novalidate>
+  
+      <ion-item>
+        <ion-label position="stacked">Usuario</ion-label>
+  
+        <ion-input
+          type="email" 
+          placeholder="Usuario o correo"
+          [(ngModel)]="credenciales.usuario"
+          [ngModelOptions]="{standalone: true}">
+        </ion-input>
+      </ion-item>
+  
+      <ion-item>
+        <ion-label position="stacked">Clave</ion-label>
+  
+        <ion-input
+          type="password"
+          placeholder="Clave"
+          [(ngModel)]="credenciales.clave"
+          [ngModelOptions]="{standalone: true}">
+        </ion-input>
+      </ion-item>
+
+      <ion-button fill="solid" expand="block" color="primary" (click)="login()">
+        Login
+      </ion-button>
+  
+    </form>
+  
+
+    <ion-item padding>
+
+    </ion-item>
+
+    <ion-button fill="solid" expand="block" color="light" href="#!"><!-- href="/resetearclave" -->
+      Olvide mi clave
+    </ion-button>
+  
+    <ion-button fill="solid" expand="block" color="light" href="/registro">
+      Registrar
+    </ion-button>
+
+
+
+
+  
+  </ion-content>	
