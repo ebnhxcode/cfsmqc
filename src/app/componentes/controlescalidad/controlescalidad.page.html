@@ -23,14 +23,16 @@
       <ion-label position="stacked">Región</ion-label>
 
       <ion-select
-        type="select" 
+        okText="OK" cancelText="Cancelar"  
         placeholder="Región"
-        [(ngModel)]="control.region"
+        [(ngModel)]="control.region_id"
         [ngModelOptions]="{standalone: true}">
 
-        <ion-option *ngFor="let region of regiones" value="region.region_id">
-          {{region.region_nombre}}
-        </ion-option>
+        <ion-select-option 
+          *ngFor="let region of regiones" 
+          [value]="region.region_id">
+          {{ region.region_nombre }}
+        </ion-select-option>
 
       </ion-select>
     </ion-item>

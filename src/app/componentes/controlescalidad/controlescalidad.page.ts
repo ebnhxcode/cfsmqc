@@ -9,7 +9,7 @@ import { NavController, LoadingController, NavParams } from "@ionic/angular";
 export class ControlescalidadPage implements OnInit {
 
   control = {
-    region:null,
+    region_id:null,
     productor_id:null,
     especie_id:null,
     variedad_id:null,

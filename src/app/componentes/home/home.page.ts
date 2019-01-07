@@ -9,18 +9,6 @@ import { NavController, LoadingController, NavParams } from "@ionic/angular";
 })
 export class HomePage {
 
-  control = {
-    region_id:'',
-    productor_id:'',
-    especie_id:'',
-    variedad_id:'',
-    calibre:'',
-    categoria_id:'',
-    embalaje_id:'',
-    etiqueta_id:'',
-    peso:'',
-  }
-
   constructor (
     public navCtrl: NavController,
     public router: Router
