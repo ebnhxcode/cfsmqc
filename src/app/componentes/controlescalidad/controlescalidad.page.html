@@ -20,10 +20,10 @@
   <form novalidate>
 
     <ion-item>
+
       <ion-label position="stacked">Región</ion-label>
 
       <ion-select
-        okText="OK" cancelText="Cancelar"  
         placeholder="Región"
         [(ngModel)]="control.region_id"
         [ngModelOptions]="{standalone: true}">
@@ -41,23 +41,35 @@
     <ion-item>
       <ion-label position="stacked">Productor</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
         placeholder="Productor"
         [(ngModel)]="control.productor_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let productor of productores" 
+          [value]="productor.productor_id">
+          {{ productor.productor_nombre }}
+        </ion-select-option>
+
+      </ion-select>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Especie</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
         placeholder="Especie"
         [(ngModel)]="control.especie_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let especie of especies" 
+          [value]="especie.especie_id">
+          {{ especie.especie_nombre }}
+        </ion-select-option>
+
+      </ion-select>
     </ion-item>
 
 
@@ -65,12 +77,19 @@
     <ion-item>
       <ion-label position="stacked">Variedad</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
+        okText="OK" cancelText="Cancelar"
         placeholder="Variedad"
         [(ngModel)]="control.variedad_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let variedad of variedades" 
+          [value]="variedad.variedad_id">
+          {{ variedad.variedad_nombre }}
+        </ion-select-option>
+      </ion-select>
+
     </ion-item>
 
 

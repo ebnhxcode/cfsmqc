@@ -10,20 +10,21 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 // Firebase config.
-import { configuraciones } from './servicios/entornos/configuraciones';
+import { firebaseConfig } from './servicios/databases/firebase-config';
 // Firebase deps
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
-
+import { HttpModule } from '@angular/http';
 
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
   imports: [
     BrowserModule,
+    HttpModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    AngularFireModule.initializeApp(configuraciones.firebase),
+    AngularFireModule.initializeApp(firebaseConfig.firebase),
     AngularFireAuthModule
   ],
   providers: [

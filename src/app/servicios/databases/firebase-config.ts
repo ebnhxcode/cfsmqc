@@ -1,4 +1,4 @@
-export const configuraciones = {
+export const firebaseConfig = {
    produccion: false,
    firebase: {
       apiKey: "AIzaSyALqkFTQHE67ULIQOkeezkUYaSJiTjKdZw",
