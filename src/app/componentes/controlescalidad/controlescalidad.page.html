@@ -6,17 +6,6 @@
 
 <ion-content padding>
 
-  <ion-item>
-    <ion-label position="stacked">Calculo prueba</ion-label>
-    <ion-input
-      class="success"
-      type="text" 
-      [(ngModel)]="control.calculo_total"
-      [ngModelOptions]="{standalone: true}">
-    </ion-input>
-
-  </ion-item>
-
   <form novalidate>
 
     <ion-item>
@@ -96,12 +85,18 @@
     <ion-item>
       <ion-label position="stacked">Calibre</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
+        okText="OK" cancelText="Calibre"
         placeholder="Calibre"
-        [(ngModel)]="control.calibre"
+        [(ngModel)]="control.calibre_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let calibre of calibres" 
+          [value]="calibre.calibre_id">
+          {{ calibre.calibre_nombre }}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
 
@@ -113,24 +108,37 @@
     <ion-item>
       <ion-label position="stacked">Categoría</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
+        okText="OK" cancelText="Categoría"
         placeholder="Categoría"
         [(ngModel)]="control.categoria_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let categoria of categorias" 
+          [value]="categoria.categoria_id">
+          {{ categoria.categoria_nombre }}
+        </ion-select-option>
+      </ion-select>
+
     </ion-item>
 
 
     <ion-item>
       <ion-label position="stacked">Embalaje</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
+        okText="OK" cancelText="Embalaje"
         placeholder="Embalaje"
         [(ngModel)]="control.embalaje_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let embalaje of embalajes" 
+          [value]="embalaje.embalaje_id">
+          {{ embalaje.embalaje_nombre }}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
 
@@ -139,12 +147,18 @@
     <ion-item>
       <ion-label position="stacked">Etiqueta</ion-label>
 
-      <ion-input
-        type="select" 
+      <ion-select
+        okText="OK" cancelText="Etiqueta"
         placeholder="Etiqueta"
         [(ngModel)]="control.etiqueta_id"
         [ngModelOptions]="{standalone: true}">
-      </ion-input>
+
+        <ion-select-option 
+          *ngFor="let etiqueta of etiquetas" 
+          [value]="etiqueta.etiqueta_id">
+          {{ etiqueta.etiqueta_nombre }}
+        </ion-select-option>
+      </ion-select>
     </ion-item>
 
     <ion-item>

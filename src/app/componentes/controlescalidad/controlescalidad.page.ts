@@ -42,10 +42,10 @@ export class ControlescalidadPage implements OnInit {
   productores: any[];
   especies: any[];
   variedades: any[];
-  calibre: any[];
-  categoria: any[];
-  embalaje: any[];
-  etiqueta: any[];
+  calibres: any[];
+  categorias: any[];
+  embalajes: any[];
+  etiquetas: any[];
   peso: any[];
   
 
@@ -80,12 +80,14 @@ export class ControlescalidadPage implements OnInit {
 
 
     let self = this;
-
-
-    this.http.get(`${this.url_base}/regiones`).subscribe( res => { self.regiones = res.json(); });
-    this.http.get(`${this.url_base}/productores`).subscribe( res => { self.productores = res.json(); });
-    this.http.get(`${this.url_base}/especies`).subscribe( res => { self.especies = res.json(); });
-    this.http.get(`${this.url_base}/variedades`).subscribe( res => { self.variedades = res.json(); });
+    this.http.get(`${this.url_base}/getRegiones`).subscribe( res => { self.regiones = res.json().regiones; });
+    this.http.get(`${this.url_base}/getProductores`).subscribe( res => { self.productores = res.json().productores; });
+    this.http.get(`${this.url_base}/getEspecies`).subscribe( res => { self.especies = res.json().especies; });
+    this.http.get(`${this.url_base}/getVariedades`).subscribe( res => { self.variedades = res.json().variedades; });
+    this.http.get(`${this.url_base}/getCalibres`).subscribe( res => { self.calibres = res.json().calibres; });
+    this.http.get(`${this.url_base}/getCategorias`).subscribe( res => { self.categorias = res.json().categorias; });
+    this.http.get(`${this.url_base}/getEmbalajes`).subscribe( res => { self.embalajes = res.json().embalajes; });
+    this.http.get(`${this.url_base}/getEtiquetas`).subscribe( res => { self.etiquetas = res.json().etiquetas; });
 
   }
   
@@ -100,6 +102,10 @@ export class ControlescalidadPage implements OnInit {
     await alert.present();
   }
   */
+
+  guardarContinuar() {
+    this.navCtrl.navigateForward('/calidadcondicion');
+  }
 
   irHome () {
     this.navCtrl.navigateForward('/home');

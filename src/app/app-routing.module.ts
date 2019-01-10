@@ -15,7 +15,8 @@ const routes: Routes = [
   { path: 'reportes', loadChildren: './componentes/reportes/reportes.module#ReportesPageModule' },
   { path: 'controlescalidad', loadChildren: './componentes/controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
   { path: 'opciones', loadChildren: './componentes/opciones/opciones.module#OpcionesPageModule' },
-  { path: 'registro', loadChildren: './componentes/registro/registro.module#RegistroPageModule' }
+  { path: 'registro', loadChildren: './componentes/registro/registro.module#RegistroPageModule' },
+  { path: 'calidadcondicion', loadChildren: './componentes/calidadcondicion/calidadcondicion.module#CalidadcondicionPageModule' }
 ];
 
 @NgModule({
