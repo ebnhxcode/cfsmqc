@@ -31,6 +31,7 @@ export class CalidadcondicionPage implements OnInit {
   irControlCalidad () {
     this.navCtrl.navigateForward('/controlescalidad');
   }
+  
 
   
 

@@ -18,7 +18,9 @@ const routes: Routes = [
   { path: 'registro', loadChildren: './componentes/registro/registro.module#RegistroPageModule' },
   { path: 'calidadcondicion', loadChildren: './componentes/calidadcondicion/calidadcondicion.module#CalidadcondicionPageModule' },
   { path: 'listasmuestras', loadChildren: './componentes/listasmuestras/listasmuestras.module#ListasmuestrasPageModule' },
-  { path: 'ingresarqr', loadChildren: './componentes/ingresarqr/ingresarqr.module#IngresarqrPageModule' }
+  { path: 'ingresarqr', loadChildren: './componentes/ingresarqr/ingresarqr.module#IngresarqrPageModule' },
+  { path: 'calculocalidad', loadChildren: './componentes/calculocalidad/calculocalidad.module#CalculocalidadPageModule' },
+  { path: 'calculocondicion', loadChildren: './componentes/calculocondicion/calculocondicion.module#CalculocondicionPageModule' }
 ];
 
 @NgModule({
