@@ -1,22 +1,23 @@
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CalidadcondicionPage } from './calidadcondicion.page';
+import { CalidadcondicionmenuPage } from './calidadcondicionmenu.page';
 
-describe('CalidadcondicionPage', () => {
-  let component: CalidadcondicionPage;
-  let fixture: ComponentFixture<CalidadcondicionPage>;
+describe('CalidadcondicionmenuPage', () => {
+  let component: CalidadcondicionmenuPage;
+  let fixture: ComponentFixture<CalidadcondicionmenuPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CalidadcondicionPage ],
+      declarations: [ CalidadcondicionmenuPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CalidadcondicionPage);
+    fixture = TestBed.createComponent(CalidadcondicionmenuPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

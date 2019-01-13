@@ -15,19 +15,21 @@ export class HomePage {
   ){}
 
 
-  
+  /**
+   * Funcion de los botones de la seccion del QR
+   */
   escanearQRMuestra () {
     this.navCtrl.navigateForward('/controlescalidad');
   }
-
   ingresarQRMuestra () {
     this.navCtrl.navigateForward('/ingresarqr');
   }
 
-  guardarContinuar () {
-    
-  }
+
   
+  /**
+   * Funciones del submenú
+   */
   irListadosMuestras () {
     this.navCtrl.navigateForward('/listasmuestras');
   }

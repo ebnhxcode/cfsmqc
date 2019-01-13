@@ -1,0 +1,72 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Calidad y Condición</ion-title>
+  </ion-toolbar>
+  
+</ion-header>
+
+<ion-content padding>
+
+
+  <h1> Menú </h1>
+
+  <ion-list>
+
+    <ion-item-sliding>
+
+      <ion-item  (click)="irCalculoCalidad()">
+
+        <ion-avatar slot="start">
+          <ion-img src="/assets/imgs/calidad.png"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>Calidad</h2>
+          <p>Toca aquí para ingresar defectos en la muestra</p>
+          <p>O desliza para más opciones</p>
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="favorite(item)">Reiniciar</ion-item-option>
+        <ion-item-option color="info" (click)="share(item)">Ver Nota</ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option (click)="irCalculoCalidad()">Ir</ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+    <ion-item-sliding>
+
+      <ion-item (click)="irCalculoCondicion()">
+        <ion-avatar slot="start">
+          <ion-img src="/assets/imgs/condicion.png"></ion-img>
+        </ion-avatar>
+        <ion-label>
+          <h2>Condición</h2>
+          <p>Toca aquí ingresar defectos en la muestra</p>
+          <p>O desliza para más opciones</p> 
+        </ion-label>
+      </ion-item>
+
+      <ion-item-options side="start">
+        <ion-item-option color="danger" (click)="favorite(item)">Reiniciar</ion-item-option>
+        <ion-item-option color="info" (click)="share(item)">Ver Nota</ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option (click)="irCalculoCondicion()">Ir</ion-item-option>
+      </ion-item-options>
+
+    </ion-item-sliding>
+
+  </ion-list>
+
+
+
+  <ion-button fill="solid" expand="block" color="light" (click)="irControlCalidad()">
+    Volver
+  </ion-button>
+
+</ion-content>

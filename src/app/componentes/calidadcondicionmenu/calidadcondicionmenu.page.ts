@@ -5,10 +5,10 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
   selector: 'app-calidadcondicion',
-  templateUrl: './calidadcondicion.page.html',
-  styleUrls: ['./calidadcondicion.page.scss'],
+  templateUrl: './calidadcondicionmenu.page.html',
+  styleUrls: ['./calidadcondicionmenu.page.scss'],
 })
-export class CalidadcondicionPage implements OnInit {
+export class CalidadcondicionmenuPage implements OnInit {
 
   servicio: {
     nota_calidad:0,
@@ -24,14 +24,20 @@ export class CalidadcondicionPage implements OnInit {
 
 
   irHome () {
-    this.navCtrl.navigateForward('/home');
-    
+    this.navCtrl.navigateForward('/home'); 
   }
 
   irControlCalidad () {
     this.navCtrl.navigateForward('/controlescalidad');
   }
-  
+
+  irCalculoCondicion () {
+    this.navCtrl.navigateForward('/calculocondicion');
+  }
+
+  irCalculoCalidad () {
+    this.navCtrl.navigateForward('/calculocalidad');
+  }
 
   
 

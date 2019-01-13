@@ -103,8 +103,8 @@ export class ControlescalidadPage implements OnInit {
   }
   */
 
-  guardarContinuar() {
-    this.navCtrl.navigateForward('/calidadcondicion');
+  irCalidadCondicionMenu() {
+    this.navCtrl.navigateForward('/calidadcondicionmenu');
   }
 
   irHome () {
