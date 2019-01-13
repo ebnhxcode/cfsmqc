@@ -11,6 +11,31 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 })
 export class CalculocondicionPage implements OnInit {
 
+
+  defectos = [
+    {
+      defecto: 'Defecto 1',
+      descripcion: 'Descripcion o comentario del defecto',
+      textoAdicional: 'texto adicional',
+      categoria: 'prueba1',
+      nota: 'A',
+    },
+    {
+      defecto: 'Defecto 2',
+      descripcion: 'Descripcion o comentario del defecto',
+      textoAdicional: 'texto adicional',
+      categoria: 'prueba2',
+      nota: 'B',
+    },
+    {
+      defecto: 'Defecto 3',
+      descripcion: 'Descripcion o comentario del defecto',
+      textoAdicional: 'texto adicional',
+      categoria: 'prueba3',
+      nota: 'A',
+    }
+  ];
+
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, 
