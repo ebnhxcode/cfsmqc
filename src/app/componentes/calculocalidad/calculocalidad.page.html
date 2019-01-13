@@ -8,7 +8,7 @@
 
 
   <h1>
-    Calidad {{servicio.nota_condicion}}
+    Calidad
     <span style="float:right;">B</span>
   </h1>
   
@@ -58,8 +58,8 @@
       <ion-icon name="cog"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-list side="top">
-      Agregar Nota Calidad
+    <ion-fab-list side="top" (click)="abrirModalFormularioCalidad()">
+      Abrir Modal
     </ion-fab-list>
 
     <ion-fab-list side="start">

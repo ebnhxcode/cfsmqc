@@ -21,8 +21,8 @@ const routes: Routes = [
   { path: 'ingresarqr', loadChildren: './componentes/ingresarqr/ingresarqr.module#IngresarqrPageModule' },
   { path: 'calculocalidad', loadChildren: './componentes/calculocalidad/calculocalidad.module#CalculocalidadPageModule' },
   { path: 'calculocondicion', loadChildren: './componentes/calculocondicion/calculocondicion.module#CalculocondicionPageModule' },
-  { path: 'modal-formulario-calidad', loadChildren: './components/calculocalidad/modals/modal-formulario-calidad/modal-formulario-calidad.module#ModalFormularioCalidadPageModule' },
-  { path: 'modal-formulario-condicion', loadChildren: './components/calculocondicion/modals/modal-formulario-condicion/modal-formulario-condicion.module#ModalFormularioCondicionPageModule' },
+  { path: 'modalformulariocalidad', loadChildren: './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module#ModalformulariocalidadPageModule' },
+  { path: 'modalformulariocondicion', loadChildren: './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module#ModalformulariocondicionPageModule' },
 ];
 
 @NgModule({

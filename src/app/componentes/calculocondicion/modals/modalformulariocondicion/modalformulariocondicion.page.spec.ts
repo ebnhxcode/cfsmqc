@@ -1,22 +1,22 @@
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ModalFormularioCondicionPage } from './modal-formulario-condicion.page';
+import { ModalformulariocondicionPage } from './modalformulariocondicion.page';
 
-describe('ModalFormularioCondicionPage', () => {
-  let component: ModalFormularioCondicionPage;
-  let fixture: ComponentFixture<ModalFormularioCondicionPage>;
+describe('ModalformulariocondicionPage', () => {
+  let component: ModalformulariocondicionPage;
+  let fixture: ComponentFixture<ModalformulariocondicionPage>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ModalFormularioCondicionPage ],
+      declarations: [ ModalformulariocondicionPage ],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ModalFormularioCondicionPage);
+    fixture = TestBed.createComponent(ModalformulariocondicionPage);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

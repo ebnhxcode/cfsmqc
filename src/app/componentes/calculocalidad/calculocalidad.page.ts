@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, AlertController, ModalController, NavParams } from "@ionic/angular";
 
 import { Http, Headers, RequestOptions } from '@angular/http';
+
+import { ModalformulariocalidadPage } from './modals/modalformulariocalidad/modalformulariocalidad.page';
 
 @Component({
   selector: 'app-calculocalidad',
@@ -39,6 +41,7 @@ export class CalculocalidadPage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     public http: Http
   ) { }
 
@@ -51,6 +54,14 @@ export class CalculocalidadPage implements OnInit {
 
   irHome () {
     this.navCtrl.navigateForward('/home'); 
+  }
+
+
+  async abrirModalFormularioCalidad () {
+    const modal = await this.modalCtrl.create({
+      component: ModalformulariocalidadPage
+    });
+    modal.present();
   }
 
 }

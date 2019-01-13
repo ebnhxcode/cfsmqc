@@ -5,12 +5,12 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { IonicModule } from '@ionic/angular';
 
-import { ModalFormularioCalidadPage } from './modal-formulario-calidad.page';
+import { ModalformulariocondicionPage } from './modalformulariocondicion.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: ModalFormularioCalidadPage
+    component: ModalformulariocondicionPage
   }
 ];
 
@@ -21,6 +21,6 @@ const routes: Routes = [
     IonicModule,
     RouterModule.forChild(routes)
   ],
-  declarations: [ModalFormularioCalidadPage]
+  declarations: [ModalformulariocondicionPage]
 })
-export class ModalFormularioCalidadPageModule {}
+export class ModalformulariocondicionPageModule {}
