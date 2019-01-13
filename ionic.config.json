@@ -1,6 +1,8 @@
 {
   "name": "cfsmqc",
-  "integrations": {},
+  "integrations": {
+    "cordova": {}
+  },
   "type": "angular",
   "id": "c15e6555"
 }

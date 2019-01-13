@@ -4,16 +4,11 @@ import { NavController, LoadingController, AlertController, NavParams } from "@i
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
-  selector: 'app-calidadcondicion',
-  templateUrl: './calidadcondicion.page.html',
-  styleUrls: ['./calidadcondicion.page.scss'],
+  selector: 'app-listasmuestras',
+  templateUrl: './listasmuestras.page.html',
+  styleUrls: ['./listasmuestras.page.scss'],
 })
-export class CalidadcondicionPage implements OnInit {
-
-  servicio: {
-    nota_calidad:0,
-    nota_condicion:0,
-  }
+export class ListasmuestrasPage implements OnInit {
 
   constructor(
     public navCtrl: NavController,
@@ -22,19 +17,12 @@ export class CalidadcondicionPage implements OnInit {
     public http: Http
   ) { }
 
+  ngOnInit() {
+  }
+
 
   irHome () {
     this.navCtrl.navigateForward('/home');
-    
-  }
-
-  irControlCalidad () {
-    this.navCtrl.navigateForward('/controlescalidad');
-  }
-
-  
-
-  ngOnInit() {
     
   }
 

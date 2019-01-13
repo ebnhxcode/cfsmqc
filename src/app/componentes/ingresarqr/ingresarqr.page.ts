@@ -4,16 +4,15 @@ import { NavController, LoadingController, AlertController, NavParams } from "@i
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 @Component({
-  selector: 'app-calidadcondicion',
-  templateUrl: './calidadcondicion.page.html',
-  styleUrls: ['./calidadcondicion.page.scss'],
+  selector: 'app-ingresarqr',
+  templateUrl: './ingresarqr.page.html',
+  styleUrls: ['./ingresarqr.page.scss'],
 })
-export class CalidadcondicionPage implements OnInit {
+export class IngresarqrPage implements OnInit {
 
-  servicio: {
-    nota_calidad:0,
-    nota_condicion:0,
-  }
+  ingreso = {
+    codigo: "",
+  };
 
   constructor(
     public navCtrl: NavController,
@@ -22,20 +21,11 @@ export class CalidadcondicionPage implements OnInit {
     public http: Http
   ) { }
 
-
-  irHome () {
-    this.navCtrl.navigateForward('/home');
-    
-  }
-
-  irControlCalidad () {
-    this.navCtrl.navigateForward('/controlescalidad');
-  }
-
-  
-
   ngOnInit() {
-    
+  }
+
+  guardarContinuar () {
+    this.navCtrl.navigateForward('/controlescalidad');
   }
 
 }

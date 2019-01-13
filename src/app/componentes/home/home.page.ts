@@ -20,9 +20,16 @@ export class HomePage {
     this.navCtrl.navigateForward('/controlescalidad');
   }
 
+  ingresarQRMuestra () {
+    this.navCtrl.navigateForward('/ingresarqr');
+  }
 
   guardarContinuar () {
     
+  }
+  
+  irListadosMuestras () {
+    this.navCtrl.navigateForward('/listasmuestras');
   }
 
 

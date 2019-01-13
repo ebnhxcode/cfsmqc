@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>ingresarqr</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form action="">
+    <ion-item>
+        <ion-label position="stacked">Peso</ion-label>
+  
+        <ion-input
+          type="text" 
+          placeholder="Codigo"
+          [(ngModel)]="ingreso.codigo"
+          [ngModelOptions]="{standalone: true}">
+        </ion-input>
+      </ion-item>
+  
+  
+  
+      <ion-button fill="solid" expand="block" color="primary" (click)="guardarContinuar()">
+        Guardar y Continuar
+      </ion-button>
+
+  </form>
+
+</ion-content>
