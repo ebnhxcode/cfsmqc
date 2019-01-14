@@ -18,6 +18,9 @@ import { HttpModule } from '@angular/http';
 import { ModalformulariocalidadPageModule } from './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module';
 import { ModalformulariocondicionPageModule } from './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module';
 
+// QR BAR SCANNER DEPS
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -34,7 +37,8 @@ import { ModalformulariocondicionPageModule } from './componentes/calculocondici
   providers: [
     StatusBar,
     SplashScreen,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
+    BarcodeScanner
   ],
   bootstrap: [AppComponent]
 })
