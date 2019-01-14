@@ -15,6 +15,8 @@ import { firebaseConfig } from './servicios/databases/firebase-config';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpModule } from '@angular/http';
+import { ModalformulariocalidadPageModule } from './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module';
+import { ModalformulariocondicionPageModule } from './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -25,7 +27,9 @@ import { HttpModule } from '@angular/http';
     IonicModule.forRoot(),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig.firebase),
-    AngularFireAuthModule
+    AngularFireAuthModule,
+    ModalformulariocalidadPageModule,
+    ModalformulariocondicionPageModule
   ],
   providers: [
     StatusBar,

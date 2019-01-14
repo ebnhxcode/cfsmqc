@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, AlertController, ModalController, NavParams } from "@ionic/angular";
 
 import { Http, Headers, RequestOptions } from '@angular/http';
+
+import { ModalformulariocondicionPage } from './modals/modalformulariocondicion/modalformulariocondicion.page';
 
 @Component({
   selector: 'app-calculocondicion',
@@ -40,6 +42,7 @@ export class CalculocondicionPage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     public http: Http
   ) { }
 
@@ -51,6 +54,13 @@ export class CalculocondicionPage implements OnInit {
   }
   irHome () {
     this.navCtrl.navigateForward('/home'); 
+  }
+
+  async abrirModalFormularioCondicion () {
+    const modal = await this.modalCtrl.create({
+      component: ModalformulariocondicionPage
+    });
+    modal.present();
   }
 
 }
