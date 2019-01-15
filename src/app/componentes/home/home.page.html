@@ -12,21 +12,31 @@
 <ion-content>
     <ion-card class="welcome-card">
       <!-- <ion-img src="/assets/imgs/uvanegra.jpg"></ion-img> -->
-      <ion-img style="width: 400px;height: 400px;" src="/assets/imgs/lectorqr.jpg"></ion-img>
+      <!--<ion-img style="width: 400px;height: 400px;" src="/assets/imgs/lectorqr.jpg"></ion-img>-->
 
 
       <!-- <ion-input type="text" [(ngModel)]="encodedText"></ion-input> -->
       <ion-card-header>
         <!-- <ion-card-subtitle>ACCIÓN PRINCIPAL</ion-card-subtitle> -->
         <!-- <ion-card-title text-center>Escanear QR Muestra</ion-card-title> -->
-        <ion-button fill="solid" expand="block" color="primary" (click)="escanearQRMuestra()">
-          <ion-icon slot="start" name="qr-scanner"></ion-icon>
-          ESCANEAR QR MUESTRA
-        </ion-button>
-        <ion-button fill="solid" expand="block" color="light" (click)="ingresarQRMuestra()">
-          <ion-icon slot="start" name="qr-scanner"></ion-icon>
-          INGRESAR QR MANUAL
-          </ion-button>
+
+
+        <ion-grid>
+          <ion-row>
+            <ion-col>
+                <ion-button fill="solid" expand="block" color="primary" (click)="escanearQRMuestra()">
+                  <ion-icon slot="start" name="qr-scanner"></ion-icon>
+                  ESCANEAR QR MUESTRA
+                </ion-button>
+            </ion-col>
+            <ion-col>
+                <ion-button fill="solid" expand="block" color="light" (click)="ingresarQRMuestra()">
+                  INGRESAR QR MANUAL
+                </ion-button>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+
       </ion-card-header>
       <!--
       <ion-card-content>
@@ -34,7 +44,7 @@
       </ion-card-content>
       -->
     </ion-card>
-    <ion-list lines="none">
+    <ion-list lines="none" padding>
       <ion-list-header>
         <ion-label>OTRAS ACCIONES</ion-label>
       </ion-list-header>
