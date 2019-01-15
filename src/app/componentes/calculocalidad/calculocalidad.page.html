@@ -38,34 +38,35 @@
 
   </ion-item>
 
-  <form novalidate>
-
-    <!--
-    <ion-button fill="solid" expand="block" color="primary" (click)="irHome()">
-      Guardar y Continuar
-    </ion-button>
-    -->
-
-    <ion-button fill="solid" expand="block" color="light" (click)="irCalidadCondicionMenu()">
-      Volver
-    </ion-button>
-
-  </form>
-
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 
-    <ion-fab-button>
-      <ion-icon name="cog"></ion-icon>
+    <ion-fab-button (click)="abrirModalFormularioCalidad()">
+      <ion-icon name="add"></ion-icon>
     </ion-fab-button>
 
-    <ion-fab-list side="top" (click)="abrirModalFormularioCalidad()">
+    <!--
+    <ion-fab-list side="top" >
       Abrir Modal
     </ion-fab-list>
 
     <ion-fab-list side="start">
       Agregar Nota Condicion
     </ion-fab-list>
+    -->
 
   </ion-fab>
 
 </ion-content>
+
+<ion-footer padding>
+  <!--
+  <ion-button fill="solid" expand="block" color="primary" (click)="irHome()">
+    Guardar y Continuar
+  </ion-button>
+  -->
+
+  <ion-button fill="solid" expand="block" color="light" (click)="irCalidadCondicionMenu()">
+    Volver
+  </ion-button>
+    
+</ion-footer>

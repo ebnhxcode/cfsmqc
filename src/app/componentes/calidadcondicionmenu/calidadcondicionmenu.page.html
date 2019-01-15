@@ -8,7 +8,14 @@
 <ion-content padding>
 
 
-  <h1> Menú </h1>
+  <ion-item>
+    <h1 text-center>Menú QC</h1>
+
+    <p padding text-center>
+      Selecciona calidad o condición para ingresar los defectos de la muestra.
+      Desliza hacia izq. o der. para ver más opciones
+    </p>
+  </ion-item>
 
   <ion-list>
 
@@ -21,8 +28,7 @@
         </ion-avatar>
         <ion-label>
           <h2>Calidad</h2>
-          <p>Toca aquí para ingresar defectos en la muestra</p>
-          <p>O desliza para más opciones</p>
+          <p>Ingresar defectos de calidad.</p>
         </ion-label>
       </ion-item>
 
@@ -45,8 +51,7 @@
         </ion-avatar>
         <ion-label>
           <h2>Condición</h2>
-          <p>Toca aquí ingresar defectos en la muestra</p>
-          <p>O desliza para más opciones</p> 
+          <p>Ingresar defectos de condición.</p>
         </ion-label>
       </ion-item>
 
@@ -64,9 +69,10 @@
   </ion-list>
 
 
+</ion-content>
 
+<ion-footer padding>
   <ion-button fill="solid" expand="block" color="light" (click)="irControlCalidad()">
     Volver
   </ion-button>
-
-</ion-content>
+</ion-footer>

@@ -26,12 +26,12 @@
             <ion-col>
                 <ion-button fill="solid" expand="block" color="primary" (click)="escanearQRMuestra()">
                   <ion-icon slot="start" name="qr-scanner"></ion-icon>
-                  ESCANEAR QR MUESTRA
+                  ESCANEAR QR
                 </ion-button>
             </ion-col>
             <ion-col>
                 <ion-button fill="solid" expand="block" color="light" (click)="ingresarQRMuestra()">
-                  INGRESAR QR MANUAL
+                  INGRESAR QR
                 </ion-button>
             </ion-col>
           </ion-row>
@@ -49,22 +49,22 @@
         <ion-label>OTRAS ACCIONES</ion-label>
       </ion-list-header>
 
-      <ion-button (click)="irListadosMuestras()" color="light">
+      <ion-button expand="block" (click)="irListadosMuestras()" color="light">
         <ion-icon slot="start" name="list"><!--build--></ion-icon>
         <ion-label>VER LISTADO DE MUESTRAS</ion-label>
       </ion-button>
 
-      <ion-button color="light">
+      <ion-button expand="block" color="light">
         <ion-icon slot="start" name="contract"></ion-icon>
         <ion-label>SINCRONIZAR APP</ion-label>
       </ion-button>
 
-      <ion-button color="light">
+      <ion-button expand="block" color="light">
         <ion-icon slot="start" name="alert"></ion-icon>
         <ion-label>NOTIFICAR ERROR EN MUESTRA</ion-label>
       </ion-button>
 
-      <ion-button color="light">
+      <ion-button expand="block" color="light">
         <ion-icon slot="start" name="cog"></ion-icon>
         <ion-label>OPCIONES</ion-label>
       </ion-button>

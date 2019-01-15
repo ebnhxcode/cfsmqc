@@ -9,30 +9,26 @@
 {{ defectos }}
 
 
-    <ion-item>
-        <ion-label position="stacked">Defecto</ion-label>
-  
-        <ion-select
-          okText="OK" cancelText="Cancelar"
-          placeholder="Defecto"
-          [(ngModel)]="defecto.defecto_id"
-          [ngModelOptions]="{standalone: true}">
-  
-          <ion-select-option 
-            *ngFor="let defecto of defectos" 
-            [value]="defecto.defecto_id">
-            {{ defecto.defecto_nombre }}
-          </ion-select-option>
-        </ion-select>
-      </ion-item>
-  
-  
+  <ion-item>
+    <ion-label position="stacked">Defecto</ion-label>
 
+    <ion-select
+      okText="OK" cancelText="Cancelar"
+      placeholder="Defecto"
+      [(ngModel)]="defecto.defecto_id"
+      [ngModelOptions]="{standalone: true}">
+
+      <ion-select-option 
+        *ngFor="let defecto of defectos" 
+        [value]="defecto.defecto_id">
+        {{ defecto.defecto_nombre }}
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
   
+</ion-content>
 
-
-
-
+<ion-footer padding>
   <ion-button fill="solid" expand="block" color="primary" (click)="true">
     Guardar
   </ion-button>
@@ -40,6 +36,4 @@
   <ion-button fill="solid" expand="block" color="light" (click)="volverCalculoCondicion()">
     Volver
   </ion-button>
-
-
-</ion-content>
+</ion-footer>
