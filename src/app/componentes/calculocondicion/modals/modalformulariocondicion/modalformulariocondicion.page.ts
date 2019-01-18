@@ -15,6 +15,7 @@ import { HttpClient } from '@angular/common/http';
 import { cfsmBackendConfig } from '../../../../servicios/apirest/cfsm-backend-config';
 import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-config';
 
+
 @Component({
   selector: 'app-modalformulariocondicion',
   templateUrl: './modalformulariocondicion.page.html',
@@ -22,13 +23,13 @@ import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-conf
 })
 export class ModalformulariocondicionPage implements OnInit {
 
-  defecto = {
-    defecto: '',
-    descripcion: '',
-    textoAdicional: '',
-    categoria: '',
-    nota: '',
+  defectoForm = {
+    grupo_id: null,
+    defecto_id: null,
+    valor_defecto: null,
   }
+
+  codigoConcepto:number = 2;
 
   constructor(
     public navCtrl: NavController,
@@ -44,6 +45,8 @@ export class ModalformulariocondicionPage implements OnInit {
   options = new RequestOptions({ headers: this.headers });
 
   defectos: any[];
+  grupos: any[];
+
 
   ngOnInit() {
     this.cargarInformacionInicial();
@@ -51,9 +54,10 @@ export class ModalformulariocondicionPage implements OnInit {
 
   cargarInformacionInicial () {
 
-
     let self = this;
     this.http.get(`${this.url_base}/getDefectos`).subscribe( res => { self.defectos = res.json().defectos; });
+    this.http.get(`${this.url_base}/getGrupos`).subscribe( res => { self.grupos = res.json().grupos; });
+
   }
 
 
@@ -68,6 +72,10 @@ export class ModalformulariocondicionPage implements OnInit {
 
   volverCalculoCondicion () {
     this.cerrarModal();
+  }
+
+  validarDefectos () {
+    
   }
 
 

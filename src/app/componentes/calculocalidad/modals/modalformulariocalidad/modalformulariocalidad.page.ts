@@ -23,13 +23,13 @@ import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-conf
 })
 export class ModalformulariocalidadPage implements OnInit {
 
-  defecto = {
-    defecto: '',
-    descripcion: '',
-    textoAdicional: '',
-    categoria: '',
-    nota: '',
+  defectoForm = {
+    grupo_id: null,
+    defecto_id: null,
+    valor_defecto: null,
   }
+
+  codigoConcepto:number = 1;
 
   constructor(
     public navCtrl: NavController,
@@ -45,6 +45,7 @@ export class ModalformulariocalidadPage implements OnInit {
   options = new RequestOptions({ headers: this.headers });
 
   defectos: any[];
+  grupos: any[];
 
 
   ngOnInit() {
@@ -56,6 +57,7 @@ export class ModalformulariocalidadPage implements OnInit {
 
     let self = this;
     this.http.get(`${this.url_base}/getDefectos`).subscribe( res => { self.defectos = res.json().defectos; });
+    this.http.get(`${this.url_base}/getGrupos`).subscribe( res => { self.grupos = res.json().grupos; });
 
   }
   guardarNotaCalidad () {

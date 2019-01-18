@@ -5,8 +5,23 @@
 </ion-header>
 
 <ion-content padding>
+  <ion-item>
+    <ion-label position="stacked">Grupo</ion-label>
 
-{{ defectos }}
+    <ion-select
+      okText="OK" cancelText="Cancelar"
+      placeholder="Grupo"
+      [(ngModel)]="defectoForm.grupo_id"
+      [ngModelOptions]="{standalone: true}">
+      
+      <ion-select-option 
+        *ngFor="let grupo of grupos" 
+        [value]="grupo.grupo_id">
+        {{ grupo.grupo_nombre }}
+        
+      </ion-select-option>
+    </ion-select>
+  </ion-item>
 
 
   <ion-item>
@@ -15,17 +30,30 @@
     <ion-select
       okText="OK" cancelText="Cancelar"
       placeholder="Defecto"
-      [(ngModel)]="defecto.defecto_id"
+      [(ngModel)]="defectoForm.defecto_id"
       [ngModelOptions]="{standalone: true}">
 
-      <ion-select-option 
-        *ngFor="let defecto of defectos" 
-        [value]="defecto.defecto_id">
-        {{ defecto.defecto_nombre }}
-      </ion-select-option>
+      <ng-container *ngFor="let defecto of defectos">
+          <ion-select-option *ngIf="defecto.concepto_id == codigoConcepto && defecto.grupo_id == defectoForm.grupo_id"
+          [value]="defecto.defecto_id">
+          {{ defecto.defecto_nombre }}
+        </ion-select-option>
+      </ng-container>
+
     </ion-select>
   </ion-item>
-  
+
+  <ion-item>
+    <ion-label position="stacked">Nota</ion-label>
+
+    <ion-input
+      type="select" 
+      placeholder="Valor Defecto"
+      [(ngModel)]="defectoForm.valor_defecto"
+      [ngModelOptions]="{standalone: true}">
+    </ion-input>
+  </ion-item>
+
 </ion-content>
 
 <ion-footer padding>
