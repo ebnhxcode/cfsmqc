@@ -34,6 +34,7 @@ export class ControlescalidadPage implements OnInit {
     categoria_id:null,
     embalaje_id:null,
     etiqueta_id:null,
+    apariencia_id:null,
     peso:null,
     calculo_total:null,
   }
@@ -46,6 +47,7 @@ export class ControlescalidadPage implements OnInit {
   categorias: any[];
   embalajes: any[];
   etiquetas: any[];
+  apariencias: any[];
   peso: any[];
   
 
@@ -88,6 +90,9 @@ export class ControlescalidadPage implements OnInit {
     this.http.get(`${this.url_base}/getCategorias`).subscribe( res => { self.categorias = res.json().categorias; });
     this.http.get(`${this.url_base}/getEmbalajes`).subscribe( res => { self.embalajes = res.json().embalajes; });
     this.http.get(`${this.url_base}/getEtiquetas`).subscribe( res => { self.etiquetas = res.json().etiquetas; });
+    this.http.get(`${this.url_base}/getApariencias`).subscribe( res => { self.apariencias = res.json().apariencias; });
+    console.log(self.apariencias);
+    console.log(new Date(Date.now()).toLocaleTimeString());
 
   }
   

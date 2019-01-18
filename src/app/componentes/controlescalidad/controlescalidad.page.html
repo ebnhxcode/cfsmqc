@@ -8,6 +8,50 @@
 
   <form novalidate>
 
+
+
+    <ion-item>
+      <ion-label position="stacked">Calibre</ion-label>
+
+      <ion-select
+        okText="OK" cancelText="Cancelar"
+        placeholder="Calibre"
+        [(ngModel)]="control.calibre_id"
+        [ngModelOptions]="{standalone: true}">
+
+        <ion-select-option 
+          *ngFor="let calibre of calibres" 
+          [value]="calibre.calibre_id">
+          {{ calibre.calibre_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label>Date</ion-label>
+      <ion-datetime displayFormat="MM/DD/YYYY"></ion-datetime>
+      <!-- [(ngModel)]="myDate" -->
+    </ion-item>
+    
+    <ion-item>
+      <ion-label position="stacked">Categoría</ion-label>
+
+      <ion-select
+        okText="OK" cancelText="Cancelar"
+        placeholder="Categoría"
+        [(ngModel)]="control.categoria_id"
+        [ngModelOptions]="{standalone: true}">
+
+        <ion-select-option 
+          *ngFor="let categoria of categorias" 
+          [value]="categoria.categoria_id">
+          {{ categoria.categoria_nombre }}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+
     <ion-item>
 
       <ion-label position="stacked">Región</ion-label>
@@ -28,6 +72,30 @@
     </ion-item>
 
 
+
+
+
+
+    <ion-item>
+      <ion-label position="stacked">Embalaje</ion-label>
+
+      <ion-select
+        okText="OK" cancelText="Cancelar"
+        placeholder="Embalaje"
+        [(ngModel)]="control.embalaje_id"
+        [ngModelOptions]="{standalone: true}">
+
+        <ion-select-option 
+          *ngFor="let embalaje of embalajes" 
+          [value]="embalaje.embalaje_id">
+          {{ embalaje.embalaje_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+
+
+      
+
     <ion-item>
       <ion-label position="stacked">Productor</ion-label>
 
@@ -43,6 +111,25 @@
           {{ productor.productor_nombre }}
         </ion-select-option>
 
+      </ion-select>
+    </ion-item>
+
+  
+
+    <ion-item>
+      <ion-label position="stacked">Etiqueta</ion-label>
+
+      <ion-select
+        okText="OK" cancelText="Cancelar"
+        placeholder="Etiqueta"
+        [(ngModel)]="control.etiqueta_id"
+        [ngModelOptions]="{standalone: true}">
+
+        <ion-select-option 
+          *ngFor="let etiqueta of etiquetas" 
+          [value]="etiqueta.etiqueta_id">
+          {{ etiqueta.etiqueta_nombre }}
+        </ion-select-option>
       </ion-select>
     </ion-item>
 
@@ -84,85 +171,8 @@
 
     </ion-item>
 
-
-    <ion-item>
-      <ion-label position="stacked">Calibre</ion-label>
-
-      <ion-select
-        okText="OK" cancelText="Cancelar"
-        placeholder="Calibre"
-        [(ngModel)]="control.calibre_id"
-        [ngModelOptions]="{standalone: true}">
-
-        <ion-select-option 
-          *ngFor="let calibre of calibres" 
-          [value]="calibre.calibre_id">
-          {{ calibre.calibre_nombre }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-
-
-
-
-
-
-
-    <ion-item>
-      <ion-label position="stacked">Categoría</ion-label>
-
-      <ion-select
-        okText="OK" cancelText="Cancelar"
-        placeholder="Categoría"
-        [(ngModel)]="control.categoria_id"
-        [ngModelOptions]="{standalone: true}">
-
-        <ion-select-option 
-          *ngFor="let categoria of categorias" 
-          [value]="categoria.categoria_id">
-          {{ categoria.categoria_nombre }}
-        </ion-select-option>
-      </ion-select>
-
-    </ion-item>
-
-
-    <ion-item>
-      <ion-label position="stacked">Embalaje</ion-label>
-
-      <ion-select
-        okText="OK" cancelText="Cancelar"
-        placeholder="Embalaje"
-        [(ngModel)]="control.embalaje_id"
-        [ngModelOptions]="{standalone: true}">
-
-        <ion-select-option 
-          *ngFor="let embalaje of embalajes" 
-          [value]="embalaje.embalaje_id">
-          {{ embalaje.embalaje_nombre }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
-
-
-
-
-    <ion-item>
-      <ion-label position="stacked">Etiqueta</ion-label>
-
-      <ion-select
-        okText="OK" cancelText="Cancelar"
-        placeholder="Etiqueta"
-        [(ngModel)]="control.etiqueta_id"
-        [ngModelOptions]="{standalone: true}">
-
-        <ion-select-option 
-          *ngFor="let etiqueta of etiquetas" 
-          [value]="etiqueta.etiqueta_id">
-          {{ etiqueta.etiqueta_nombre }}
-        </ion-select-option>
-      </ion-select>
-    </ion-item>
+  
+  
 
     <ion-item>
       <ion-label position="stacked">Peso</ion-label>
@@ -174,6 +184,30 @@
         [ngModelOptions]="{standalone: true}">
       </ion-input>
     </ion-item>
+
+
+
+    <ion-item>
+      <ion-label position="stacked">Apariencia</ion-label>
+
+      <ion-select
+        okText="OK" cancelText="Cancelar"
+        placeholder="Apariencia"
+        [(ngModel)]="control.apariencia_id"
+        [ngModelOptions]="{standalone: true}">
+
+        <ion-select-option 
+          *ngFor="let apariencia of apariencias" 
+          [value]="apariencia.apariencia_id">
+          {{ apariencia.apariencia_nombre }}
+        </ion-select-option>
+      </ion-select>
+
+    </ion-item>
+
+
+
+
 
   </form>
 
