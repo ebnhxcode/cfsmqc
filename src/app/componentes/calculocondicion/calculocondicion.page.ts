@@ -56,7 +56,7 @@ export class CalculocondicionPage implements OnInit {
     this.navCtrl.navigateForward('/home'); 
   }
 
-  async abrirModalFormularioCondicion () {
+  async abrirModalFormularioCalidadCondicion () {
     const modal = await this.modalCtrl.create({
       component: ModalformulariocondicionPage
     });

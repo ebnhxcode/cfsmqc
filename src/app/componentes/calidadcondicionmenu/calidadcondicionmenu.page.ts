@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+
+import { NavController, LoadingController, AlertController, ModalController, NavParams } from "@ionic/angular";
 
 import { Http, Headers, RequestOptions } from '@angular/http';
+
+import { ModalformulariocalidadcondicionPage } from './modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.page';
 
 @Component({
   selector: 'app-calidadcondicion',
@@ -19,9 +22,13 @@ export class CalidadcondicionmenuPage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     public http: Http
   ) { }
 
+  ngOnInit() {
+    
+  }
 
   irHome () {
     this.navCtrl.navigateForward('/home'); 
@@ -39,10 +46,17 @@ export class CalidadcondicionmenuPage implements OnInit {
     this.navCtrl.navigateForward('/calculocalidad');
   }
 
+  async abrirModalFormularioCalidadCondicion (concepto) {
+    const modal = await this.modalCtrl.create({
+      component: ModalformulariocalidadcondicionPage,
+      componentProps: {
+        concepto_id: concepto
+      }
+    });
+    modal.present();
+  }
   
 
-  ngOnInit() {
-    
-  }
+
 
 }

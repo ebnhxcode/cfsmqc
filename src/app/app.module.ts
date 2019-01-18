@@ -17,6 +17,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpModule } from '@angular/http';
 import { ModalformulariocalidadPageModule } from './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module';
 import { ModalformulariocondicionPageModule } from './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module';
+import { ModalformulariocalidadcondicionPageModule } from './componentes/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module';
 
 // QR BAR SCANNER DEPS
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -32,7 +33,8 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     AngularFireModule.initializeApp(firebaseConfig.firebase),
     AngularFireAuthModule,
     ModalformulariocalidadPageModule,
-    ModalformulariocondicionPageModule
+    ModalformulariocondicionPageModule,
+    ModalformulariocalidadcondicionPageModule
   ],
   providers: [
     StatusBar,
