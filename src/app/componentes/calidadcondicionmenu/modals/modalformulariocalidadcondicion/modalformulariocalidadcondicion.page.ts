@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, AlertController, ModalController, NavParams } from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -29,11 +29,14 @@ export class ModalformulariocalidadcondicionPage implements OnInit {
   }
 
   codigoConcepto:number = 1;
+  nombreConcepto:string = "";
 
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
+    public modalCtrl: ModalController,
     public http: Http
   ) { }
 
@@ -49,9 +52,26 @@ export class ModalformulariocalidadcondicionPage implements OnInit {
   }
 
   cargarInformacionInicial () {
+    // Paramétricos
     let self = this;
     this.http.get(`${this.url_base}/getDefectos`).subscribe( res => { self.defectos = res.json().defectos; });
     this.http.get(`${this.url_base}/getGrupos`).subscribe( res => { self.grupos = res.json().grupos; });
+
+
+    // Params
+    this.codigoConcepto = this.navParams.get('concepto_id');
+    this.nombreConcepto = this.navParams.get('concepto_nombre');
+
+
+
+  }
+
+  cerrarModal () {
+    this.modalCtrl.dismiss();
+  }
+
+  volverCalculoCondicion () {
+    this.cerrarModal();
   }
 
 }

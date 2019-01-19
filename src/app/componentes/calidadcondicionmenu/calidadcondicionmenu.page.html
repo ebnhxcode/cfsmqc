@@ -1,28 +1,38 @@
+<!--
 <ion-header>
   <ion-toolbar>
     <ion-title>Calidad y Condición</ion-title>
   </ion-toolbar>
-  
 </ion-header>
+-->
 
 <ion-content padding>
 
+  <ion-card>
 
-  <ion-item>
-    <h1 text-center>Menú QC</h1>
+    <ion-card-header>
 
-    <p padding text-center>
-      Selecciona calidad o condición para ingresar los defectos de la muestra.
-      Desliza hacia izq. o der. para ver más opciones
-    </p>
-  </ion-item>
+      <h3>
+        Nota Final
+        <span style="float:right;">A</span>
+      </h3>  
+
+    </ion-card-header>
+
+    <hr>
+
+    <ion-card-content>
+
+      <p>Resumen de calificaciones</p>
+      <p>Detalle básico</p>
+
+    </ion-card-content>
+  </ion-card>
 
   <ion-list>
 
     <ion-item-sliding>
-
       <ion-item  (click)="irCalculoCalidad()">
-
         <ion-avatar slot="start">
           <ion-img src="/assets/imgs/calidad.png"></ion-img>
         </ion-avatar>
@@ -34,7 +44,6 @@
         </ion-label>
 
         <ion-badge item-end>A</ion-badge>
-
       </ion-item>
 
       <ion-item-options side="start">
@@ -49,7 +58,6 @@
     </ion-item-sliding>
 
     <ion-item-sliding>
-
       <ion-item (click)="irCalculoCondicion()">
         <ion-avatar slot="start">
           <ion-img src="/assets/imgs/condicion.png"></ion-img>
@@ -60,9 +68,7 @@
         </ion-label>
 
         <ion-badge item-end color="warning">C</ion-badge>
-
       </ion-item>
-
       <ion-item-options side="start">
         <ion-item-option color="danger" (click)="favorite(item)">Reiniciar</ion-item-option>
         <ion-item-option color="info" (click)="share(item)">Ver Nota</ion-item-option>
@@ -77,23 +83,17 @@
   </ion-list>
 
 
-  <ion-card>
+  <ion-item>
+    <!--Menú titulo-->
+    <h1 text-center>QC</h1>
 
-    <ion-card-header>
+    <p padding text-center>
+      Selecciona calidad o condición para ingresar los defectos de la muestra.
+      Desliza hacia izq. o der. para ver más opciones
+    </p>
+  </ion-item>
 
-      <h3>Nota Final</h3>
 
-      
-
-    </ion-card-header>
-
-    <ion-card-content>
-
-      <p>Resumen de calificaciones</p>
-      <p>Detalle básico</p>
-
-    </ion-card-content>
-  </ion-card>
 
 
   <ion-fab vertical="bottom" horizontal="end" slot="fixed">
@@ -102,11 +102,11 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
   
-      <ion-fab-list side="top" (click)="abrirModalFormularioCalidadCondicion(1)">
+      <ion-fab-list side="top" (click)="abrirModalFormularioCalidadCondicion(1, 'Condición')">
         <ion-img src="/assets/imgs/calidad.png" round ion-fab color="clear"></ion-img>
       </ion-fab-list>
   
-      <ion-fab-list side="start" (click)="abrirModalFormularioCalidadCondicion(2)">
+      <ion-fab-list side="start" (click)="abrirModalFormularioCalidadCondicion(2, 'Calidad')">
         <ion-img src="/assets/imgs/condicion.png" round ion-fab color="clear"></ion-img>
       </ion-fab-list>
   

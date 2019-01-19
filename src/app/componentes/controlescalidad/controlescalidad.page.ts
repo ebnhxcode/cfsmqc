@@ -26,16 +26,21 @@ export class ControlescalidadPage implements OnInit {
   options = new RequestOptions({ headers: this.headers });
 
   control = {
+    fecha_jornada:new Date().toISOString(),
+    calibre:null,
+    categoria_id:null,
     region_id:null,
     productor_id:null,
     especie_id:null,
     variedad_id:null,
-    calibre:null,
-    categoria_id:null,
+
     embalaje_id:null,
     etiqueta_id:null,
     apariencia_id:null,
     peso:null,
+    bolsas:null,
+    racimos:null,
+
     calculo_total:null,
   }
 
@@ -82,16 +87,17 @@ export class ControlescalidadPage implements OnInit {
 
 
     let self = this;
-    this.http.get(`${this.url_base}/getRegiones`).subscribe( res => { self.regiones = res.json().regiones; });
-    this.http.get(`${this.url_base}/getProductores`).subscribe( res => { self.productores = res.json().productores; });
-    this.http.get(`${this.url_base}/getEspecies`).subscribe( res => { self.especies = res.json().especies; });
-    this.http.get(`${this.url_base}/getVariedades`).subscribe( res => { self.variedades = res.json().variedades; });
-    this.http.get(`${this.url_base}/getCalibres`).subscribe( res => { self.calibres = res.json().calibres; });
-    this.http.get(`${this.url_base}/getCategorias`).subscribe( res => { self.categorias = res.json().categorias; });
-    this.http.get(`${this.url_base}/getEmbalajes`).subscribe( res => { self.embalajes = res.json().embalajes; });
-    this.http.get(`${this.url_base}/getEtiquetas`).subscribe( res => { self.etiquetas = res.json().etiquetas; });
-    this.http.get(`${this.url_base}/getApariencias`).subscribe( res => { self.apariencias = res.json().apariencias; });
-    console.log(self.apariencias);
+    this.http.get(`${this.url_base}/getDataControlCalidad`).subscribe( res => { 
+      self.regiones = res.json().regiones; 
+      self.productores = res.json().productores;
+      self.especies = res.json().especies;
+      self.variedades = res.json().variedades;
+      self.calibres = res.json().calibres;
+      self.categorias = res.json().categorias;
+      self.embalajes = res.json().embalajes;
+      self.etiquetas = res.json().etiquetas;
+      self.apariencias = res.json().apariencias;
+    });
     console.log(new Date(Date.now()).toLocaleTimeString());
 
   }

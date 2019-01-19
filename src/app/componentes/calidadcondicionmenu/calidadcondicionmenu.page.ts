@@ -46,11 +46,12 @@ export class CalidadcondicionmenuPage implements OnInit {
     this.navCtrl.navigateForward('/calculocalidad');
   }
 
-  async abrirModalFormularioCalidadCondicion (concepto) {
+  async abrirModalFormularioCalidadCondicion (concepto_id, concepto_nombre) {
     const modal = await this.modalCtrl.create({
       component: ModalformulariocalidadcondicionPage,
       componentProps: {
-        concepto_id: concepto
+        concepto_id: concepto_id,
+        concepto_nombre: concepto_nombre,
       }
     });
     modal.present();
