@@ -11,6 +11,9 @@ import { AppRoutingModule } from './app-routing.module';
 
 // Firebase config.
 import { firebaseConfig } from './servicios/databases/firebase-config';
+import { authPassportConfig } from './servicios/authbasic/auth-passport-config';
+
+
 // Firebase deps
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
@@ -22,6 +25,8 @@ import { ModalformulariocalidadcondicionPageModule } from './componentes/calidad
 // QR BAR SCANNER DEPS
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+import { LaravelPassportModule } from 'laravel-passport';
+
 @NgModule({
   declarations: [AppComponent],
   entryComponents: [],
@@ -29,12 +34,18 @@ import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(),
+    LaravelPassportModule.forRoot({
+      apiRoot: authPassportConfig.apiRoot, 
+      clientId: authPassportConfig.clientId, 
+      clientSecret: authPassportConfig.clientSecret
+    }),
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig.firebase),
     AngularFireAuthModule,
     ModalformulariocalidadPageModule,
     ModalformulariocondicionPageModule,
     ModalformulariocalidadcondicionPageModule
+    
   ],
   providers: [
     StatusBar,

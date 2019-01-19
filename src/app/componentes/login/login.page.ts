@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 import { NavController, LoadingController, NavParams } from "@ionic/angular";
 
 import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -12,17 +14,20 @@ import { Router } from '@angular/router';
 })
 export class LoginPage implements OnInit {
 
-  credenciales = {
-    usuario:'',
-    clave:''
-  }
+  credenciales:FormGroup;
 
   constructor(
     public afAuth: AngularFireAuth,
+    public formBuilder: FormBuilder,
     public loadingCtrl: LoadingController,
     public navCtrl: NavController,
     public router: Router
-  ){}
+  ){
+    this.credenciales = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
   }
