@@ -1,131 +1,21 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>listasmuestras</ion-title>
+    <ion-title>Listado de Muestras</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content padding>
 
+
   <ion-item>
-    <ion-label position="stacked">LISTA DE MUESTRAS</ion-label>
 
-    <ion-list>
-        <ion-item>
-          <ion-thumbnail item-start>
-            <img src="/assets/imgs/uvanegra.jpg">
-          </ion-thumbnail>
-          <h2>Set de muestras</h2>
-          <p> 1</p>
-          <button ion-button clear item-end>Ver</button>
-        </ion-item>
-      </ion-list>
-
-    <ion-list>
-
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>1</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 1</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-      
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>2</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 2</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-
-              
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>3</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 3</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-
-      
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>4</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 4</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-      
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>5</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 5</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>6</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 6</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-
-
-      <ion-item>
-        <ion-avatar slot="start">
-          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-          <h2>7</h2>
-        </ion-avatar>
-        <ion-label>
-          <h2>Muestra 7</h2>
-          <h3>Descripcion de la muestra</h3>
-          <p>Texto adicional</p>
-          <p>Categoria</p>
-        </ion-label>
-      </ion-item>
-
-    </ion-list>
+    {{ muestras | json }}
 
   </ion-item>
+
+
+
+
 </ion-content>
 
 <ion-footer padding>
