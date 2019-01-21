@@ -20,11 +20,16 @@ export class HomePage {
     public navCtrl: NavController,
     public router: Router,
     public barcodeScanner: BarcodeScanner
-  ){}
+  ){
+    console.log([
+      JSON.parse(localStorage.getItem('tokens')),
+      JSON.parse(localStorage.getItem('datosUsuario'))
+    ]);
+  }
 
 
   /**
-   * Funcion de los botones de la seccion del QR
+   * Funcion de los botones de la seccion del QR]
    */
   escanearQRMuestra () { // scan
 

@@ -34,14 +34,17 @@ import { LaravelPassportModule } from 'laravel-passport';
     BrowserModule,
     HttpModule,
     IonicModule.forRoot(),
+    
     LaravelPassportModule.forRoot({
       apiRoot: authPassportConfig.apiRoot, 
       clientId: authPassportConfig.clientId, 
       clientSecret: authPassportConfig.clientSecret
     }),
+
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig.firebase),
     AngularFireAuthModule,
+
     ModalformulariocalidadPageModule,
     ModalformulariocondicionPageModule,
     ModalformulariocalidadcondicionPageModule

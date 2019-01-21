@@ -6,12 +6,38 @@
 
 <ion-content padding>
 
+  <!-- {{ muestras | json }} -->
 
-  <ion-item>
 
-    {{ muestras | json }}
+  <ion-list>
 
-  </ion-item>
+    <ion-item *ngFor="let muestra of muestras">
+      <!--
+      <ion-avatar slot="start">
+        <img src="/docs/assets/img/avatar-finn.png"></img>
+      </ion-avatar>
+      -->
+
+      <ion-label>
+        <h2>
+          {{muestra.muestra_qr}}
+          <p style="float:right;">{{muestra.nota.nota_nombre}}</p>
+        </h2>
+        <h3>{{muestra.productor.productor_nombre}}</h3>
+        <p>
+          {{muestra.region.region_nombre}}
+          <br>
+          {{muestra.variedad.variedad_nombre}}
+          <br>
+          {{muestra.categoria.categoria_nombre}}
+        </p>
+      </ion-label>
+
+    </ion-item>
+
+  </ion-list>
+
+
 
 
 
