@@ -10,31 +10,40 @@
 
 
   <ion-list>
+    <ion-item-sliding *ngFor="let muestra of muestras">
+      <ion-item>
+        <ion-label>
+          <h2>
+            <ng-template [ngIf]="muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
+              <ion-badge item-end color="warning">{{muestra.categoria.categoria_nombre}}</ion-badge>
+            </ng-template>  
+            <ng-template #Standard>
+                <ion-badge item-end color="primary">{{muestra.categoria.categoria_nombre}}</ion-badge>
+            </ng-template>
+            · {{muestra.muestra_qr}}
 
-    <ion-item *ngFor="let muestra of muestras">
-      <!--
-      <ion-avatar slot="start">
-        <img src="/docs/assets/img/avatar-finn.png"></img>
-      </ion-avatar>
-      -->
+            <ion-badge style="float:right;" item-end color="light">{{muestra.nota.nota_nombre}}</ion-badge>
+          </h2>
+          <h3>{{muestra.productor.productor_nombre}}</h3>
+          <p>
+            {{muestra.variedad.variedad_nombre}}
+            <br>
+            {{muestra.region.region_nombre}}
+          </p>
+        </ion-label>
+      </ion-item>
 
-      <ion-label>
-        <h2>
-          {{muestra.muestra_qr}}
-          <p style="float:right;">{{muestra.nota.nota_nombre}}</p>
-        </h2>
-        <h3>{{muestra.productor.productor_nombre}}</h3>
-        <p>
-          {{muestra.region.region_nombre}}
-          <br>
-          {{muestra.variedad.variedad_nombre}}
-          <br>
-          {{muestra.categoria.categoria_nombre}}
-        </p>
-      </ion-label>
+      <ion-item-options side="start">
+        <ion-item-option color="danger">Eliminar</ion-item-option>
+        <ion-item-option color="info">Anular</ion-item-option>
+      </ion-item-options>
+  
+      <ion-item-options side="end">
+        <ion-item-option>Ver Detalle</ion-item-option>
+      </ion-item-options>
+    
 
-    </ion-item>
-
+    </ion-item-sliding>
   </ion-list>
 
 
