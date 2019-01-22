@@ -61,8 +61,8 @@ export class IngresarqrPage implements OnInit {
       'Accept': 'application/json',
       'withCredentials': 'true',
       'Access-Control-Allow-Origin': '*',
-      'Authorization': `${tokens.token_type} ${tokens.access_token}`,
-      'X-CSRF-TOKEN': `${tokens.access_token}`
+      //'Authorization': `${tokens.token_type} ${tokens.access_token}`,
+      //'X-CSRF-TOKEN': `${tokens.access_token}`
     });
 
     this.options = new RequestOptions({ headers: this.headers });
