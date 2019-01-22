@@ -7,6 +7,8 @@ import { Http, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
 
 
 // API REST.
@@ -25,24 +27,7 @@ export class ControlescalidadPage implements OnInit {
   headers = new Headers(authBasicConfig.headers);
   options = new RequestOptions({ headers: this.headers });
 
-  control = {
-    fecha_jornada:new Date().toISOString(),
-    calibre:null,
-    categoria_id:null,
-    region_id:null,
-    productor_id:null,
-    especie_id:null,
-    variedad_id:null,
-
-    embalaje_id:null,
-    etiqueta_id:null,
-    apariencia_id:null,
-    peso:null,
-    bolsas:null,
-    racimos:null,
-
-    calculo_total:null,
-  }
+  control:FormGroup;
 
   regiones: any[];
   productores: any[];
@@ -76,8 +61,32 @@ export class ControlescalidadPage implements OnInit {
     public navCtrl: NavController,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
+    public formBuilder: FormBuilder,
     public http: Http
-  ){}
+  ){
+
+    const fecha_jornada = new Date().toISOString();
+
+    this.control = this.formBuilder.group({
+      muestra_qr: ['123456', Validators.required],
+      fecha_jornada:[fecha_jornada , Validators.required],
+      region_id: ['', Validators.required],
+      productor_id: ['1', Validators.required],
+      especie_id: ['1', Validators.required],
+      variedad_id: ['', Validators.required],
+      calibre_id: ['', Validators.required],
+      categoria_id: ['', Validators.required],    
+      embalaje_id: ['', Validators.required],
+      etiqueta_id: ['', Validators.required],
+      muestra_peso: ['', Validators.required],
+      muestra_bolsas: ['', Validators.required],
+      muestra_racimos: ['', Validators.required],
+      apariencia_id: ['', Validators.required]
+
+      //calculo_total: [null, Validators.required]
+    });
+
+  }
 
   ngOnInit() {
     this.cargarInformacionInicial();
@@ -114,7 +123,35 @@ export class ControlescalidadPage implements OnInit {
   }
   */
 
-  irCalidadCondicionMenu() {
+  guardarMuestra () {
+
+    //console.log('wena la estas haciendo');
+
+    const control = this.control.value;
+
+    const tokens = JSON.parse(localStorage.getItem('tokens'))
+    let headers = new Headers({
+      'Content-Type': 'application/json;charset=utf-8',
+      'Accept': 'application/json',
+      'withCredentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      'Authorization': `${tokens.token_type} ${tokens.access_token}`,
+      'X-CSRF-TOKEN': `${tokens.access_token}`
+    });
+
+    this.options = new RequestOptions({ headers: this.headers });
+
+    let self = this;
+    this.http.post(`${this.url_base}/api/muestras/store_for_app`, control, this.options )
+      .subscribe( res => { 
+        console.log(res);
+    });
+
+
+    // irCalidadCondicionMenu();
+  }
+
+  irCalidadCondicionMenu () {
     this.navCtrl.navigateForward('/calidadcondicionmenu');
   }
 

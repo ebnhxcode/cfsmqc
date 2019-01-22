@@ -10,47 +10,48 @@
 </ion-header>
 
 <ion-content>
-    <ion-card class="welcome-card">
+    <!--<ion-card class="welcome-card">-->
       <!-- <ion-img src="/assets/imgs/uvanegra.jpg"></ion-img> -->
       <!--<ion-img style="width: 400px;height: 400px;" src="/assets/imgs/lectorqr.jpg"></ion-img>-->
 
 
       <!-- <ion-input type="text" [(ngModel)]="encodedText"></ion-input> -->
-      <ion-card-header>
+      <!--<ion-card-header>-->
         <!-- <ion-card-subtitle>ACCIÓN PRINCIPAL</ion-card-subtitle> -->
         <!-- <ion-card-title text-center>Escanear QR Muestra</ion-card-title> -->
 
 
-        <ion-grid>
-          <ion-row>
-            <ion-col>
-                <ion-button fill="solid" expand="block" color="primary" (click)="escanearQRMuestra()">
-                  <ion-icon slot="start" name="qr-scanner"></ion-icon>
-                  ESCANEAR QR
-                </ion-button>
-            </ion-col>
-            <ion-col>
-                <ion-button fill="solid" expand="block" color="light" (click)="ingresarQRMuestra()">
-                  INGRESAR QR
-                </ion-button>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+    <ion-grid style="padding-top: 30%;">
+      <ion-row>
+        <ion-col col-6 col-sm>
+            <ion-button fill="solid" expand="block" color="primary" (click)="escanearQRMuestra()">
+              <ion-icon slot="start" name="qr-scanner"></ion-icon>
+              SCAN QR
+            </ion-button>
+        </ion-col>
+        <ion-col col-6 col-sm>
+            <ion-button fill="solid" expand="block" color="light" (click)="ingresarQRMuestra()">
+              NUEVA MUESTRA
+            </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
 
-      </ion-card-header>
+      <!--</ion-card-header>-->
       <!--
       <ion-card-content>
         <p>En este sistema podrás administrar tu negocio de control de calidad.</p>
       </ion-card-content>
       -->
-    </ion-card>
+    <!--</ion-card>-->
+    <!--
     <ion-list lines="none" padding>
       <ion-list-header>
         <ion-label>OTRAS ACCIONES</ion-label>
       </ion-list-header>
 
       <ion-button expand="block" (click)="irListadosMuestras()" color="light">
-        <ion-icon slot="start" name="list"><!--build--></ion-icon>
+        <ion-icon slot="start" name="list"><!--build-></ion-icon>
         <ion-label>VER LISTADO DE MUESTRAS</ion-label>
       </ion-button>
 
@@ -69,7 +70,7 @@
         <ion-label>OPCIONES</ion-label>
       </ion-button>
 
-      <!--
+      
       <ion-item href="#!">
         <ion-icon slot="start" color="medium" name="pie"></ion-icon>
         <ion-label>Reportes</ion-label>
@@ -78,6 +79,7 @@
         <ion-icon slot="start" color="medium" name="chatbubbles"></ion-icon>
         <ion-label>Mensajes</ion-label>
       </ion-item>
-      -->
+      
     </ion-list>
+    -->
 </ion-content>

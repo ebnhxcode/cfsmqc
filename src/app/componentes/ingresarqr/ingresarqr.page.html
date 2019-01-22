@@ -6,30 +6,36 @@
 
 <ion-content padding>
 
-  <form action="">
+  <form 
+    [formGroup]="nueva_muestra" 
+    (ngSubmit)="guardarQRContinuar()">
+
     <ion-item>
         <ion-label position="stacked">Código que equivaldrá al QR</ion-label>
   
         <ion-input
-          type="text" 
-          placeholder="Codigo"
-          [(ngModel)]="ingreso.codigo"
-          [ngModelOptions]="{standalone: true}">
+          type="number" 
+          placeholder="Codigo QR"
+          formControlName="muestra_qr">
         </ion-input>
       </ion-item>
 
 
-  
+    <ion-button 
+      fill="solid" 
+      expand="block" 
+      color="primary"
+      type="submit" 
+      [disabled]="!nueva_muestra.valid">
+      Guardar y Continuar
+    </ion-button>
 
 
   </form>
 
 </ion-content>
 
+<!--
 <ion-footer padding>
-
-  <ion-button fill="solid" expand="block" color="primary" (click)="guardarContinuar()">
-    Guardar y Continuar
-  </ion-button>
-
 </ion-footer>
+-->

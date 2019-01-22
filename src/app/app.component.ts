@@ -16,10 +16,35 @@ export class AppComponent {
       icon: 'home'
     },
     {
-      title: 'Mantenedor',
-      url: '/componentes/mantenedor',
+      title: 'Scan QR',
+      url: '/#!',
+      icon: 'qr-scanner'
+    },
+    {
+      title: 'Crear Muestra',
+      url: '/ingresarqr',
+      icon: 'add'
+    },
+    {
+      title: 'Lista de Muestras',
+      url: '/listasmuestras',
+      icon: 'list'
+    },
+    {
+      title: 'Sync App',
+      url: '/#!',
+      icon: 'contract'
+    },
+    {
+      title: 'Notificar Error',
+      url: '/#!',
+      icon: 'alert'
+    },
+    {
+      title: 'Opciones',
+      url: '/#!',
       icon: 'cog'
-    }
+    },
   ];
 
   constructor(

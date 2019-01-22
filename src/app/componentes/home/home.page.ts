@@ -32,7 +32,8 @@ export class HomePage {
    * Funcion de los botones de la seccion del QR]
    */
   escanearQRMuestra () { // scan
-
+    return;
+    /*
     this.navCtrl.navigateForward('/controlescalidad');
     return;
     this.options = {
@@ -43,6 +44,7 @@ export class HomePage {
     },(err)=>{
       console.log(err);
     });
+    */
   }
 
   ingresarQRMuestra () { // encode
