@@ -32,6 +32,7 @@ export class HomePage {
    * Funcion de los botones de la seccion del QR]
    */
   escanearQRMuestra () { // scan
+    this.navCtrl.navigateForward(`/controlescalidad/169`);
     return;
     /*
     this.navCtrl.navigateForward('/controlescalidad');

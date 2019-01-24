@@ -14,7 +14,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // API REST.
 import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
-import { ConsoleReporter } from 'jasmine';
 
 @Component({
   selector: 'app-ingresarqr',
