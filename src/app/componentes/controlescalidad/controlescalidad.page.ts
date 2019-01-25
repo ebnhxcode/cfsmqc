@@ -57,8 +57,8 @@ export class ControlescalidadPage implements OnInit {
   apariencias: any[];
   peso: any[];
 
-  muestra_id:any;
-  muestra:any;
+  muestra_id:any=null;
+  muestra:any={};
   
 
   /*
@@ -100,7 +100,7 @@ export class ControlescalidadPage implements OnInit {
 
 
     let self = this;
-    this.http.get(`${this.url_base}/getDataControlCalidad`).subscribe( res => { 
+    this.http.get(`${this.url_base}/mobile/getDataControlCalidad`).subscribe( res => { 
       self.regiones = res.json().regiones; 
       self.productores = res.json().productores;
       self.especies = res.json().especies;
@@ -114,13 +114,11 @@ export class ControlescalidadPage implements OnInit {
 
     this.muestra_id = this.activatedRoute.snapshot.paramMap.get('muestra_id');
 
-    // this.muestra = 
-    this.obtenerMuestra(this.muestra_id);
+    // Carga la muestra con el id que viene 
+    if (this.muestra_id) {
+      this.obtenerMuestra(this.muestra_id);
+    }
     //console.log(this.muestra_id);
-
-
-
-
     //console.log(new Date(Date.now()).toLocaleTimeString());
   }
   
@@ -137,10 +135,6 @@ export class ControlescalidadPage implements OnInit {
   */
 
   obtenerMuestra (muestra_id) {
-
-
-    
-
     const tokens = JSON.parse(localStorage.getItem('tokens'))
     let headers = new Headers({
       'Content-Type': 'application/json;charset=utf-8',
@@ -154,30 +148,32 @@ export class ControlescalidadPage implements OnInit {
     this.options = new RequestOptions({ headers: this.headers });
 
     let self = this;
-    this.http.post(`${this.url_base}/api/get_muestra_for_app`, {muestra_id:muestra_id}, this.options )
+    this.http.post(`${this.url_base}/mobile/muestras/show`, {muestra_id:muestra_id}, this.options )
       .subscribe( res => { 
         //console.log(res);
         self.muestra = res.json().muestra; 
 
+        //console.log(self.muestra);
 
 
-      self.control = self.formBuilder.group({
-        muestra_qr: new FormControl(self.muestra.muestra_qr, Validators.required),
-        fecha_jornada: new FormControl(self.muestra.muestra_fecha, Validators.required),
-        region_id: new FormControl(self.muestra.region_id, Validators.required),
-        productor_id: new FormControl(self.muestra.productor_id, Validators.required),
-        especie_id: new FormControl(self.muestra.especie_id, Validators.required),
-        variedad_id: new FormControl(self.muestra.variedad_id, Validators.required),
-        calibre_id: new FormControl(self.muestra.calibre_id, Validators.required),
-        categoria_id: new FormControl(self.muestra.categoria_id, Validators.required), 
-        embalaje_id: new FormControl(self.muestra.embalaje_id, Validators.required),
-        etiqueta_id: new FormControl(self.muestra.etiqueta_id, Validators.required),
-        muestra_peso: new FormControl(self.muestra.muestra_peso, Validators.required),
-        muestra_bolsas: new FormControl(self.muestra.muestra_bolsas, Validators.required),
-        muestra_racimos: new FormControl(self.muestra.muestra_racimos, Validators.required),
-        apariencia_id: new FormControl(self.muestra.apariencia_id, Validators.required)
-        //calculo_total: [null, Validators.required]
-      });
+
+        self.control = self.formBuilder.group({
+          muestra_qr: new FormControl(self.muestra.muestra_qr, Validators.required),
+          fecha_jornada: new FormControl(self.muestra.muestra_fecha, Validators.required),
+          region_id: new FormControl(self.muestra.region_id, Validators.required),
+          productor_id: new FormControl(self.muestra.productor_id, Validators.required),
+          especie_id: new FormControl(self.muestra.especie_id, Validators.required),
+          variedad_id: new FormControl(self.muestra.variedad_id, Validators.required),
+          calibre_id: new FormControl(self.muestra.calibre_id, Validators.required),
+          categoria_id: new FormControl(self.muestra.categoria_id, Validators.required), 
+          embalaje_id: new FormControl(self.muestra.embalaje_id, Validators.required),
+          etiqueta_id: new FormControl(self.muestra.etiqueta_id, Validators.required),
+          muestra_peso: new FormControl(self.muestra.muestra_peso, Validators.required),
+          muestra_bolsas: new FormControl(self.muestra.muestra_bolsas, Validators.required),
+          muestra_racimos: new FormControl(self.muestra.muestra_racimos, Validators.required),
+          apariencia_id: new FormControl(self.muestra.apariencia_id, Validators.required)
+          //calculo_total: [null, Validators.required]
+        });
 
         self.control.controls["muestra_qr"].setValue(self.muestra.muestra_qr);
         self.control.controls["fecha_jornada"].setValue(self.muestra.muestra_fecha);
@@ -227,7 +223,7 @@ export class ControlescalidadPage implements OnInit {
     //return;
 
     let self = this;
-    this.http.post(`${this.url_base}/api/update_for_app`, control, this.options )
+    this.http.post(`${this.url_base}/mobile/muestras/store`, control, this.options )
       .subscribe(
         res => { 
           console.log(res);

@@ -67,11 +67,12 @@ export class IngresarqrPage implements OnInit {
     this.options = new RequestOptions({ headers: this.headers });
 
     let self = this;
-    this.http.post(`${this.url_base}/api/store_for_app`, nueva_muestra, this.options )
+    this.http.post(`${this.url_base}/mobile/muestras/store`, nueva_muestra, this.options )
       .subscribe( 
         res => { 
           //console.log(res.json().muestra);
           const muestra = res.json().muestra;
+          //console.log(muestra);
           this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_id}`);
 
 

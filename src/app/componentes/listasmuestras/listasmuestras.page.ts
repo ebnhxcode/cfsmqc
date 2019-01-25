@@ -67,7 +67,7 @@ export class ListasmuestrasPage implements OnInit {
 
 
     let self = this;
-    this.http.get(`${this.url_base}/api/muestras/index_for_app`, this.options ).subscribe( res => { 
+    this.http.get(`${this.url_base}/mobile/muestras`, this.options ).subscribe( res => { 
       self.muestras = res.json().muestras; 
     });
 
