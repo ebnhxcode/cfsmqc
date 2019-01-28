@@ -46,6 +46,24 @@ export class ControlescalidadPage implements OnInit {
     'apariencia_id': new FormControl()
   });
 
+  controlJson = {
+    'muestra_qr':null,
+    'fecha_jornada':null,
+    'region_id':null,
+    'productor_id':null,
+    'especie_id':null,
+    'variedad_id':null,
+    'calibre_id':null,
+    'categoria_id':null,
+    'embalaje_id':null,
+    'etiqueta_id':null,
+    'muestra_peso':null,
+    'muestra_bolsas':null,
+    'muestra_racimos':null,
+    'apariencia_id':null
+  };
+
+
   regiones: any[];
   productores: any[];
   especies: any[];
@@ -218,12 +236,13 @@ export class ControlescalidadPage implements OnInit {
     this.options = new RequestOptions({ headers: this.headers });
     control = Object.assign({muestra_id:this.muestra.muestra_id}, control);
 
+    this.controlJson = control;
 
     //console.log(control);
     //return;
 
     let self = this;
-    this.http.post(`${this.url_base}/mobile/muestras/store`, control, this.options )
+    this.http.post(`${this.url_base}/mobile/muestras/update`, control, this.options )
       .subscribe(
         res => { 
           console.log(res);

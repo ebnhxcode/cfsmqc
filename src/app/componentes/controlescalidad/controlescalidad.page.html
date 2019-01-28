@@ -124,13 +124,16 @@
       <ion-label 
         position="stacked">
           Calibre
+          {{controlJson.calibre_id}}
       </ion-label>
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
         placeholder="Calibre"
+        [(ngModel)]="controlJson.calibre_id"
         formControlName="calibre_id">
         <ion-select-option 
+          [attr.selected]="(calibre.calibre_id==controlJson.calibre_id)?'true':''"
           *ngFor="let calibre of calibres" 
           [value]="calibre.calibre_id">
           {{ calibre.calibre_nombre }}
@@ -185,6 +188,7 @@
         placeholder="Embalaje"
         formControlName="embalaje_id">
         <ion-select-option 
+          selected
           *ngFor="let embalaje of embalajes" 
           [value]="embalaje.embalaje_id">
           {{ embalaje.embalaje_nombre }}
