@@ -14,6 +14,9 @@
     [formGroup]="control" 
     (ngSubmit)="guardarMuestra()">
 
+    <!--{{ muestra | json }}-->
+    
+
     <ion-item>
       <ion-label position="stacked">
           Código QR
@@ -28,11 +31,12 @@
     <ion-item>
       <ion-label 
         position="stacked">
-          Fecha Jornada
+          Fecha Jornada <span style="float:right;" *ngIf="muestra.muestra_fecha">{{ muestra.muestra_fecha }}</span>
       </ion-label>
       <ion-datetime 
-        displayFormat="MM/DD/YYYY" 
-        formControlName="fecha_jornada">
+        [value]="muestra.muestra_fecha"
+        displayFormat="MMM DD, YYYY HH:mm" 
+        formControlName="muestra_fecha">
       </ion-datetime>
     </ion-item>
 
@@ -45,9 +49,10 @@
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
-        placeholder="Región"
+        [placeholder]="muestra.region ? muestra.region.region_nombre : 'Región'"
         formControlName="region_id">
         <ion-select-option 
+          [selected]="(muestra.region_id==region.region_id)?true:false"
           *ngFor="let region of regiones" 
           [value]="region.region_id">
           {{ region.region_nombre }}
@@ -55,7 +60,6 @@
       </ion-select>
     </ion-item>
 
-      
 
     <ion-item>
       <ion-label 
@@ -65,18 +69,16 @@
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
-        placeholder="Productor"
+        [placeholder]="muestra.productor ? muestra.productor.productor_nombre : 'Productor'"
         formControlName="productor_id">
         <ion-select-option 
+          [selected]="(muestra.productor_id==productor.productor_id)?true:false"
           *ngFor="let productor of productores" 
           [value]="productor.productor_id">
           {{ productor.productor_nombre }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-
-
-
 
 
     <ion-item>
@@ -87,16 +89,16 @@
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
-        placeholder="Especie"
+        [placeholder]="muestra.especie ? muestra.especie.especie_nombre : 'Especie'"
         formControlName="especie_id">
         <ion-select-option 
+        [selected]="(muestra.especie_id==especie.especie_id)?true:false"
           *ngFor="let especie of especies" 
           [value]="especie.especie_id">
           {{ especie.especie_nombre }}
         </ion-select-option>
       </ion-select>
     </ion-item>
-
 
 
     <ion-item>
@@ -107,9 +109,10 @@
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
-        placeholder="Variedad"
+        [placeholder]="muestra.variedad ? muestra.variedad.variedad_nombre : 'Variedad'"
         formControlName="variedad_id">
         <ion-select-option 
+          [selected]="(muestra.variedad_id==variedad.variedad_id)?true:false"
           *ngFor="let variedad of variedades" 
           [value]="variedad.variedad_id">
           {{ variedad.variedad_nombre }}
@@ -117,23 +120,19 @@
       </ion-select>
     </ion-item>
 
-
-
-
     <ion-item>
       <ion-label 
         position="stacked">
           Calibre
-          {{controlJson.calibre_id}}
       </ion-label>
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
         placeholder="Calibre"
-        [(ngModel)]="controlJson.calibre_id"
+        [placeholder]="muestra.calibre ? muestra.calibre.calibre_nombre : 'Calibre'"
         formControlName="calibre_id">
         <ion-select-option 
-          [attr.selected]="(calibre.calibre_id==controlJson.calibre_id)?'true':''"
+          [selected]="(muestra.calibre_id==calibre.calibre_id)?true:false"
           *ngFor="let calibre of calibres" 
           [value]="calibre.calibre_id">
           {{ calibre.calibre_nombre }}
@@ -151,7 +150,7 @@
         </ion-list-header>
         <ion-item *ngFor="let categoria of categorias">
           <ion-label>{{ categoria.categoria_nombre }}</ion-label>
-          <ion-radio [value]="categoria.categoria_id"></ion-radio>
+          <ion-radio [value]="categoria.categoria_id" checked="{{(muestra.categoria_id==categoria.categoria_id)?'true':'false'}}"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
@@ -185,10 +184,10 @@
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
-        placeholder="Embalaje"
+        [placeholder]="muestra.embalaje ? muestra.embalaje.embalaje_nombre : 'Embalaje'"
         formControlName="embalaje_id">
         <ion-select-option 
-          selected
+          [selected]="(muestra.embalaje_id==embalaje.embalaje_id)?true:false"
           *ngFor="let embalaje of embalajes" 
           [value]="embalaje.embalaje_id">
           {{ embalaje.embalaje_nombre }}
@@ -209,9 +208,10 @@
       <ion-select
         okText="OK" 
         cancelText="Cancelar"
-        placeholder="Etiqueta"
+        [placeholder]="muestra.etiqueta ? muestra.etiqueta.etiqueta_nombre : 'Etiqueta'"
         formControlName="etiqueta_id">
         <ion-select-option 
+          [selected]="(muestra.etiqueta_id==etiqueta.etiqueta_id)?true:false"
           *ngFor="let etiqueta of etiquetas" 
           [value]="etiqueta.etiqueta_id">
           {{ etiqueta.etiqueta_nombre }}
@@ -289,7 +289,7 @@
         </ion-list-header>
         <ion-item *ngFor="let apariencia of apariencias">
           <ion-label>{{ apariencia.apariencia_nombre }}</ion-label>
-          <ion-radio [value]="apariencia.apariencia_id"></ion-radio>
+          <ion-radio [value]="apariencia.apariencia_id" checked="{{(muestra.apariencia_id==apariencia.apariencia_id)?'true':'false'}}"></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
@@ -300,7 +300,7 @@
       expand="block" 
       color="primary" 
       type="submit" 
-      [disabled]="!control.valid">
+      [disabled]="!control.valid && !muestra.muestra_fecha">
       Guardar y Continuar
     </ion-button>
 

@@ -31,7 +31,7 @@ export class ControlescalidadPage implements OnInit {
 
   control = new FormGroup({
     'muestra_qr': new FormControl(),
-    'fecha_jornada': new FormControl(),
+    'muestra_fecha': new FormControl(),
     'region_id': new FormControl(),
     'productor_id': new FormControl(),
     'especie_id': new FormControl(),
@@ -48,7 +48,7 @@ export class ControlescalidadPage implements OnInit {
 
   controlJson = {
     'muestra_qr':null,
-    'fecha_jornada':null,
+    'muestra_fecha':null,
     'region_id':null,
     'productor_id':null,
     'especie_id':null,
@@ -104,7 +104,7 @@ export class ControlescalidadPage implements OnInit {
     public http: Http
   ){
 
-    //const fecha_jornada = new Date().toISOString();
+    //const muestra_fecha = new Date().toISOString();
 
 
 
@@ -176,25 +176,25 @@ export class ControlescalidadPage implements OnInit {
 
 
         self.control = self.formBuilder.group({
-          muestra_qr: new FormControl(self.muestra.muestra_qr, Validators.required),
-          fecha_jornada: new FormControl(self.muestra.muestra_fecha, Validators.required),
-          region_id: new FormControl(self.muestra.region_id, Validators.required),
-          productor_id: new FormControl(self.muestra.productor_id, Validators.required),
-          especie_id: new FormControl(self.muestra.especie_id, Validators.required),
-          variedad_id: new FormControl(self.muestra.variedad_id, Validators.required),
-          calibre_id: new FormControl(self.muestra.calibre_id, Validators.required),
-          categoria_id: new FormControl(self.muestra.categoria_id, Validators.required), 
-          embalaje_id: new FormControl(self.muestra.embalaje_id, Validators.required),
-          etiqueta_id: new FormControl(self.muestra.etiqueta_id, Validators.required),
-          muestra_peso: new FormControl(self.muestra.muestra_peso, Validators.required),
-          muestra_bolsas: new FormControl(self.muestra.muestra_bolsas, Validators.required),
-          muestra_racimos: new FormControl(self.muestra.muestra_racimos, Validators.required),
-          apariencia_id: new FormControl(self.muestra.apariencia_id, Validators.required)
+          muestra_qr: new FormControl({value: self.muestra.muestra_qr,disabled:true}, Validators.required),
+          muestra_fecha: new FormControl({value: self.muestra.muestra_fecha,disabled:true}, Validators.required),
+          region_id: new FormControl({value: self.muestra.region_id,disabled:true}, Validators.required),
+          productor_id: new FormControl({value: self.muestra.productor_id,disabled:true}, Validators.required),
+          especie_id: new FormControl({value: self.muestra.especie_id,disabled:true}, Validators.required),
+          variedad_id: new FormControl({value: self.muestra.variedad_id,disabled:true}, Validators.required),
+          calibre_id: new FormControl({value: self.muestra.calibre_id,disabled:true}, Validators.required),
+          categoria_id: new FormControl({value: self.muestra.categoria_id,disabled:true}, Validators.required), 
+          embalaje_id: new FormControl({value: self.muestra.embalaje_id,disabled:true}, Validators.required),
+          etiqueta_id: new FormControl({value: self.muestra.etiqueta_id,disabled:true}, Validators.required),
+          muestra_peso: new FormControl({value: self.muestra.muestra_peso,disabled:true}, Validators.required),
+          muestra_bolsas: new FormControl({value: self.muestra.muestra_bolsas,disabled:true}, Validators.required),
+          muestra_racimos: new FormControl({value: self.muestra.muestra_racimos,disabled:true}, Validators.required),
+          apariencia_id: new FormControl({value: self.muestra.apariencia_id,disabled:true}, Validators.required)
           //calculo_total: [null, Validators.required]
         });
 
         self.control.controls["muestra_qr"].setValue(self.muestra.muestra_qr);
-        self.control.controls["fecha_jornada"].setValue(self.muestra.muestra_fecha);
+        self.control.controls["muestra_fecha"].setValue(self.muestra.muestra_fecha);
         self.control.controls["region_id"].setValue(self.muestra.region_id);
         self.control.controls["productor_id"].setValue(self.muestra.productor_id);
         self.control.controls["especie_id"].setValue(self.muestra.especie_id);
@@ -210,9 +210,9 @@ export class ControlescalidadPage implements OnInit {
 
         //console.log(self.control.controls);
         //console.log(self.control.controls);
-        //console.log(self.muestra);
+        console.log(self.muestra);
 
-        //console.log(self.muestra);
+        //console.log(this.control.value.apariencia_id);
     });
 
   }
