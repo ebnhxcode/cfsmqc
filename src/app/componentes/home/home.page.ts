@@ -4,6 +4,9 @@ import { NavController, LoadingController, NavParams } from "@ionic/angular";
 
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
+import { ActivatedRoute } from '@angular/router';
+
+
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
@@ -15,12 +18,20 @@ export class HomePage {
   encodedText:string='';
   encodedData:any={};
   scannedData:any={};
+  scan:any='';
 
   constructor (
     public navCtrl: NavController,
     public router: Router,
+    public activatedRoute: ActivatedRoute,
     public barcodeScanner: BarcodeScanner
   ){
+
+    this.scan = this.activatedRoute.snapshot.paramMap.get('scan');
+    if (this.scan) {
+      this.escanearQRMuestra();
+    }
+
     console.log([
       JSON.parse(localStorage.getItem('tokens')),
       JSON.parse(localStorage.getItem('datosUsuario'))

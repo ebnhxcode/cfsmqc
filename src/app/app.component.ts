@@ -12,12 +12,12 @@ export class AppComponent {
   public appPages = [
     {
       title: 'Home',
-      url: '/componentes/home',
+      url: '/home',
       icon: 'home'
     },
     {
       title: 'Scan QR',
-      url: '/#!',
+      url: '/home/scan',
       icon: 'qr-scanner'
     },
     {

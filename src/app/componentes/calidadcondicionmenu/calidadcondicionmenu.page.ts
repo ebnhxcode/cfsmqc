@@ -5,7 +5,7 @@ import { NavController, LoadingController, AlertController, ModalController, Nav
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { ModalformulariocalidadcondicionPage } from './modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.page';
-
+import { ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-calidadcondicion',
   templateUrl: './calidadcondicionmenu.page.html',
@@ -17,14 +17,18 @@ export class CalidadcondicionmenuPage implements OnInit {
     nota_calidad:0,
     nota_condicion:0,
   }
+  muestra_id:any='';
 
   constructor(
     public navCtrl: NavController,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
     public modalCtrl: ModalController,
+    public activatedRoute: ActivatedRoute,
     public http: Http
-  ) { }
+  ) {
+    this.muestra_id = this.activatedRoute.snapshot.paramMap.get('muestra_id');
+  }
 
   ngOnInit() {
     
@@ -34,8 +38,8 @@ export class CalidadcondicionmenuPage implements OnInit {
     this.navCtrl.navigateForward('/home'); 
   }
 
-  irControlCalidad () {
-    this.navCtrl.navigateForward('/controlescalidad');
+  irControlCalidad (muestra_id) {
+    this.navCtrl.navigateForward(`/controlescalidad/${muestra_id}`);
   }
 
   irCalculoCondicion () {

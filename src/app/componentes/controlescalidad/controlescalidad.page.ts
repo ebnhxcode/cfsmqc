@@ -43,6 +43,8 @@ export class ControlescalidadPage implements OnInit {
     'muestra_peso': new FormControl(),
     'muestra_bolsas': new FormControl(),
     'muestra_racimos': new FormControl(),
+    'muestra_brix': new FormControl(),
+    'muestra_desgrane': new FormControl(),
     'apariencia_id': new FormControl()
   });
 
@@ -60,6 +62,8 @@ export class ControlescalidadPage implements OnInit {
     'muestra_peso':null,
     'muestra_bolsas':null,
     'muestra_racimos':null,
+    'muestra_brix':null,
+    'muestra_desgrane':null,
     'apariencia_id':null
   };
 
@@ -135,7 +139,7 @@ export class ControlescalidadPage implements OnInit {
 
     this.obtenerMuestra(this.muestra_qr);
     // Carga la muestra con el id que viene 
-    
+
     //console.log(this.muestra_id);
     //console.log(new Date(Date.now()).toLocaleTimeString());
   }
@@ -189,6 +193,8 @@ export class ControlescalidadPage implements OnInit {
           muestra_peso: new FormControl({value: self.muestra.muestra_peso,disabled:true}, Validators.required),
           muestra_bolsas: new FormControl({value: self.muestra.muestra_bolsas,disabled:true}, Validators.required),
           muestra_racimos: new FormControl({value: self.muestra.muestra_racimos,disabled:true}, Validators.required),
+          muestra_brix: new FormControl({value: self.muestra.muestra_brix,disabled:true}, Validators.required),
+          muestra_desgrane: new FormControl({value: self.muestra.muestra_desgrane,disabled:true}, Validators.required),
           apariencia_id: new FormControl({value: self.muestra.apariencia_id,disabled:true}, Validators.required)
           //calculo_total: [null, Validators.required]
         });
@@ -206,6 +212,8 @@ export class ControlescalidadPage implements OnInit {
         self.control.controls["muestra_peso"].setValue(self.muestra.muestra_peso);
         self.control.controls["muestra_bolsas"].setValue(self.muestra.muestra_bolsas);
         self.control.controls["muestra_racimos"].setValue(self.muestra.muestra_racimos);
+        self.control.controls["muestra_brix"].setValue(self.muestra.muestra_brix);
+        self.control.controls["muestra_desgrane"].setValue(self.muestra.muestra_desgrane);
         self.control.controls["apariencia_id"].setValue(self.muestra.apariencia_id);
 
         //console.log(self.control.controls);
@@ -247,9 +255,10 @@ export class ControlescalidadPage implements OnInit {
         res => { 
           console.log(res);
 
-
-
-
+          if (res.status == 200) {
+            this.muestra = res.json().muestra;
+            this.irCalidadCondicionMenu(this.muestra);
+          }
         },
         err => {
           console.log(err);
@@ -257,7 +266,7 @@ export class ControlescalidadPage implements OnInit {
       );
 
 
-    // irCalidadCondicionMenu();
+    
   }
 
   async errorMuestraId () {
@@ -272,8 +281,8 @@ export class ControlescalidadPage implements OnInit {
     alert.present();
   }
 
-  irCalidadCondicionMenu () {
-    this.navCtrl.navigateForward('/calidadcondicionmenu');
+  irCalidadCondicionMenu (muestra) {
+    this.navCtrl.navigateForward(`/calidadcondicionmenu/${muestra.muestra_id}`);
   }
 
   irHome () {

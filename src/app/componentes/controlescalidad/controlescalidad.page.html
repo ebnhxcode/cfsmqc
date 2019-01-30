@@ -11,6 +11,7 @@
 <ion-content padding>
 
   <form 
+    *ngIf="muestra"
     [formGroup]="control" 
     (ngSubmit)="guardarMuestra()">
 
@@ -257,6 +258,31 @@
         type="select" 
         placeholder="Racimos"
         formControlName="muestra_racimos">
+      </ion-input>
+    </ion-item>
+
+    <ion-item>
+      <ion-label 
+        position="stacked">
+          Brix
+      </ion-label>
+      <ion-input
+        type="select" 
+        placeholder="Brix"
+        formControlName="muestra_brix">
+      </ion-input>
+    </ion-item>
+
+
+    <ion-item>
+      <ion-label 
+        position="stacked">
+          Desgrane
+      </ion-label>
+      <ion-input
+        type="select" 
+        placeholder="Desgrane"
+        formControlName="muestra_desgrane">
       </ion-input>
     </ion-item>
 
