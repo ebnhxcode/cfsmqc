@@ -34,9 +34,10 @@
         position="stacked">
           Fecha Jornada <span style="float:right;" *ngIf="muestra.muestra_fecha">{{ muestra.muestra_fecha }}</span>
       </ion-label>
+      <!--displayFormat="MMM DD, YYYY HH:mm" -->
       <ion-datetime 
-        [value]="muestra.muestra_fecha"
-        displayFormat="MMM DD, YYYY HH:mm" 
+        [value]="muestra.muestra_fecha || muestra_fecha_por_defecto"
+        displayFormat="YYYY/MM/DD" 
         formControlName="muestra_fecha">
       </ion-datetime>
     </ion-item>
@@ -49,6 +50,7 @@
       </ion-label>
       <ion-select
         okText="OK" 
+        [(ngModel)]="region_id"
         cancelText="Cancelar"
         [placeholder]="muestra.region ? muestra.region.region_nombre : 'Región'"
         formControlName="region_id">
@@ -72,12 +74,15 @@
         cancelText="Cancelar"
         [placeholder]="muestra.productor ? muestra.productor.productor_nombre : 'Productor'"
         formControlName="productor_id">
-        <ion-select-option 
-          [selected]="(muestra.productor_id==productor.productor_id)?true:false"
-          *ngFor="let productor of productores" 
-          [value]="productor.productor_id">
-          {{ productor.productor_nombre }}
-        </ion-select-option>
+        <ng-container *ngFor="let productor of productores">
+          <!--*ngIf="productor.region_id == muestra.region_id"-->
+          <ion-select-option 
+            *ngIf="productor.region_id == region_id"
+            [selected]="(muestra.productor_id == productor.productor_id)?true:false"
+            [value]="productor.productor_id">
+            {{ productor.productor_nombre }}
+          </ion-select-option>
+        </ng-container>
       </ion-select>
     </ion-item>
 

@@ -84,6 +84,7 @@ export class ControlescalidadPage implements OnInit {
   estados_muestras: any[];
   peso: any[];
 
+  region_id:any=null;
   muestra_id:any=null;
   muestra_qr:any=null;
   muestra:any={};
@@ -114,7 +115,7 @@ export class ControlescalidadPage implements OnInit {
     public http: Http
   ){
 
-    //const muestra_fecha = new Date().toISOString();
+    const muestra_fecha_por_defecto = new Date().toISOString();
 
 
 
@@ -181,6 +182,7 @@ export class ControlescalidadPage implements OnInit {
         //console.log(res);
         self.muestra = res.json().muestra; 
 
+        self.region_id = self.muestra.region_id;
         //console.log(self.muestra);
 
 
@@ -233,6 +235,10 @@ export class ControlescalidadPage implements OnInit {
         //console.log(this.control.value.apariencia_id);
     });
 
+  }
+
+  test () {
+    alert("Test");
   }
 
   guardarMuestra () {
