@@ -73,7 +73,7 @@ export class IngresarqrPage implements OnInit {
           //console.log(res.json().muestra);
           const muestra = res.json().muestra;
           //console.log(muestra);
-          this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_id}`);
+          this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
 
 
         },
