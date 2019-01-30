@@ -237,10 +237,6 @@ export class ControlescalidadPage implements OnInit {
 
   }
 
-  test () {
-    alert("Test");
-  }
-
   guardarMuestra () {
 
     //console.log('wena la estas haciendo');

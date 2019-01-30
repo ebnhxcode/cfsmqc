@@ -18,29 +18,28 @@
   
 
   <ion-list>
-
-
-    <ion-item *ngFor="let defecto of muestra.muestras_defectos">
-      <!--<ion-avatar slot="start" >-->
-        <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-        <!-- <h2>{{  }} · {{ defecto.nota.nota_descripcion }}</h2>  -->
-      <!--</ion-avatar>-->
-      <ion-label *ngIf="defecto.nota">
-        <p style="float:right;" *ngIf="defecto.defecto.concepto_id == 1">Calidad</p>
-        <p style="float:right;" *ngIf="defecto.defecto.concepto_id == 2">Condición</p>
-        <h4>Defecto: {{ defecto.defecto.defecto_nombre }}</h4>
-        <p>Valor: {{ defecto.muestra_defecto_valor }}</p>
-        <p>Suma: {{ defecto.muestra_defecto_calculo }}</p>
-
-        <!--
-        <h2>{{ defecto.nota.nota_nombre }}</h2>
-        <h3>{{ defecto.nota.nota_descripcion }}</h3>
-        <p>{{defecto.textoAdicional}}</p>
-        <p>{{defecto.categoria}}</p>
-        -->
-      </ion-label>
-    </ion-item>
-
+    <ng-container *ngFor="let defecto of muestra.muestras_defectos">
+      <ion-item *ngIf="defecto.nota && defecto.defecto && defecto.defecto.concepto_id == 2">
+        <!--<ion-avatar slot="start" >-->
+          <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
+          <!-- <h2>{{  }} · {{ defecto.nota.nota_descripcion }}</h2>  -->
+        <!--</ion-avatar>-->
+        <ion-label>
+          <!--<p style="float:right;" *ngIf="defecto.defecto.concepto_id == 1">Calidad</p>-->
+          <p style="float:right;">Condición</p>
+          <h4>Defecto: {{ defecto.defecto.defecto_nombre }}</h4>
+          <p>Valor: {{ defecto.muestra_defecto_valor }}</p>
+          <p>Suma: {{ defecto.muestra_defecto_calculo }}</p>
+  
+          <!--
+          <h2>{{ defecto.nota.nota_nombre }}</h2>
+          <h3>{{ defecto.nota.nota_descripcion }}</h3>
+          <p>{{defecto.textoAdicional}}</p>
+          <p>{{defecto.categoria}}</p>
+          -->
+        </ion-label>
+      </ion-item>
+    </ng-container>
 
   </ion-list>
   
