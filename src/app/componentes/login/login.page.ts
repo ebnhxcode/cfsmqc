@@ -29,8 +29,8 @@ export class LoginPage implements OnInit {
 
   credenciales:FormGroup;
   datosUsuario:any = {
-    'email':null,
-    'password':null
+    'email':'prueba@mail.cl',
+    'password':123456
   };
 
   url_base = authPassportConfig.url_base_qa;
@@ -47,8 +47,8 @@ export class LoginPage implements OnInit {
     public http: Http
   ){
     this.credenciales = this.formBuilder.group({
-      email: ['', Validators.required],
-      password: ['', Validators.required]
+      email: ['prueba@mail.cl', Validators.required],
+      password: ['123456', Validators.required]
     });
   }
 
@@ -65,6 +65,7 @@ export class LoginPage implements OnInit {
 
   public async login () {
 
+    
     const credenciales = this.credenciales.value;
     this.laravelPassportService
       .loginWithEmailAndPassword(credenciales.email, credenciales.password)
@@ -74,8 +75,8 @@ export class LoginPage implements OnInit {
           console.log(res);
           localStorage.setItem('tokens', JSON.stringify(res));
           localStorage.setItem('datosUsuario', JSON.stringify(credenciales)); // Para la autenticacion cuando recupere la conexion
-
           this.router.navigate(['home']);
+          
 
           //this.headers.append('Authorization', 'Basic ' + info.token);
           //this.http.post(`${this.url_base}/datosUsuario`, credenciales, this.options).subscribe( data => { console.log(data); } );

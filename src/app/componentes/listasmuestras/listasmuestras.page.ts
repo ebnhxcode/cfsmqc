@@ -81,6 +81,10 @@ export class ListasmuestrasPage implements OnInit {
     
   }
 
+  irEditarMuestra (muestra) {
+    this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_id}`);
+  }
+
 
 
 

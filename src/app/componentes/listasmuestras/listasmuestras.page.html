@@ -14,21 +14,27 @@
       <ion-item>
         <ion-label>
           <h2>
-            <ng-template [ngIf]="muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
-              <ion-badge item-end color="warning">{{muestra.categoria.categoria_nombre}}</ion-badge>
+            <ng-template [ngIf]="muestra.categoria && muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
+              <ion-badge item-end color="warning">
+                {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
+              </ion-badge>
             </ng-template>  
             <ng-template #Standard>
-                <ion-badge item-end color="primary">{{muestra.categoria.categoria_nombre}}</ion-badge>
+                <ion-badge item-end color="primary">
+                  {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
+                </ion-badge>
             </ng-template>
             · {{muestra.muestra_qr}}
 
-            <ion-badge style="float:right;" item-end color="light">{{muestra.nota.nota_nombre}}</ion-badge>
+            <ion-badge style="float:right;" item-end color="light">
+              {{(muestra.nota)?muestra.nota.nota_nombre:'Sin nota'}}
+            </ion-badge>
           </h2>
-          <h3>{{muestra.productor.productor_nombre}}</h3>
+          <h3>{{(muestra.productor)?muestra.productor.productor_nombre:'Sin productor'}}</h3>
           <p>
-            {{muestra.variedad.variedad_nombre}}
+            {{(muestra.variedad)?muestra.variedad.variedad_nombre:'Sin variedad'}}
             <br>
-            {{muestra.region.region_nombre}}
+            {{(muestra.region)?muestra.region.region_nombre:'Sin región'}}
           </p>
         </ion-label>
       </ion-item>
@@ -39,7 +45,7 @@
       </ion-item-options>
   
       <ion-item-options side="end">
-        <ion-item-option>Ver Detalle</ion-item-option>
+        <ion-item-option (click)="irEditarMuestra(muestra)">Editar</ion-item-option>
       </ion-item-options>
     
 

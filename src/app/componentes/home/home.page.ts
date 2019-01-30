@@ -32,20 +32,28 @@ export class HomePage {
    * Funcion de los botones de la seccion del QR]
    */
   escanearQRMuestra () { // scan
-    this.navCtrl.navigateForward(`/controlescalidad/169`);
-    return;
-    /*
-    this.navCtrl.navigateForward('/controlescalidad');
-    return;
+    //this.navCtrl.navigateForward(`/controlescalidad/169`);
+    //return;
+    //this.navCtrl.navigateForward('/controlescalidad');
+    //return;
     this.options = {
       prompt: 'Porfavor escanee el código QR'
     }
+
     this.barcodeScanner.scan(this.options).then((data)=>{
-      this.scannedData = data;
+      
+      this.scannedData = data; //JSON.stringify(data);
+      if (this.scannedData) { //alert(this.scannedData);alert(JSON.stringify(this.scannedData));
+        this.navCtrl.navigateForward(`/controlescalidad/${this.scannedData.text}`);
+      }
+      //console.log(this.scannedData);
+      
     },(err)=>{
       console.log(err);
     });
-    */
+
+    
+    
   }
 
   ingresarQRMuestra () { // encode

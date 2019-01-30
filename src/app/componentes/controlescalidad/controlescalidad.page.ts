@@ -76,6 +76,7 @@ export class ControlescalidadPage implements OnInit {
   peso: any[];
 
   muestra_id:any=null;
+  muestra_qr:any=null;
   muestra:any={};
   
 
@@ -130,12 +131,11 @@ export class ControlescalidadPage implements OnInit {
       self.apariencias = res.json().apariencias;
     });
 
-    this.muestra_id = this.activatedRoute.snapshot.paramMap.get('muestra_id');
+    this.muestra_qr = this.activatedRoute.snapshot.paramMap.get('muestra_qr');
 
+    this.obtenerMuestra(this.muestra_qr);
     // Carga la muestra con el id que viene 
-    if (this.muestra_id) {
-      this.obtenerMuestra(this.muestra_id);
-    }
+    
     //console.log(this.muestra_id);
     //console.log(new Date(Date.now()).toLocaleTimeString());
   }
@@ -152,7 +152,7 @@ export class ControlescalidadPage implements OnInit {
   }
   */
 
-  obtenerMuestra (muestra_id) {
+  obtenerMuestra (muestra_qr) {
     const tokens = JSON.parse(localStorage.getItem('tokens'))
     let headers = new Headers({
       'Content-Type': 'application/json;charset=utf-8',
@@ -166,7 +166,7 @@ export class ControlescalidadPage implements OnInit {
     this.options = new RequestOptions({ headers: this.headers });
 
     let self = this;
-    this.http.post(`${this.url_base}/mobile/muestras/show`, {muestra_id:muestra_id}, this.options )
+    this.http.post(`${this.url_base}/mobile/muestras/showByQR`, {muestra_qr:muestra_qr}, this.options )
       .subscribe( res => { 
         //console.log(res);
         self.muestra = res.json().muestra; 
@@ -210,7 +210,7 @@ export class ControlescalidadPage implements OnInit {
 
         //console.log(self.control.controls);
         //console.log(self.control.controls);
-        console.log(self.muestra);
+        //console.log(self.muestra);
 
         //console.log(this.control.value.apariencia_id);
     });

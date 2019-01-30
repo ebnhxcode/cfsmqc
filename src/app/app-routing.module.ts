@@ -13,7 +13,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './componentes/home/home.module#HomePageModule' },
   { path: 'autoayuda', loadChildren: './componentes/autoayuda/autoayuda.module#AutoayudaPageModule' },
   { path: 'reportes', loadChildren: './componentes/reportes/reportes.module#ReportesPageModule' },
-  { path: 'controlescalidad/:muestra_id', loadChildren: './componentes/controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
+  { path: 'controlescalidad/:muestra_qr', loadChildren: './componentes/controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
   { path: 'opciones', loadChildren: './componentes/opciones/opciones.module#OpcionesPageModule' },
   { path: 'registro', loadChildren: './componentes/registro/registro.module#RegistroPageModule' },
   { path: 'calidadcondicionmenu', loadChildren: './componentes/calidadcondicionmenu/calidadcondicionmenu.module#CalidadcondicionmenuPageModule' },
