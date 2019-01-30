@@ -231,7 +231,7 @@
           Peso
       </ion-label>
       <ion-input
-        type="select" 
+        type="number" 
         placeholder="Peso"
         formControlName="muestra_peso">
       </ion-input>
@@ -243,7 +243,7 @@
           Bolsas
       </ion-label>
       <ion-input
-        type="select" 
+        type="number" 
         placeholder="Bolsas"
         formControlName="muestra_bolsas">
       </ion-input>
@@ -255,7 +255,7 @@
           Racimos
       </ion-label>
       <ion-input
-        type="select" 
+        type="number" 
         placeholder="Racimos"
         formControlName="muestra_racimos">
       </ion-input>
@@ -267,7 +267,7 @@
           Brix
       </ion-label>
       <ion-input
-        type="select" 
+        type="number" 
         placeholder="Brix"
         formControlName="muestra_brix">
       </ion-input>
@@ -280,7 +280,7 @@
           Desgrane
       </ion-label>
       <ion-input
-        type="select" 
+        type="number" 
         placeholder="Desgrane"
         formControlName="muestra_desgrane">
       </ion-input>
@@ -326,7 +326,8 @@
       expand="block" 
       color="primary" 
       type="submit" 
-      [disabled]="!control.valid && !muestra.muestra_fecha">
+      >
+      <!--[disabled]="!control.valid && !muestra.muestra_fecha"-->
       Guardar y Continuar
     </ion-button>
 

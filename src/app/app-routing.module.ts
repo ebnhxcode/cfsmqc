@@ -20,8 +20,8 @@ const routes: Routes = [
   { path: 'calidadcondicionmenu/:muestra_id', loadChildren: './componentes/calidadcondicionmenu/calidadcondicionmenu.module#CalidadcondicionmenuPageModule' },
   { path: 'listasmuestras', loadChildren: './componentes/listasmuestras/listasmuestras.module#ListasmuestrasPageModule' },
   { path: 'ingresarqr', loadChildren: './componentes/ingresarqr/ingresarqr.module#IngresarqrPageModule' },
-  { path: 'calculocalidad', loadChildren: './componentes/calculocalidad/calculocalidad.module#CalculocalidadPageModule' },
-  { path: 'calculocondicion', loadChildren: './componentes/calculocondicion/calculocondicion.module#CalculocondicionPageModule' },
+  { path: 'calculocalidad/:muestra_id', loadChildren: './componentes/calculocalidad/calculocalidad.module#CalculocalidadPageModule' },
+  { path: 'calculocondicion/:muestra_id', loadChildren: './componentes/calculocondicion/calculocondicion.module#CalculocondicionPageModule' },
 
 
 

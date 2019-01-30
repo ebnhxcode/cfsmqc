@@ -246,17 +246,19 @@ export class ControlescalidadPage implements OnInit {
 
     this.controlJson = control;
 
-    //console.log(control);
+    console.log(control);
     //return;
 
     let self = this;
     this.http.post(`${this.url_base}/mobile/muestras/update`, control, this.options )
       .subscribe(
         res => { 
-          console.log(res);
+          console.log(res.json().muestra);
 
           if (res.status == 200) {
+
             this.muestra = res.json().muestra;
+
             this.irCalidadCondicionMenu(this.muestra);
           }
         },

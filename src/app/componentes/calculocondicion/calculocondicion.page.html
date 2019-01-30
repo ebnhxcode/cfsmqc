@@ -7,43 +7,51 @@
 <ion-content padding>
 
 
+  <!--
   <h1>
     Condición
-    <span style="float:right;">A</span>
+    <span style="float:right;"></span>
   </h1>
+  -->
 
-
-  <ion-item>
-      <ion-label position="stacked">NOTAS</ion-label>
-
-      <ion-list>
-
-
-          <ion-item *ngFor="let defecto of defectos">
-            <ion-avatar slot="start">
-              <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
-              <h2>{{defecto.nota}}</h2>
-            </ion-avatar>
-            <ion-label>
-              <h2>{{defecto.defecto}}</h2>
-              <h3>{{defecto.descripcion}}</h3>
-              <p>{{defecto.textoAdicional}}</p>
-              <p>{{defecto.categoria}}</p>
-            </ion-label>
-          </ion-item>
-    
-    
-        </ion-list>
+  <h3><ion-label position="stacked">DEFECTOS</ion-label></h3>
   
+
+  <ion-list>
+
+
+    <ion-item *ngFor="let defecto of muestra.muestras_defectos">
+      <!--<ion-avatar slot="start" >-->
+        <!-- <ion-img src="/docs/assets/img/avatar-finn.png"></ion-img> -->
+        <!-- <h2>{{  }} · {{ defecto.nota.nota_descripcion }}</h2>  -->
+      <!--</ion-avatar>-->
+      <ion-label *ngIf="defecto.nota">
+        <p style="float:right;" *ngIf="defecto.defecto.concepto_id == 1">Calidad</p>
+        <p style="float:right;" *ngIf="defecto.defecto.concepto_id == 2">Condición</p>
+        <h4>Defecto: {{ defecto.defecto.defecto_nombre }}</h4>
+        <p>Valor: {{ defecto.muestra_defecto_valor }}</p>
+        <p>Suma: {{ defecto.muestra_defecto_calculo }}</p>
+
+        <!--
+        <h2>{{ defecto.nota.nota_nombre }}</h2>
+        <h3>{{ defecto.nota.nota_descripcion }}</h3>
+        <p>{{defecto.textoAdicional}}</p>
+        <p>{{defecto.categoria}}</p>
+        -->
+      </ion-label>
     </ion-item>
+
+
+  </ion-list>
   
+    <!--
     <ion-fab vertical="bottom" horizontal="end" slot="fixed">
 
       <ion-fab-button (click)="abrirModalFormularioCondicion()">
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
 
-      <!--
+      
       <ion-fab-list side="start" >
         <ion-icon name="cog"></ion-icon>
       </ion-fab-list>
@@ -51,9 +59,10 @@
       <ion-fab-list side="top">
         Agregar Nota Condicion
       </ion-fab-list>
-      -->
+      
 
     </ion-fab>
+    -->
 
 
 </ion-content>
@@ -65,7 +74,7 @@
   </ion-button>
   -->
 
-  <ion-button fill="solid" expand="block" color="light" (click)="irCalidadCondicionMenu()">
+  <ion-button fill="solid" expand="block" color="light" (click)="irCalidadCondicionMenu(muestra_id)">
     Volver
   </ion-button>
     

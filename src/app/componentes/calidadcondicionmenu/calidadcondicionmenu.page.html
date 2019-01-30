@@ -34,7 +34,7 @@
   <ion-list>
 
     <ion-item-sliding>
-      <ion-item  (click)="irCalculoCalidad()">
+      <ion-item  (click)="irCalculoCalidad(muestra_id)">
         <ion-avatar slot="start">
           <ion-img src="/assets/imgs/calidad.png"></ion-img>
         </ion-avatar>
@@ -54,13 +54,13 @@
       </ion-item-options>
   
       <ion-item-options side="end">
-        <ion-item-option (click)="irCalculoCalidad()">Ir</ion-item-option>
+        <ion-item-option (click)="irCalculoCalidad(muestra_id)">Ir</ion-item-option>
       </ion-item-options>
 
     </ion-item-sliding>
 
     <ion-item-sliding>
-      <ion-item (click)="irCalculoCondicion()">
+      <ion-item (click)="irCalculoCondicion(muestra_id)">
         <ion-avatar slot="start">
           <ion-img src="/assets/imgs/condicion.png"></ion-img>
         </ion-avatar>
@@ -77,7 +77,7 @@
       </ion-item-options>
   
       <ion-item-options side="end">
-        <ion-item-option (click)="irCalculoCondicion()">Ir</ion-item-option>
+        <ion-item-option (click)="irCalculoCondicion(muestra_id)">Ir</ion-item-option>
       </ion-item-options>
 
     </ion-item-sliding>
@@ -104,11 +104,12 @@
         <ion-icon name="add"></ion-icon>
       </ion-fab-button>
   
-      <ion-fab-list side="top" (click)="abrirModalFormularioCalidadCondicion(1, 'Condición')">
+      <!-- Numeros 1 y 2 indican condicion y calidad respectivamente -->
+      <ion-fab-list side="top" (click)="abrirModalFormularioCalidadCondicion(1, 'Condición', muestra_id)">
         <ion-img src="/assets/imgs/calidad.png" round ion-fab color="clear"></ion-img>
       </ion-fab-list>
   
-      <ion-fab-list side="start" (click)="abrirModalFormularioCalidadCondicion(2, 'Calidad')">
+      <ion-fab-list side="start" (click)="abrirModalFormularioCalidadCondicion(2, 'Calidad', muestra_id)">
         <ion-img src="/assets/imgs/condicion.png" round ion-fab color="clear"></ion-img>
       </ion-fab-list>
   
