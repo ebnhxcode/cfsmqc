@@ -286,6 +286,38 @@
       </ion-input>
     </ion-item>
 
+    <ion-item>
+      <ion-label 
+        position="stacked">
+          Nro Pallet
+      </ion-label>
+      <ion-input
+        type="number" 
+        placeholder="Pallet"
+        formControlName="lote_codigo">
+      </ion-input>
+    </ion-item>
+  
+    <ion-item>
+      <ion-label 
+        position="stacked">
+          Estado Muestra
+      </ion-label>
+      <ion-select
+        okText="OK" 
+        cancelText="Cancelar"
+        [placeholder]="muestra.estado_muestra ? muestra.estado_muestra.estado_muestra_nombre : 'Estado'"
+        formControlName="estado_muestra_id">
+        <ion-select-option 
+          [selected]="(muestra.estado_muestra_id==estado.estado_muestra_id)?true:false"
+          *ngFor="let estado of estados_muestras" 
+          [value]="estado.estado_muestra_id">
+          {{ estado.estado_muestra_nombre }}
+        </ion-select-option>
+      </ion-select>
+    </ion-item>
+  
+    
 
     <!--
     <ion-item>

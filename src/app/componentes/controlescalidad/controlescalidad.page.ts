@@ -45,6 +45,8 @@ export class ControlescalidadPage implements OnInit {
     'muestra_racimos': new FormControl(),
     'muestra_brix': new FormControl(),
     'muestra_desgrane': new FormControl(),
+    'lote_codigo': new FormControl(),
+    'estado_muestra_id': new FormControl(),
     'apariencia_id': new FormControl()
   });
 
@@ -64,6 +66,8 @@ export class ControlescalidadPage implements OnInit {
     'muestra_racimos':null,
     'muestra_brix':null,
     'muestra_desgrane':null,
+    'lote_codigo':null,
+    'estado_muestra_id':null,
     'apariencia_id':null
   };
 
@@ -77,6 +81,7 @@ export class ControlescalidadPage implements OnInit {
   embalajes: any[];
   etiquetas: any[];
   apariencias: any[];
+  estados_muestras: any[];
   peso: any[];
 
   muestra_id:any=null;
@@ -133,6 +138,7 @@ export class ControlescalidadPage implements OnInit {
       self.embalajes = res.json().embalajes;
       self.etiquetas = res.json().etiquetas;
       self.apariencias = res.json().apariencias;
+      self.estados_muestras = res.json().estados_muestras;
     });
 
     this.muestra_qr = this.activatedRoute.snapshot.paramMap.get('muestra_qr');
@@ -195,6 +201,8 @@ export class ControlescalidadPage implements OnInit {
           muestra_racimos: new FormControl({value: self.muestra.muestra_racimos,disabled:true}, Validators.required),
           muestra_brix: new FormControl({value: self.muestra.muestra_brix,disabled:true}, Validators.required),
           muestra_desgrane: new FormControl({value: self.muestra.muestra_desgrane,disabled:true}, Validators.required),
+          lote_codigo: new FormControl({value: self.muestra.lote_codigo,disabled:true}, Validators.required),
+          estado_muestra_id: new FormControl({value: self.muestra.estado_muestra_id,disabled:true}, Validators.required),
           apariencia_id: new FormControl({value: self.muestra.apariencia_id,disabled:true}, Validators.required)
           //calculo_total: [null, Validators.required]
         });
@@ -214,6 +222,8 @@ export class ControlescalidadPage implements OnInit {
         self.control.controls["muestra_racimos"].setValue(self.muestra.muestra_racimos);
         self.control.controls["muestra_brix"].setValue(self.muestra.muestra_brix);
         self.control.controls["muestra_desgrane"].setValue(self.muestra.muestra_desgrane);
+        self.control.controls["lote_codigo"].setValue(self.muestra.lote_codigo);
+        self.control.controls["estado_muestra_id"].setValue(self.muestra.estado_muestra_id);
         self.control.controls["apariencia_id"].setValue(self.muestra.apariencia_id);
 
         //console.log(self.control.controls);
