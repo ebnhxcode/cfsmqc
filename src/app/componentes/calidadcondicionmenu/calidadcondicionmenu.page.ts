@@ -48,10 +48,39 @@ export class CalidadcondicionmenuPage implements OnInit {
 
 
     this.obtenerMuestra(this.muestra_id);
+    this.obtenerCalificacionMuestra(this.muestra_id);
     // Carga la muestra con el id que viene 
 
     //console.log(this.muestra_id);
     //console.log(new Date(Date.now()).toLocaleTimeString());
+  }
+
+  obtenerCalificacionMuestra (muestra_id) {
+    const tokens = JSON.parse(localStorage.getItem('tokens'))
+    let headers = new Headers({
+      'Content-Type': 'application/json;charset=utf-8',
+      'Accept': 'application/json',
+      'withCredentials': 'true',
+      'Access-Control-Allow-Origin': '*',
+      //'Authorization': `${tokens.token_type} ${tokens.access_token}`,
+      //'X-CSRF-TOKEN': `${tokens.access_token}`
+    });
+
+    this.options = new RequestOptions({ headers: this.headers });
+
+    let self = this;
+    this.http.post(`${this.url_base}/mobile/obtenerCalificacionMuestra`, {muestra_id:muestra_id}, this.options )
+      .subscribe( res => { 
+        //console.log(res);
+        //self.muestra = res.json().muestra; 
+        console.log(res.json());
+
+        //console.log(self.muestra);
+
+
+
+
+    });
   }
 
   obtenerMuestra (muestra_id) {
