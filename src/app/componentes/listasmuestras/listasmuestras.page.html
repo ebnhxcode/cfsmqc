@@ -26,9 +26,15 @@
             </ng-template>
             · QR:{{muestra.muestra_qr}}
 
-            <ion-badge style="float:right;" item-end color="light">
-              {{(muestra.nota)?muestra.nota.nota_nombre:'Sin nota'}}
-            </ion-badge>
+
+
+            <span style="float:right;" *ngIf="muestra.nota">
+              <ion-badge *ngIf="muestra.nota.nota_nombre=='A'" color="primary" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+              <ion-badge *ngIf="muestra.nota.nota_nombre=='B'" color="success" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+              <ion-badge *ngIf="muestra.nota.nota_nombre=='C'" color="warning" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+              <ion-badge *ngIf="muestra.nota.nota_nombre=='O'" color="danger" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+              <ion-badge *ngIf="muestra.nota.nota_nombre=='X'" color="dark" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+            </span>
           </h2>
           <h3>{{(muestra.productor)?muestra.productor.productor_nombre:'Sin productor'}}</h3>
           <p>

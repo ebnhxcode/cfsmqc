@@ -28,6 +28,9 @@ export class CalidadcondicionmenuPage implements OnInit {
   }
   muestra_id:any='';
   muestra:any={};
+  nota_global_calidad:any='';
+  nota_global_condicion:any='';
+  nota_global_muestra:any='';
 
   constructor(
     public navCtrl: NavController,
@@ -72,9 +75,11 @@ export class CalidadcondicionmenuPage implements OnInit {
     this.http.post(`${this.url_base}/mobile/obtenerCalificacionMuestra`, {muestra_id:muestra_id}, this.options )
       .subscribe( res => { 
         //console.log(res);
-        //self.muestra = res.json().muestra; 
-        console.log(res.json());
-
+        self.nota_global_muestra = res.json().nota.nota_nombre; 
+        self.nota_global_condicion = res.json().nota_calidad_nombre; 
+        self.nota_global_calidad = res.json().nota_condicion_nombre; 
+        
+        //console.log(res.json());
         //console.log(self.muestra);
 
 

@@ -14,7 +14,14 @@
 
       <h3>
         Nota Final
-        <span style="float:right;">A</span>
+        <span style="float:right;">
+          <ion-badge *ngIf="nota_global_muestra=='A'" color="primary" item-end>{{ nota_global_muestra }}</ion-badge>
+          <ion-badge *ngIf="nota_global_muestra=='B'" color="success" item-end>{{ nota_global_muestra }}</ion-badge>
+          <ion-badge *ngIf="nota_global_muestra=='C'" color="warning" item-end>{{ nota_global_muestra }}</ion-badge>
+          <ion-badge *ngIf="nota_global_muestra=='O'" color="danger" item-end>{{ nota_global_muestra }}</ion-badge>
+          <ion-badge *ngIf="nota_global_muestra=='X'" color="dark" item-end>{{ nota_global_muestra }}</ion-badge>
+        </span>
+
       </h3>  
 
     </ion-card-header>
@@ -45,7 +52,11 @@
 
         </ion-label>
 
-        <ion-badge item-end>A</ion-badge>
+        <ion-badge *ngIf="nota_global_calidad=='A'" color="primary" item-end>{{ nota_global_calidad }}</ion-badge>
+        <ion-badge *ngIf="nota_global_calidad=='B'" color="success" item-end>{{ nota_global_calidad }}</ion-badge>
+        <ion-badge *ngIf="nota_global_calidad=='C'" color="warning" item-end>{{ nota_global_calidad }}</ion-badge>
+        <ion-badge *ngIf="nota_global_calidad=='O'" color="danger" item-end>{{ nota_global_calidad }}</ion-badge>
+        <ion-badge *ngIf="nota_global_calidad=='X'" color="dark" item-end>{{ nota_global_calidad }}</ion-badge>
       </ion-item>
 
       <ion-item-options side="start">
@@ -69,7 +80,13 @@
           <p>Ingresar defectos de condición.</p>
         </ion-label>
 
-        <ion-badge item-end color="warning">C</ion-badge>
+      
+        <ion-badge *ngIf="nota_global_condicion=='A'" color="primary" item-end>{{ nota_global_condicion }}</ion-badge>
+        <ion-badge *ngIf="nota_global_condicion=='B'" color="success" item-end>{{ nota_global_condicion }}</ion-badge>
+        <ion-badge *ngIf="nota_global_condicion=='C'" color="warning" item-end>{{ nota_global_condicion }}</ion-badge>
+        <ion-badge *ngIf="nota_global_condicion=='O'" color="danger" item-end>{{ nota_global_condicion }}</ion-badge>
+        <ion-badge *ngIf="nota_global_condicion=='X'" color="dark" item-end>{{ nota_global_condicion }}</ion-badge>
+
       </ion-item>
       <ion-item-options side="start">
         <ion-item-option color="danger" (click)="favorite(item)">Reiniciar</ion-item-option>

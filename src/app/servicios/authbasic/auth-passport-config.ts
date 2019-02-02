@@ -9,6 +9,7 @@ export const authPassportConfig = {
 
    /* Preprod */
    apiRoot: 'https://cfsmqcpreprod.publicidadorigen.cl',
+   //apiRoot: 'https://cfsmq.publicidadorigen.cl',
    clientId: 11,
    clientSecret: 'S4HefduIdpMZJVRzISv2Be53lVDksFKJjNPx9H4o'
 
