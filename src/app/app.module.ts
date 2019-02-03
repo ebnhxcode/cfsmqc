@@ -14,7 +14,7 @@ import { firebaseConfig } from './servicios/databases/firebase-config';
 import { authPassportConfig } from './servicios/authbasic/auth-passport-config';
 
 
-// Firebase deps
+// Firebase libs
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpModule } from '@angular/http';
@@ -22,9 +22,10 @@ import { ModalformulariocalidadPageModule } from './componentes/calculocalidad/m
 import { ModalformulariocondicionPageModule } from './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module';
 import { ModalformulariocalidadcondicionPageModule } from './componentes/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module';
 
-// QR BAR SCANNER DEPS
+// QR/BAR Scanner libs
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+// Laravel Passport libs
 import { LaravelPassportModule } from 'laravel-passport';
 
 @NgModule({

@@ -1,21 +1,17 @@
-<!--
 <ion-header>
   <ion-toolbar>
-    <ion-title>Login</ion-title>
+    <ion-title>Inicio de Sesión</ion-title>
   </ion-toolbar>
 </ion-header>
--->
 
 <!-- View content -->
 <ion-content padding hide-tabs>
   <!--<ion-img src="/assets/imgs/uvanegra.jpg"></ion-img>-->
-  
 
   <ion-item style="padding-bottom: 20px;">
     <!-- <h2>A&A QC MOBILE APP</h2> -->
     <ion-img width="80" height="80" src="/assets/imgs/control-calidad.jpg"></ion-img>
   </ion-item>
-
   <!-- 
     ##########################################################
             LOGIN CON CREDENCIALES LOCALSTORAGE || FIREBASE
@@ -26,25 +22,48 @@
 
     <ion-item>
       <ion-label position="stacked">Usuario</ion-label>
-
       <ion-input
         type="email" 
-        [(ngModel)]="datosUsuario.email"
         formControlName="email">
       </ion-input>
+    </ion-item>
+    <ion-item class="error-messages">
+      <ng-container *ngFor="let error of error_messages.email">
+        <ul *ngIf="credenciales.get('email').hasError(error.type) 
+            && (credenciales.get('email').dirty 
+            || credenciales.get('email').touched)">
+          <li>{{ error.message }}</li>
+      </ul>
+      </ng-container>
     </ion-item>
 
     <ion-item>
       <ion-label position="stacked">Clave</ion-label>
-
       <ion-input
         type="password"
-        [(ngModel)]="datosUsuario.password"
         formControlName="password">
       </ion-input>
     </ion-item>
+    <ion-item class="error-messages">
+      <ng-container *ngFor="let error of error_messages.password">
+        <ul class="error-message" 
+          *ngIf="credenciales.get('password').hasError(error.type) 
+            && (credenciales.get('password').dirty 
+            || credenciales.get('password').touched)">
+          <li>{{ error.message }}</li>
+        </ul>
+      </ng-container>
+    </ion-item>
+  
 
-    <ion-button fill="solid" expand="block" color="primary" type="submit" [disabled]="!credenciales.valid">Login</ion-button>
+    <ion-button 
+      fill="solid" 
+      expand="block" 
+      color="primary" 
+      type="submit" 
+      [disabled]="!credenciales.valid && 0">
+        Login
+    </ion-button>
   </form>
 
 

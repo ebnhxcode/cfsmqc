@@ -1,6 +1,11 @@
 export const authPassportConfig = {
    produccion: false,
    ssl: true,
+   urlBackend: 'https://cfsmqcpreprod.publicidadorigen.cl',
+
+
+
+
    url_base_prod: 'https://cfsmqcpreprod.publicidadorigen.cl',
    url_base_qa: 'https://cfsmqcpreprod.publicidadorigen.cl',
    //url_base_prod: 'https://cfsmqc.publicidadorigen.cl',

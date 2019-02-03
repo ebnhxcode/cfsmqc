@@ -1,23 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFireAuth } from '@angular/fire/auth';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+
+// Forms, remember register ReactiveForms in class module
+import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LaravelPassportService } from 'laravel-passport';
 
-import { NavController, LoadingController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, NavParams, AlertController } from "@ionic/angular";
 
 import { Router } from '@angular/router';
-
-//import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
-import { Http, Headers, RequestOptions } from '@angular/http';
-
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-
-
-
-// API REST.
-import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
-import { authPassportConfig } from '../../servicios/authbasic/auth-passport-config';
 
 
 @Component({
@@ -27,106 +17,133 @@ import { authPassportConfig } from '../../servicios/authbasic/auth-passport-conf
 })
 export class LoginPage implements OnInit {
 
-  credenciales:FormGroup;
-  datosUsuario:any = {
-    'email':'prueba@mail.cl',
-    'password':123456
-  };
+  private credenciales:FormGroup;
+  private loading:any;
+  private alert:any;
 
-  url_base = authPassportConfig.url_base_qa;
-  headers = new Headers(authPassportConfig.headers);
-  options = new RequestOptions({ headers: this.headers });
+  private error_messages = {
+    'email': [
+      { type: 'required', message: 'Email requerido' },
+      { type: 'minlength', message: 'El email debe ser mayor a 6 caracteres' },
+      { type: 'maxlength', message: 'El email debe ser menor a 50 caracteres' },
+      { type: 'pattern', message: 'Ingrese un email válido' }
+    ],
+    'password': [
+      { type: 'required', message: 'Clave requerida' },
+      { type: 'minlength', message: 'La clave debe ser mayor a 6 caracteres' },
+      { type: 'maxlength', message: 'La clave debe ser menor a 50 caracteres' },
+      { type: 'pattern', message: 'Ingrese una clave válida' }
+    ],
+  }
+
 
   constructor(
     public afAuth: AngularFireAuth,
     public formBuilder: FormBuilder,
     public laravelPassportService: LaravelPassportService,
     public loadingCtrl: LoadingController,
+    public alertCtrl: AlertController,
     public navCtrl: NavController,
-    public router: Router,
-    public http: Http
+    public router: Router
   ){
-    this.credenciales = this.formBuilder.group({
-      email: ['prueba@mail.cl', Validators.required],
-      password: ['123456', Validators.required]
+    // Validadores de mis imputs
+    this.credenciales = this.formBuilder.group({ 
+      password: new FormControl('', Validators.compose([ //123456
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(30),
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+      ])),
+      email:  new FormControl('', Validators.compose([ //prueba@mail.cl
+        Validators.required,
+        Validators.minLength(6),
+        Validators.maxLength(30),
+        Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
+      ])), 
     });
+    // Para que cachee los datos del usuario
+    let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
+    if (credencialesUsuario) {
+      // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
+      this.credenciales.value.email = credencialesUsuario.email;
+      this.credenciales.value.password = credencialesUsuario.password;
+      this.autoLogin(credencialesUsuario);
+    }
   }
 
-  ngOnInit() {
+  ngOnInit() {}
 
-    this.datosUsuario = JSON.parse(localStorage.getItem('datosUsuario'));
-    if (this.datosUsuario) {
-      this.credenciales.value.email = this.datosUsuario.email;
-      this.credenciales.value.password = this.datosUsuario.password;
-    }
+  private async presentLogin () { 
+    this.loading = await this.loadingCtrl.create({
+      message: 'Espere un momento por favor',
+      spinner: 'crescent',
+      //duration: 2000
+    });
+    return await this.loading.present();
+  }
 
+  private async presentAutoLogin () { 
+    this.loading = await this.loadingCtrl.create({
+      message: 'Auto Inicio de sesión, validando credenciales',
+      spinner: 'crescent',
+    });
+    return await this.loading.present();
+  }
+
+  private async autoLogin (credencialesUsuario) {
+    this.presentAutoLogin();
+
+    // Si no hay conexion, que checkee si en localstorage tiene datos para iniciar la sesion local
+    // Si no hay conexion y ademas no tiene datos, debe tener conexion a internet para validar al usuario
+    // Si hay conexion, que autologuee si tiene datos en localstorage
+    // Si hay conexion, si es primera vez que inicia sesion hace login y guarda los datos en localstorage
+
+    this.laravelPassportService
+      .loginWithEmailAndPassword(credencialesUsuario.email, credencialesUsuario.password)
+      .subscribe(
+        res => {
+          this.loading.dismiss();
+          localStorage.setItem('tokens', JSON.stringify(res));
+          localStorage.setItem('credencialesUsuario', JSON.stringify(credencialesUsuario)); // Para la autenticacion cuando recupere la conexion
+          this.router.navigate(['home']);
+        },
+        err => { console.log(err); },
+        ()=>{}
+      );
 
   }
 
   public async login () {
-
-    
+    this.presentLogin();
     const credenciales = this.credenciales.value;
     this.laravelPassportService
       .loginWithEmailAndPassword(credenciales.email, credenciales.password)
       .subscribe(
         res => {
-          //console.log(credenciales);
-          console.log(res);
+          this.loading.dismiss();
           localStorage.setItem('tokens', JSON.stringify(res));
-          localStorage.setItem('datosUsuario', JSON.stringify(credenciales)); // Para la autenticacion cuando recupere la conexion
+          localStorage.setItem('credencialesUsuario', JSON.stringify(credenciales)); // Para la autenticacion cuando recupere la conexion
           this.router.navigate(['home']);
-          
-
           //this.headers.append('Authorization', 'Basic ' + info.token);
           //this.http.post(`${this.url_base}/datosUsuario`, credenciales, this.options).subscribe( data => { console.log(data); } );
-
           /*
           let headers = new Headers({
             'Content-Type': 'application/json;charset=utf-8',
             'Accept': 'application/json',
             'withCredentials': 'true',
             'Access-Control-Allow-Origin': '*',
-          });
-      
-          this.options = new RequestOptions({ headers: this.headers });
-      
+          }); 
+          this.options = new RequestOptions({ headers: this.headers }); 
           let self = this;
           this.http.post(`${this.url_base}/api/login`, credenciales, this.options ).subscribe( res => { 
             //self.muestras = res.json().muestras; 
             console.log(res);
           });
           */
-      
-
-
         },
-        err => {
-          console.log(err);
-        },
-        ()=>{
-          console.log('completed');
-        }
+        err => { console.log(err); },
+        ()=>{}
       );
-
-
-    
-    // this.router.navigate(['home']);
-    /*
-    
-
-    * En la prox. refact. se debe validar que el usuario tenga acceso a internet sino para buscar en la base local
-    
-    const  { usuario , clave } = this 
-    try {
-      const res = await this.afAuth.auth.signInWithEmailAndPassword(usuario, clave);
-    } catch ( err ) {
-      console.dir(err);
-      if (err.code === 'auth/user-not-found') {
-        console.log("Usuario no encontrado");
-      }
-    }
-    */
   }
 
   public irRegistrar () {
