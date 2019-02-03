@@ -25,6 +25,9 @@ import { ModalformulariocalidadcondicionPageModule } from './componentes/calidad
 // QR/BAR Scanner libs
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
+// Network
+import { Network } from '@ionic-native/network/ngx';
+
 // Laravel Passport libs
 import { LaravelPassportModule } from 'laravel-passport';
 
@@ -55,7 +58,8 @@ import { LaravelPassportModule } from 'laravel-passport';
     StatusBar,
     SplashScreen,
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy },
-    BarcodeScanner
+    BarcodeScanner,
+    Network
   ],
   bootstrap: [AppComponent]
 })

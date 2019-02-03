@@ -9,6 +9,9 @@ import { NavController, LoadingController, NavParams, AlertController } from "@i
 
 import { Router } from '@angular/router';
 
+// Network 
+import { Network } from '@ionic-native/network/ngx';
+
 
 @Component({
   selector: 'app-login',
@@ -38,13 +41,14 @@ export class LoginPage implements OnInit {
 
 
   constructor(
-    public afAuth: AngularFireAuth,
-    public formBuilder: FormBuilder,
-    public laravelPassportService: LaravelPassportService,
-    public loadingCtrl: LoadingController,
-    public alertCtrl: AlertController,
-    public navCtrl: NavController,
-    public router: Router
+    private afAuth: AngularFireAuth,
+    private formBuilder: FormBuilder,
+    private laravelPassportService: LaravelPassportService,
+    private loadingCtrl: LoadingController,
+    private alertCtrl: AlertController,
+    private navCtrl: NavController,
+    private network: Network,
+    private router: Router
   ){
     // Validadores de mis imputs
     this.credenciales = this.formBuilder.group({ 
@@ -61,16 +65,68 @@ export class LoginPage implements OnInit {
         Validators.pattern('^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+$'),
       ])), 
     });
+
+
+    // Si no hay conexion, que checkee si en localstorage tiene datos para iniciar la sesion local
+    // Si no hay conexion y ademas no tiene datos, debe tener conexion a internet para validar al usuario
+    // Si hay conexion, que autologuee si tiene datos en localstorage
+    // Si hay conexion, si es primera vez que inicia sesion hace login y guarda los datos en localstorage
+
+
+
+
+
+    // watch network for a disconnection
+    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
+      alert('network was disconnected :-(');
+      console.log('network was disconnected :-(');
+    });
+
+    // stop disconnect watch
+    disconnectSubscription.unsubscribe();
+
+
+    // watch network for a connection
+    let connectSubscription = this.network.onConnect().subscribe(() => {
+      console.log('network connected!');
+      alert('network connected!');
+      // We just got a connection but we need to wait briefly
+      // before we determine the connection type. Might need to wait.
+      // prior to doing any api requests as well.
+      setTimeout(() => {
+        if (this.network.type === 'wifi') {
+          console.log('we got a wifi connection, woohoo!');
+          alert('we got a wifi connection, woohoo!');
+        }
+        if (this.network.type === '3g') {
+          console.log('we got a 3g connection, woohoo!');
+          alert('we got a 3g connection, woohoo!');
+        }
+      }, 3000);
+    });
+
+
+
+
+
+
+
     // Para que cachee los datos del usuario
     let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
     if (credencialesUsuario) {
       // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
       this.credenciales.value.email = credencialesUsuario.email;
       this.credenciales.value.password = credencialesUsuario.password;
-      this.autoLogin(credencialesUsuario);
+      //this.autoLogin(credencialesUsuario);
     }
   }
 
+
+
+
+
+
+  
   ngOnInit() {}
 
   private async presentLogin () { 
@@ -92,11 +148,6 @@ export class LoginPage implements OnInit {
 
   private async autoLogin (credencialesUsuario) {
     this.presentAutoLogin();
-
-    // Si no hay conexion, que checkee si en localstorage tiene datos para iniciar la sesion local
-    // Si no hay conexion y ademas no tiene datos, debe tener conexion a internet para validar al usuario
-    // Si hay conexion, que autologuee si tiene datos en localstorage
-    // Si hay conexion, si es primera vez que inicia sesion hace login y guarda los datos en localstorage
 
     this.laravelPassportService
       .loginWithEmailAndPassword(credencialesUsuario.email, credencialesUsuario.password)

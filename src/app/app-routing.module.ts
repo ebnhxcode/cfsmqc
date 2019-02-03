@@ -28,9 +28,6 @@ const routes: Routes = [
   /* Paths modals */
   { path: 'modalformulariocalidad', loadChildren: './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module#ModalformulariocalidadPageModule' },
   { path: 'modalformulariocondicion', loadChildren: './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module#ModalformulariocondicionPageModule' },
-  { path: 'paso1', loadChildren: './componentes/controlescalidad/paso1/paso1.module#Paso1PageModule' },
-  { path: 'paso2', loadChildren: './componentes/controlescalidad/paso2/paso2.module#Paso2PageModule' },
-  { path: 'paso3', loadChildren: './componentes/controlescalidad/paso3/paso3.module#Paso3PageModule' },
   { path: 'modalformulariocalidadcondicion', loadChildren: './componentes/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module#ModalformulariocalidadcondicionPageModule' },
 ];
 

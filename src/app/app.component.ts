@@ -45,6 +45,11 @@ export class AppComponent {
       url: '/#!',
       icon: 'cog'
     },
+    {
+      title: 'Cerrar Sesión',
+      url: '/login',
+      icon: 'power'
+    },
   ];
 
   constructor(

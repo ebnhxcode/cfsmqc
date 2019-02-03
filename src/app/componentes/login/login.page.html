@@ -7,11 +7,12 @@
 <!-- View content -->
 <ion-content padding hide-tabs>
   <!--<ion-img src="/assets/imgs/uvanegra.jpg"></ion-img>-->
-
+<!--
   <ion-item style="padding-bottom: 20px;">
-    <!-- <h2>A&A QC MOBILE APP</h2> -->
+    <h2>A&A QC MOBILE APP</h2>
     <ion-img width="80" height="80" src="/assets/imgs/control-calidad.jpg"></ion-img>
   </ion-item>
+-->
   <!-- 
     ##########################################################
             LOGIN CON CREDENCIALES LOCALSTORAGE || FIREBASE
@@ -21,40 +22,38 @@
   <form [formGroup]="credenciales" (ngSubmit)="login()">
 
     <ion-item>
-      <ion-label position="stacked">Usuario</ion-label>
+      <ion-label>Usuario</ion-label>
       <ion-input
         type="email" 
         formControlName="email">
       </ion-input>
     </ion-item>
-    <ion-item class="error-messages">
-      <ng-container *ngFor="let error of error_messages.email">
-        <ul *ngIf="credenciales.get('email').hasError(error.type) 
+    <ng-container>
+      <div *ngFor="let error of error_messages.email">
+        <ion-item class="error-messages" *ngIf="credenciales.get('email').hasError(error.type) 
             && (credenciales.get('email').dirty 
             || credenciales.get('email').touched)">
-          <li>{{ error.message }}</li>
-      </ul>
-      </ng-container>
-    </ion-item>
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
-      <ion-label position="stacked">Clave</ion-label>
+      <ion-label>Clave</ion-label>
       <ion-input
         type="password"
         formControlName="password">
       </ion-input>
     </ion-item>
-    <ion-item class="error-messages">
-      <ng-container *ngFor="let error of error_messages.password">
-        <ul class="error-message" 
-          *ngIf="credenciales.get('password').hasError(error.type) 
+    <ng-container>
+      <div *ngFor="let error of error_messages.password">
+        <ion-item class="error-messages" *ngIf="credenciales.get('password').hasError(error.type) 
             && (credenciales.get('password').dirty 
             || credenciales.get('password').touched)">
-          <li>{{ error.message }}</li>
-        </ul>
-      </ng-container>
-    </ion-item>
-  
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-button 
       fill="solid" 
