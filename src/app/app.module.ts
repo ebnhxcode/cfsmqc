@@ -25,11 +25,13 @@ import { ModalformulariocalidadcondicionPageModule } from './componentes/calidad
 // QR/BAR Scanner libs
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
 
-// Network
-import { Network } from '@ionic-native/network/ngx';
-
 // Laravel Passport libs
 import { LaravelPassportModule } from 'laravel-passport';
+
+// Network
+import { Network } from '@ionic-native/network/ngx';
+import { HttpClientModule } from '@angular/common/http';
+import { IonicStorageModule } from '@ionic/storage';
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,6 +46,9 @@ import { LaravelPassportModule } from 'laravel-passport';
       clientId: authPassportConfig.clientId, 
       clientSecret: authPassportConfig.clientSecret
     }),
+    
+    HttpClientModule,
+    IonicStorageModule.forRoot(),
 
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig.firebase),
