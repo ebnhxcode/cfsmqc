@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { NavController, LoadingController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, NavParams, MenuController } from "@ionic/angular";
 
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
@@ -21,11 +21,13 @@ export class HomePage {
   scan:any='';
 
   constructor (
-    public navCtrl: NavController,
-    public router: Router,
-    public activatedRoute: ActivatedRoute,
-    public barcodeScanner: BarcodeScanner
+    private navCtrl: NavController,
+    private menuCtrl: MenuController,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private barcodeScanner: BarcodeScanner
   ){
+    this.menuCtrl.enable(true);
 
     this.scan = this.activatedRoute.snapshot.paramMap.get('scan');
     if (this.scan) {
