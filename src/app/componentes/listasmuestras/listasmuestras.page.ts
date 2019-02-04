@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, AlertController, NavParams, Platform } from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -12,6 +12,8 @@ import { HttpClient } from '@angular/common/http';
 // API REST.
 import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authPassportConfig } from '../../servicios/authbasic/auth-passport-config';
+
+import { ApiService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-listasmuestras',
@@ -28,18 +30,23 @@ export class ListasmuestrasPage implements OnInit {
 
 
   constructor(
-    public navCtrl: NavController,
-    public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController,
-    public http: Http
+    private navCtrl: NavController,
+    private alertCtrl: AlertController, 
+    private loadingCtrl: LoadingController,
+    private apiService: ApiService,
+    private platform: Platform,
+    private http: Http
   ) { }
 
   ngOnInit() {
-    this.cargarInformacionInicial();
+    this.platform.ready().then( () => {
+      this.cargarInformacionInicial(true);
+    });
+    
   }
 
 
-  cargarInformacionInicial () {
+  cargarInformacionInicial (refresh = false, refresher?) {
 
     /*
     const tokens = JSON.parse(localStorage.getItem('tokens'))
@@ -51,6 +58,20 @@ export class ListasmuestrasPage implements OnInit {
 
     //console.log(this.options);
 
+
+    /* NUEVO */
+
+      this.apiService.obtenerMuestras(refresh).subscribe(res => {
+        this.muestras = res;
+        if (refresher) {
+          refresher.target.complete();
+        }
+      });
+
+    /* /NUEVO */
+
+
+    /*
     const tokens = JSON.parse(localStorage.getItem('tokens'))
 
     let headers = new Headers({
@@ -70,7 +91,7 @@ export class ListasmuestrasPage implements OnInit {
     this.http.get(`${this.url_base}/mobile/muestras`, this.options ).subscribe( res => { 
       self.muestras = res.json().muestras; 
     });
-
+    */
     
   }
 

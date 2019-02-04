@@ -6,11 +6,15 @@
 
 <ion-content padding>
 
+  <ion-refresher slot="fixed" (ionRefresh)="cargarInformacionInicial(true, $event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <!-- {{ muestras | json }} -->
 
 
   <ion-list>
-    <ion-item-sliding *ngFor="let muestra of muestras">
+    <ion-item-sliding *ngFor="let muestra of muestras" tappable>
       <ion-item>
         <ion-label>
           <h2>

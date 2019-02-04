@@ -32,9 +32,10 @@ export class ApiService {
       let page = Math.floor(Math.random() * Math.floor(6));
 
       return this.http.get(`${API_URL}/mobile/muestras`).pipe(
-        map(res => res['data']),
+        map(res => res['muestras']),
         tap(res => {
           console.log('returns real live API data');
+          alert('returns real live API data');
           this.setLocalData('muestras', res);
         })
       );
@@ -50,7 +51,7 @@ export class ApiService {
       return this.http.post(url, data).pipe(
         catchError(err => {
             this.offlineManagerService.storeRequest(url, 'POST', data);
-            throw new Error(err);
+            throw new Error(err); 
         })
       );
     }
@@ -64,6 +65,7 @@ export class ApiService {
   // Get cached API result
   private getLocalData (key) {
     console.log('return local data!');
+    alert('return local data!');
     return this.storage.get(`${API_STORAGE_KEY}-${key}`);
     
   }
