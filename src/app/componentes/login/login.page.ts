@@ -55,15 +55,17 @@ export class LoginPage implements OnInit {
     //this.menuCtrl.enable(false, 'MenuCfsmqc');
     this.menuCtrl.enable(false);
 
+    let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
+
     // Validadores de mis imputs
     this.credenciales = this.formBuilder.group({ 
-      password: new FormControl('', Validators.compose([ //123456
+      password: new FormControl(credencialesUsuario?credencialesUsuario.password:'', Validators.compose([ //123456
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(30),
-        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
+        //Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]+$'),
       ])),
-      email:  new FormControl('', Validators.compose([ //prueba@mail.cl
+      email:  new FormControl(credencialesUsuario?credencialesUsuario.email:'', Validators.compose([ //prueba@mail.cl
         Validators.required,
         Validators.minLength(6),
         Validators.maxLength(30),
@@ -77,36 +79,17 @@ export class LoginPage implements OnInit {
     // Si hay conexion, que autologuee si tiene datos en localstorage
     // Si hay conexion, si es primera vez que inicia sesion hace login y guarda los datos en localstorage
 
-
-
-    if (this.apiService.checkearConexionAplicacion()) {
-      let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
-      if (credencialesUsuario) {
-        // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
-        this.credenciales.value.email = credencialesUsuario.email;
-        this.credenciales.value.password = credencialesUsuario.password;
-        this.autoLogin(credencialesUsuario);
-      }
+    
+    if (!credencialesUsuario) {
+      let toast = this.toastCtrl.create({
+        message: 'No se encontraron datos para auto inicio de sesión, debes iniciar sesión para validar tus datos.',
+        duration: 5000,
+        position: 'bottom'
+      });
+      toast.then( toast => toast.present());
     } else {
-      let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
-      if (credencialesUsuario) {
-        // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
-        this.credenciales.value.email = credencialesUsuario.email;
-        this.credenciales.value.password = credencialesUsuario.password;
-        this.autoLogin(credencialesUsuario);
-      } else {
-        this.toast = this.toastCtrl.create({
-          message: 'Te debes conectar a internet para validar tus datos.',
-          duration: 10000,
-          position: 'bottom'
-        });
-        this.toast.then( toast => toast.present());
-      }
+      this.login();
     }
-
-
-
-
 
     /*
     // Para que cachee los datos del usuario
@@ -158,6 +141,61 @@ export class LoginPage implements OnInit {
   }
 
   public async login () {
+
+    let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
+
+    console.log(this.apiService.checkearConexionOnlineAplicacion());
+    if ( this.apiService.checkearConexionOnlineAplicacion() === true ) {
+
+      
+      if (credencialesUsuario) {
+        // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
+        this.autoLogin(credencialesUsuario);
+      } else {
+        this.presentLogin();
+        const credenciales = this.credenciales.value;
+        this.laravelPassportService
+          .loginWithEmailAndPassword(credenciales.email, credenciales.password)
+          .subscribe(
+            res => {
+              this.loading.dismiss();
+              localStorage.setItem('tokens', JSON.stringify(res));
+              localStorage.setItem('credencialesUsuario', JSON.stringify(credenciales)); // Para la autenticacion cuando recupere la conexion
+              this.router.navigate(['home']);
+              //this.headers.append('Authorization', 'Basic ' + info.token);
+              //this.http.post(`${this.url_base}/datosUsuario`, credenciales, this.options).subscribe( data => { console.log(data); } );
+              
+            },
+            err => { console.log(err); },
+            ()=>{}
+          );
+      }
+    } else {
+      if (credencialesUsuario) {
+        if (this.credenciales.value.email == credencialesUsuario.email && 
+          this.credenciales.value.password == credencialesUsuario.password) {
+            let toast = this.toastCtrl.create({
+              message: 'Iniciando sesión modo offline.',
+              duration: 4000,
+              position: 'bottom'
+            });
+            toast.then( toast => toast.present());
+            // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
+            this.router.navigate(['home']);
+        }
+
+      } else {
+        let toast = this.toastCtrl.create({
+          message: 'Te debes conectar a internet para validar tus datos.',
+          duration: 5000,
+          position: 'bottom'
+        });
+        toast.then( toast => toast.present());
+      }
+
+    }
+
+    /*
     this.presentLogin();
     const credenciales = this.credenciales.value;
     this.laravelPassportService
@@ -170,7 +208,7 @@ export class LoginPage implements OnInit {
           this.router.navigate(['home']);
           //this.headers.append('Authorization', 'Basic ' + info.token);
           //this.http.post(`${this.url_base}/datosUsuario`, credenciales, this.options).subscribe( data => { console.log(data); } );
-          /*
+          
           let headers = new Headers({
             'Content-Type': 'application/json;charset=utf-8',
             'Accept': 'application/json',
@@ -183,11 +221,13 @@ export class LoginPage implements OnInit {
             //self.muestras = res.json().muestras; 
             console.log(res);
           });
-          */
+          
         },
         err => { console.log(err); },
         ()=>{}
       );
+      
+      */
   }
 
   public irRegistrar () {

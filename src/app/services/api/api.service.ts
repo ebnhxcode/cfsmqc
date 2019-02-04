@@ -27,47 +27,11 @@ export class ApiService {
   }
 
 
-  checkearConexionAplicacion () {
+  checkearConexionOnlineAplicacion () {
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
-      let toast = this.toastCtrl.create({
-        message: 'Conectado.',
-        duration: 3000,
-        position: 'bottom'
-      });
-      toast.then( toast => toast.present());
-      return true;
-    } else {
-      let toast = this.toastCtrl.create({
-        message: 'Desconectado.',
-        duration: 3000,
-        position: 'bottom'
-      });
-      toast.then( toast => toast.present());
       return false;
-    }
-    
-
-
-    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
-      // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
-      return from(this.getLocalData('credencialesUsuario'));
     } else {
-      // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
-      // JSON.stringify(localStorage.setItem('credencialesUsuario',res));
-
-      let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
-      if (credencialesUsuario) {
-        this.setLocalData('credencialesUsuario', credencialesUsuario);
-        return from(this.getLocalData('credencialesUsuario'));
-      } else {
-        let toast = this.toastCtrl.create({
-          message: 'Te debes conectar a internet para validar tus datos.',
-          duration: 10000,
-          position: 'bottom'
-        });
-        toast.then( toast => toast.present());
-      }
-
+      return true;
     }
   }
 
