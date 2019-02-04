@@ -5,7 +5,7 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LaravelPassportService } from 'laravel-passport';
 
-import { NavController, LoadingController, NavParams, AlertController } from "@ionic/angular";
+import { NavController, LoadingController, NavParams, AlertController, MenuController } from "@ionic/angular";
 
 import { Router } from '@angular/router';
 
@@ -47,9 +47,13 @@ export class LoginPage implements OnInit {
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private navCtrl: NavController,
+    private menuCtrl: MenuController,
     private network: Network,
     private router: Router
   ){
+    //this.menuCtrl.enable(false, 'MenuCfsmqc');
+    this.menuCtrl.enable(false);
+
     // Validadores de mis imputs
     this.credenciales = this.formBuilder.group({ 
       password: new FormControl('', Validators.compose([ //123456
