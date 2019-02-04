@@ -26,6 +26,7 @@ export class ListasmuestrasPage implements OnInit {
   headers = new Headers(authPassportConfig.headers);
   options = new RequestOptions({ headers: this.headers });
 
+  private loading:any;
   muestras: any[];
 
 
@@ -60,9 +61,10 @@ export class ListasmuestrasPage implements OnInit {
 
 
     /* NUEVO */
-
+      this.presentCargandoMuestras();
       this.apiService.obtenerMuestras(refresh).subscribe(res => {
         this.muestras = res;
+        this.loading.dismiss();
         if (refresher) {
           refresher.target.complete();
         }
@@ -106,6 +108,14 @@ export class ListasmuestrasPage implements OnInit {
     this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
   }
 
+  private async presentCargandoMuestras () { 
+    this.loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      spinner: 'crescent',
+      //duration: 2000
+    });
+    return await this.loading.present();
+  }
 
 
 

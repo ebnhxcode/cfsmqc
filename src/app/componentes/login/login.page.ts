@@ -5,13 +5,11 @@ import { AngularFireAuth } from '@angular/fire/auth';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LaravelPassportService } from 'laravel-passport';
 
-import { NavController, LoadingController, NavParams, AlertController, MenuController } from "@ionic/angular";
+import { NavController, LoadingController, NavParams, AlertController, ToastController, MenuController, Platform } from "@ionic/angular";
 
 import { Router } from '@angular/router';
 
-// Network 
-import { Network } from '@ionic-native/network/ngx';
-
+import { ApiService } from '../../services/api/api.service';
 
 @Component({
   selector: 'app-login',
@@ -22,6 +20,7 @@ export class LoginPage implements OnInit {
 
   private credenciales:FormGroup;
   private loading:any;
+  private toast:any;
   private alert:any;
 
   private error_messages = {
@@ -46,9 +45,11 @@ export class LoginPage implements OnInit {
     private laravelPassportService: LaravelPassportService,
     private loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
+    private toastCtrl: ToastController,
     private navCtrl: NavController,
     private menuCtrl: MenuController,
-    private network: Network,
+    private apiService: ApiService,
+    private platform: Platform,
     private router: Router
   ){
     //this.menuCtrl.enable(false, 'MenuCfsmqc');
@@ -78,51 +79,39 @@ export class LoginPage implements OnInit {
 
 
 
-
-
-    // watch network for a disconnection
-    let disconnectSubscription = this.network.onDisconnect().subscribe(() => {
-      alert('network was disconnected :-(');
-      console.log('network was disconnected :-(');
-    });
-
-    // stop disconnect watch
-    disconnectSubscription.unsubscribe();
-
-
-    // watch network for a connection
-    let connectSubscription = this.network.onConnect().subscribe(() => {
-      console.log('network connected!');
-      alert('network connected!');
-      // We just got a connection but we need to wait briefly
-      // before we determine the connection type. Might need to wait.
-      // prior to doing any api requests as well.
-      setTimeout(() => {
-        if (this.network.type === 'wifi') {
-          console.log('we got a wifi connection, woohoo!');
-          alert('we got a wifi connection, woohoo!');
-        }
-        if (this.network.type === '3g') {
-          console.log('we got a 3g connection, woohoo!');
-          alert('we got a 3g connection, woohoo!');
-        }
-      }, 3000);
-    });
-
-
-
-
-
-
-
-    // Para que cachee los datos del usuario
-    let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
-    if (credencialesUsuario) {
-      // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
-      this.credenciales.value.email = credencialesUsuario.email;
-      this.credenciales.value.password = credencialesUsuario.password;
-      //this.autoLogin(credencialesUsuario);
+    if (this.apiService.checkearConexionAplicacion()) {
+      let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
+      if (credencialesUsuario) {
+        // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
+        this.credenciales.value.email = credencialesUsuario.email;
+        this.credenciales.value.password = credencialesUsuario.password;
+        this.autoLogin(credencialesUsuario);
+      }
+    } else {
+      let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
+      if (credencialesUsuario) {
+        // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
+        this.credenciales.value.email = credencialesUsuario.email;
+        this.credenciales.value.password = credencialesUsuario.password;
+        this.autoLogin(credencialesUsuario);
+      } else {
+        this.toast = this.toastCtrl.create({
+          message: 'Te debes conectar a internet para validar tus datos.',
+          duration: 10000,
+          position: 'bottom'
+        });
+        this.toast.then( toast => toast.present());
+      }
     }
+
+
+
+
+
+    /*
+    // Para que cachee los datos del usuario
+
+    */
   }
 
 
