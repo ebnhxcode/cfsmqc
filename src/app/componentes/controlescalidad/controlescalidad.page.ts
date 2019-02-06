@@ -137,10 +137,10 @@ export class ControlescalidadPage implements OnInit {
 
   cargarInformacionInicial (refresh = false, refresher?) {
 
-    this.presentCargandoControlCalidad();
+    //this.presentCargandoControlCalidad();
 
     this.apiService.obtenerDatosParametricosMuestras(refresh).subscribe(res => {
-      this.loading.dismiss();
+      //this.loading.dismiss();
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: 'Carga completa',
@@ -164,6 +164,83 @@ export class ControlescalidadPage implements OnInit {
       }
     });
 
+    this.muestra_qr = this.activatedRoute.snapshot.paramMap.get('muestra_qr');
+    //this.obtenerMuestra(this.muestra_qr);
+
+    this.presentCargandoMuestra();
+    this.apiService.obtenerMuestraPorQR(this.muestra_qr).subscribe(res => {
+      
+      this.loading.dismiss();
+
+      this.muestra = res.muestra; 
+
+      this.region_id = this.muestra.region_id;
+      //console.log(self.muestra);
+
+
+
+      this.control = this.formBuilder.group({
+        muestra_qr: new FormControl({value: this.muestra.muestra_qr,disabled:true}, Validators.required),
+        muestra_fecha: new FormControl({value: this.muestra.muestra_fecha,disabled:true}, Validators.required),
+        region_id: new FormControl({value: this.muestra.region_id,disabled:true}, Validators.required),
+        productor_id: new FormControl({value: this.muestra.productor_id,disabled:true}, Validators.required),
+        especie_id: new FormControl({value: this.muestra.especie_id,disabled:true}, Validators.required),
+        variedad_id: new FormControl({value: this.muestra.variedad_id,disabled:true}, Validators.required),
+        calibre_id: new FormControl({value: this.muestra.calibre_id,disabled:true}, Validators.required),
+        categoria_id: new FormControl({value: this.muestra.categoria_id,disabled:true}, Validators.required), 
+        embalaje_id: new FormControl({value: this.muestra.embalaje_id,disabled:true}, Validators.required),
+        etiqueta_id: new FormControl({value: this.muestra.etiqueta_id,disabled:true}, Validators.required),
+        muestra_peso: new FormControl({value: this.muestra.muestra_peso,disabled:true}, Validators.required),
+        muestra_bolsas: new FormControl({value: this.muestra.muestra_bolsas,disabled:true}, Validators.required),
+        muestra_racimos: new FormControl({value: this.muestra.muestra_racimos,disabled:true}, Validators.required),
+        muestra_brix: new FormControl({value: this.muestra.muestra_brix,disabled:true}, Validators.required),
+        muestra_desgrane: new FormControl({value: this.muestra.muestra_desgrane,disabled:true}, Validators.required),
+        lote_codigo: new FormControl({value: this.muestra.lote_codigo,disabled:true}, Validators.required),
+        estado_muestra_id: new FormControl({value: this.muestra.estado_muestra_id,disabled:true}, Validators.required),
+        apariencia_id: new FormControl({value: this.muestra.apariencia_id,disabled:true}, Validators.required)
+        //calculo_total: [null, Validators.required]
+      });
+
+      this.control.controls["muestra_qr"].setValue(this.muestra.muestra_qr);
+      this.control.controls["muestra_fecha"].setValue(this.muestra.muestra_fecha);
+      this.control.controls["region_id"].setValue(this.muestra.region_id);
+      this.control.controls["productor_id"].setValue(this.muestra.productor_id);
+      this.control.controls["especie_id"].setValue(this.muestra.especie_id);
+      this.control.controls["variedad_id"].setValue(this.muestra.variedad_id);
+      this.control.controls["calibre_id"].setValue(this.muestra.calibre_id);
+      this.control.controls["categoria_id"].setValue(this.muestra.categoria_id);
+      this.control.controls["embalaje_id"].setValue(this.muestra.embalaje_id);
+      this.control.controls["etiqueta_id"].setValue(this.muestra.etiqueta_id);
+      this.control.controls["muestra_peso"].setValue(this.muestra.muestra_peso);
+      this.control.controls["muestra_bolsas"].setValue(this.muestra.muestra_bolsas);
+      this.control.controls["muestra_racimos"].setValue(this.muestra.muestra_racimos);
+      this.control.controls["muestra_brix"].setValue(this.muestra.muestra_brix);
+      this.control.controls["muestra_desgrane"].setValue(this.muestra.muestra_desgrane);
+      this.control.controls["lote_codigo"].setValue(this.muestra.lote_codigo);
+      this.control.controls["estado_muestra_id"].setValue(this.muestra.estado_muestra_id);
+      this.control.controls["apariencia_id"].setValue(this.muestra.apariencia_id);
+
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: 'Muestra cargada',
+          duration :1000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+      }
+
+      //console.log(self.control.controls);
+      //console.log(self.control.controls);
+      //console.log(self.muestra);
+
+      //console.log(this.control.value.apariencia_id);
+  });
+
+
+
+
+
+
     /*
 
     aqui voy
@@ -182,11 +259,12 @@ export class ControlescalidadPage implements OnInit {
       self.estados_muestras = res.json().estados_muestras;
     });
 
-    */
-
     this.muestra_qr = this.activatedRoute.snapshot.paramMap.get('muestra_qr');
 
     this.obtenerMuestra(this.muestra_qr);
+
+    */
+
     // Carga la muestra con el id que viene 
 
     //console.log(this.muestra_id);
@@ -373,12 +451,19 @@ export class ControlescalidadPage implements OnInit {
 
   private async presentCargandoControlCalidad () { 
     this.loading = await this.loadingCtrl.create({
-      message: 'Cargando...',
+      message: 'Cargando información del formulario...',
       spinner: 'crescent',
       //duration: 2000
     });
     return await this.loading.present();
   }
-
+  private async presentCargandoMuestra () { 
+    this.loading = await this.loadingCtrl.create({
+      message: 'Cargando muestra...',
+      spinner: 'crescent',
+      //duration: 2000
+    });
+    return await this.loading.present();
+  }
 
 }

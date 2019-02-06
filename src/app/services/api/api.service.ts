@@ -42,7 +42,7 @@ export class ApiService {
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || !forceRefresh) {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
-          message: 'No estás conectado a internet, datos obtenidos desde la base de datos local',
+          message: `No estás conectado a internet, datos obtenidos desde la base de datos local`,
           duration :2000,
           position: 'bottom'
         });
@@ -141,6 +141,96 @@ export class ApiService {
 
     }
     
+  }
+
+  obtenerMuestra (muestra_id) {
+
+    let url = `${API_URL}/mobile/muestras/show`;
+    let data = { muestra_id:muestra_id };
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      /**
+      * obtengo el dato de base local
+      */
+
+
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, datos obtenidos desde la base de datos local`,
+          duration :5000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+
+      /**
+       * Lo que hace este return es "desde lo que obtengo de la peticion en base local, entonces envíalo"
+       * a traves del método from
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
+    } else {
+      /**
+       * actualiza muestra en el backend, en caso de error guarda el dato en local
+       * captura errores
+       */
+      return this.http.post(url, data).pipe(
+        catchError(err => {
+
+            this.offlineManagerService.storeRequest(url, 'POST', data);
+
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `${err}`,
+                duration :5000,
+                position: 'bottom'
+              });
+              toast.then(toast => toast.present());
+              //console.log(err);
+            }      
+
+            throw new Error(err); 
+        })
+      );
+
+    }
+
+  }
+
+  obtenerMuestraPorQR (muestra_qr) {
+
+    let url = `${API_URL}/mobile/muestras/showByQR`;
+    let data = {
+      muestra_qr:muestra_qr
+    };
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      //console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, datos obtenidos desde la base de datos local`,
+          duration :5000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
+    } else {
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, data).pipe(
+        catchError(err => {
+            this.offlineManagerService.storeRequest(url, 'POST', data);
+            throw new Error(err); 
+        })
+      );
+
+    }
+
   }
 
   crearMuestra (muestra, data): Observable<any> {
@@ -243,86 +333,7 @@ export class ApiService {
     }
   }
 
-  buscarMuestra (muestra_id) {
 
-    let url = `${API_URL}/mobile/muestras/show`;
-    let data = { muestra_id:muestra_id };
-    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
-      /**
-      * obtengo el dato de base local
-      */
-
-
-      if ( DEBUG ) {
-        let toast = this.toastCtrl.create({
-          message: `${data}`,
-          duration :5000,
-          position: 'bottom'
-        });
-        toast.then(toast => toast.present());
-        //console.log(data);
-      }
-
-      /**
-       * Lo que hace este return es "desde lo que obtengo de la peticion en base local, entonces envíalo"
-       * a traves del método from
-       */
-      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
-    } else {
-      /**
-       * actualiza muestra en el backend, en caso de error guarda el dato en local
-       * captura errores
-       */
-      return this.http.post(url, data).pipe(
-        catchError(err => {
-
-            this.offlineManagerService.storeRequest(url, 'POST', data);
-
-            if ( DEBUG ) {
-              let toast = this.toastCtrl.create({
-                message: `${err}`,
-                duration :5000,
-                position: 'bottom'
-              });
-              toast.then(toast => toast.present());
-              //console.log(err);
-            }      
-
-            throw new Error(err); 
-        })
-      );
-
-    }
-
-  }
-
-  buscarMuestraPorQR (muestra_qr) {
-
-    let url = `${API_URL}/mobile/muestras/showByQR`;
-    let data = {
-      muestra_qr:muestra_qr
-    };
-    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
-      //console.log(data);
-      /**
-       * almacena el dato de forma local en sqlite
-       */
-      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
-    } else {
-      /**
-       * actualiza muestra en el backend
-       * captura errores
-       */
-      return this.http.post(url, data).pipe(
-        catchError(err => {
-            this.offlineManagerService.storeRequest(url, 'POST', data);
-            throw new Error(err); 
-        })
-      );
-
-    }
-
-  }
 
 
 
