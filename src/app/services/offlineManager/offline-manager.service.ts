@@ -55,8 +55,8 @@ export class OfflineManagerService {
                      if ( DEBUG ) {
                         let toast = this.toastCtrl.create({
                            message: 'Datos locales sincronizados con la API',
-                           duration :500,
-                           position: 'bottom'
+                           duration :1000,
+                           position: 'top'
                         });
                         toast.then(toast => toast.present());
                      }
@@ -71,8 +71,8 @@ export class OfflineManagerService {
                if ( DEBUG ) {
                   let toast = this.toastCtrl.create({
                      message: 'No hay eventos locales',
-                     duration :5000,
-                     position: 'bottom'
+                     duration :2000,
+                     position: 'top'
                   });
                   toast.then(toast => toast.present());
                   console.log('No hay eventos locales');
