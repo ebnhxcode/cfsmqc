@@ -21,6 +21,7 @@ export class NetworkService {
 
    /**
     * Instancia de variable que informa los estados y comportamientos en base a los eventos
+    * se inicializa con el estado de la suscripcion a ser observable
     */
    private status: BehaviorSubject<ConnectionStatus> = new BehaviorSubject(ConnectionStatus.Offline);
 
@@ -31,6 +32,9 @@ export class NetworkService {
    ) {
       /**
        * Checkeo si la app está lista
+       * inicializa eventos de conexion
+       * checkea estado
+       * retorna|emite el estado
        */
       this.platform.ready().then( () => {
          this.initializeNetworkEvents();

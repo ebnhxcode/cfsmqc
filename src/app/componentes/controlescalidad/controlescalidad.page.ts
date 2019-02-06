@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+import { NavController, LoadingController, AlertController, NavParams, Platform, ToastController } from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
@@ -16,6 +16,10 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
 import { ActivatedRoute } from '@angular/router';
+
+import { ApiService } from '../../services/api/api.service';
+
+const DEBUG = true;
 
 @Injectable()
 @Component({
@@ -89,6 +93,7 @@ export class ControlescalidadPage implements OnInit {
   muestra_qr:any=null;
   muestra:any={};
   
+  loading:any;
 
   /*
   alerts = {
@@ -107,12 +112,15 @@ export class ControlescalidadPage implements OnInit {
   */
 
   constructor(
-    public navCtrl: NavController,
-    public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController,
-    public formBuilder: FormBuilder,
-    public activatedRoute: ActivatedRoute,
-    public http: Http
+    private navCtrl: NavController,
+    private alertCtrl: AlertController, 
+    private toastCtrl: ToastController, 
+    private loadingCtrl: LoadingController,
+    private formBuilder: FormBuilder,
+    private activatedRoute: ActivatedRoute,
+    private apiService: ApiService,
+    private platform: Platform,
+    private http: Http
   ){
 
     const muestra_fecha_por_defecto = new Date().toISOString();
@@ -122,11 +130,43 @@ export class ControlescalidadPage implements OnInit {
   }
 
   ngOnInit() {
-    this.cargarInformacionInicial();
+    this.platform.ready().then( () => {
+      this.cargarInformacionInicial(true);
+    });
   }
 
-  cargarInformacionInicial () {
+  cargarInformacionInicial (refresh = false, refresher?) {
 
+    this.presentCargandoControlCalidad();
+
+    this.apiService.obtenerDatosParametricosMuestras(refresh).subscribe(res => {
+      this.loading.dismiss();
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: 'Carga completa',
+          duration :500,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        console.log(res);
+      }
+      this.regiones = res.regiones; 
+      this.productores = res.productores;
+      this.especies = res.especies;
+      this.variedades = res.variedades;
+      this.calibres = res.calibres;
+      this.categorias = res.categorias;
+      this.embalajes = res.embalajes;
+      this.etiquetas = res.etiquetas;
+      this.apariencias = res.apariencias;
+      if (refresher) {
+        refresher.target.complete();
+      }
+    });
+
+    /*
+
+    aqui voy
 
     let self = this;
     this.http.get(`${this.url_base}/mobile/getDataControlCalidad`).subscribe( res => { 
@@ -141,6 +181,8 @@ export class ControlescalidadPage implements OnInit {
       self.apariencias = res.json().apariencias;
       self.estados_muestras = res.json().estados_muestras;
     });
+
+    */
 
     this.muestra_qr = this.activatedRoute.snapshot.paramMap.get('muestra_qr');
 
@@ -228,6 +270,15 @@ export class ControlescalidadPage implements OnInit {
         self.control.controls["estado_muestra_id"].setValue(self.muestra.estado_muestra_id);
         self.control.controls["apariencia_id"].setValue(self.muestra.apariencia_id);
 
+        if ( DEBUG ) {
+          let toast = this.toastCtrl.create({
+            message: 'Muestra cargada',
+            duration :1000,
+            position: 'bottom'
+          });
+          toast.then(toast => toast.present());
+        }
+
         //console.log(self.control.controls);
         //console.log(self.control.controls);
         //console.log(self.muestra);
@@ -271,6 +322,17 @@ export class ControlescalidadPage implements OnInit {
 
             this.muestra = res.json().muestra;
 
+
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: 'Muestra actualizada',
+                duration :1000,
+                position: 'bottom'
+              });
+              toast.then(toast => toast.present());
+            }
+
+
             this.irCalidadCondicionMenu(this.muestra);
           }
         },
@@ -307,6 +369,15 @@ export class ControlescalidadPage implements OnInit {
     // this.control.calculo_total = (this.control.region_id + this.control.productor_id + this.control.especie_id + this.control.variedad_id ) / 4;
     // console.log(this.control.calculo_total);
 
+  }
+
+  private async presentCargandoControlCalidad () { 
+    this.loading = await this.loadingCtrl.create({
+      message: 'Cargando...',
+      spinner: 'crescent',
+      //duration: 2000
+    });
+    return await this.loading.present();
   }
 
 

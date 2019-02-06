@@ -63,8 +63,8 @@ export class ListasmuestrasPage implements OnInit {
     /* NUEVO */
       this.presentCargandoMuestras();
       this.apiService.obtenerMuestras(refresh).subscribe(res => {
-        this.muestras = res;
         this.loading.dismiss();
+        this.muestras = res;
         if (refresher) {
           refresher.target.complete();
         }
@@ -105,6 +105,9 @@ export class ListasmuestrasPage implements OnInit {
   }
 
   irEditarMuestra (muestra) {
+    /**
+     * Le mando el QR por que aprobecho de usar esa misma opcion cuando se escanea la muestra
+     */
     this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
   }
 

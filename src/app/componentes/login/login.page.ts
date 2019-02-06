@@ -175,7 +175,7 @@ export class LoginPage implements OnInit {
         if (this.credenciales.value.email == credencialesUsuario.email && 
           this.credenciales.value.password == credencialesUsuario.password) {
             let toast = this.toastCtrl.create({
-              message: 'Iniciando sesión modo offline.',
+              message: 'Iniciando sesión.',
               duration: 4000,
               position: 'bottom'
             });

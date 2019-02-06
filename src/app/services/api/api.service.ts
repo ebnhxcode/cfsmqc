@@ -9,12 +9,15 @@ import { map, tap, catchError } from 'rxjs/operators';
 
 const API_STORAGE_KEY = 'specialkey';
 const API_URL = 'https://cfsmqcpreprod.publicidadorigen.cl';
+const DEBUG = true;
 
 @Injectable({
   providedIn: 'root'
 })
 
 export class ApiService {
+
+  
 
   constructor(
      private storage: Storage,
@@ -35,38 +38,291 @@ export class ApiService {
     }
   }
 
-  obtenerMuestras (forceRefresh: boolean = false): Observable<any> {
+  obtenerDatosParametricosMuestras (forceRefresh: boolean = false): Observable<any> {
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || !forceRefresh) {
-      return from(this.getLocalData('muestras'));
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: 'No estás conectado a internet, datos obtenidos desde la base de datos local',
+          duration :2000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        console.log(`Datos obtenidos desde la base de datos local:`);
+      }
+      return from(this.getLocalData('dataControlCalidad'));
     } else {
       let page = Math.floor(Math.random() * Math.floor(6));
+
+      return this.http.get(`${API_URL}/mobile/getDataControlCalidadCompactada`).pipe(
+        map(res => res['dataControlCalidad']),
+        tap(res => {
+
+          if ( DEBUG ) {
+            let toast = this.toastCtrl.create({
+              message: 'Datos obtenidos desde la base de datos externa',
+              duration :2000,
+              position: 'bottom'
+            });
+            toast.then(toast => toast.present());
+            console.log(`Datos obtenidos desde la base de datos externa:`);
+            console.log(res);
+          }
+
+          /*
+          this.setLocalData('regiones', res.regiones); 
+          this.setLocalData('productores', res.productores);
+          this.setLocalData('especies', res.especies);
+          this.setLocalData('variedades', res.variedades);
+          this.setLocalData('calibres', res.calibres);
+          this.setLocalData('categorias', res.categorias);
+          this.setLocalData('embalajes', res.embalajes);
+          this.setLocalData('etiquetas', res.etiquetas);
+          this.setLocalData('apariencias', res.apariencias);
+          this.setLocalData('estados_muestras', res.estados_muestras);
+          */
+          //alert('returns real live API data');
+          this.setLocalData('dataControlCalidad', res);
+        })
+      );
+
+    }
+  }
+
+  obtenerMuestras (forceRefresh: boolean = false): Observable<any> {
+
+    /*
+    from(this.getLocalData('muestras')).subscribe(res => { 
+      
+      console.log(res); 
+      console.log(`Cargando muestras desde obenerMuestras`);
+      // return res;
+    }, err => {}, 
+    () => {
+
+    });
+    */
+    
+
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || !forceRefresh ) {
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: 'No estás conectado a internet, datos obtenidos desde la base de datos local',
+          duration :2000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(`Datos obtenidos desde la base de datos local:`);
+      }
+      return from(this.getLocalData('muestras'));
+      //return from(this.getLocalData('muestras'));
+    } else {
+      let page = Math.floor(Math.random() * Math.floor(6));
+      
 
       return this.http.get(`${API_URL}/mobile/muestras`).pipe(
         map(res => res['muestras']),
         tap(res => {
-          console.log('returns real live API data');
+
+          if ( DEBUG ) {
+            let toast = this.toastCtrl.create({
+              message: 'Datos obtenidos desde la base de datos externa',
+              duration :2000,
+              position: 'bottom'
+            });
+            toast.then(toast => toast.present());
+            console.log(`Datos obtenidos desde la base de datos externa:`);
+            //console.log(res);
+          }
+
           //alert('returns real live API data');
           this.setLocalData('muestras', res);
         })
       );
+
+    }
+    
+  }
+
+  crearMuestra (muestra, data): Observable<any> {
+    let url = `${API_URL}/mobile/muestras/store`;
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
+          duration :2000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
+    } else {
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `Muestra enviada`,
+          duration :1000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, data).pipe(
+        catchError(err => {
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
+                duration :2000,
+                position: 'bottom'
+              });
+              toast.then(toast => toast.present());
+              //console.log(data);
+            }
+            this.offlineManagerService.storeRequest(url, 'POST', data);
+            throw new Error(err); 
+        })
+      );
+
     }
   }
 
   actualizarMuestra (muestra, data): Observable<any> {
-    let url = `${API_URL}/mobile/muestras/store`;
+    let url = `${API_URL}/mobile/muestras/update`;
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      //console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
+          duration :5000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        console.log(data);
+      }
+      /**
+       * almacena el dato de forma local en sqlite
+       */
       return from(this.offlineManagerService.storeRequest(url, 'POST', data));
     } else {
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `Muestra enviada`,
+          duration :1000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, data).pipe(
+        catchError(err => {
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
+                duration :2000,
+                position: 'bottom'
+              });
+              toast.then(toast => toast.present());
+              //console.log(data);
+            }
+            this.offlineManagerService.storeRequest(url, 'POST', data);
+            throw new Error(err); 
+        })
+      );
+
+    }
+  }
+
+  buscarMuestra (muestra_id) {
+
+    let url = `${API_URL}/mobile/muestras/show`;
+    let data = { muestra_id:muestra_id };
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      /**
+      * obtengo el dato de base local
+      */
+
+
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `${data}`,
+          duration :5000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+
+      /**
+       * Lo que hace este return es "desde lo que obtengo de la peticion en base local, entonces envíalo"
+       * a traves del método from
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
+    } else {
+      /**
+       * actualiza muestra en el backend, en caso de error guarda el dato en local
+       * captura errores
+       */
+      return this.http.post(url, data).pipe(
+        catchError(err => {
+
+            this.offlineManagerService.storeRequest(url, 'POST', data);
+
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `${err}`,
+                duration :5000,
+                position: 'bottom'
+              });
+              toast.then(toast => toast.present());
+              //console.log(err);
+            }      
+
+            throw new Error(err); 
+        })
+      );
+
+    }
+
+  }
+
+  buscarMuestraPorQR (muestra_qr) {
+
+    let url = `${API_URL}/mobile/muestras/showByQR`;
+    let data = {
+      muestra_qr:muestra_qr
+    };
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      //console.log(data);
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', data));
+    } else {
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
       return this.http.post(url, data).pipe(
         catchError(err => {
             this.offlineManagerService.storeRequest(url, 'POST', data);
             throw new Error(err); 
         })
       );
+
     }
+
   }
-
-
 
 
 
@@ -77,12 +333,36 @@ export class ApiService {
 
   // Save result of API request
   private setLocalData (key ,data) {
+
+    if ( DEBUG ) {
+      let toast = this.toastCtrl.create({
+        message: `Guardando datos en local!`,
+        duration :2000,
+        position: 'bottom'
+      });
+      toast.then(toast => toast.present());
+      //console.log('setting local data!');
+      //console.log(`API_STORAGE_KEY:${API_STORAGE_KEY} - key:${key} - data:${data}`);
+    }    
+
     this.storage.set(`${API_STORAGE_KEY}-${key}`, data);
   }
 
   // Get cached API result
   private getLocalData (key) {
-    console.log('return local data!');
+
+    if ( DEBUG ) {
+      let toast = this.toastCtrl.create({
+        message: `Cargando datos de local!`,
+        duration :2000,
+        position: 'bottom'
+      });
+      toast.then(toast => toast.present());
+      //console.log(`API_STORAGE_KEY:${API_STORAGE_KEY} - key:${key}`);
+      //console.log('return local data!');
+    }    
+
+    
     //alert('return local data!');
     return this.storage.get(`${API_STORAGE_KEY}-${key}`);
     
