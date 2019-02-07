@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from '@angular/fire/auth';
+//import { AngularFireAuth } from '@angular/fire/auth';
 
 // Forms, remember register ReactiveForms in class module
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
@@ -40,7 +40,7 @@ export class LoginPage implements OnInit {
 
 
   constructor(
-    private afAuth: AngularFireAuth,
+    //private afAuth: AngularFireAuth,
     private formBuilder: FormBuilder,
     private laravelPassportService: LaravelPassportService,
     private loadingCtrl: LoadingController,
@@ -53,6 +53,9 @@ export class LoginPage implements OnInit {
     private router: Router
   ){
     //this.menuCtrl.enable(false, 'MenuCfsmqc');
+    /**
+     * Para desactivar el menu o el despliegue del menu en el login page
+     */
     this.menuCtrl.enable(false);
 
     let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
