@@ -14,52 +14,54 @@
 
 
   <ion-list>
-    <ion-item-sliding *ngFor="let muestra of muestras" tappable>
-      <ion-item>
-        <ion-label>
-          <h2>
-            <ng-template [ngIf]="muestra.categoria && muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
-              <ion-badge item-end color="warning">
-                {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
-              </ion-badge>
-            </ng-template>  
-            <ng-template #Standard>
-                <ion-badge item-end color="primary">
+    <ng-container *ngFor="let muestra of muestras">
+      <ion-item-sliding>
+        <ion-item>
+          <ion-label>
+            <h2>
+              <ng-template [ngIf]="muestra.categoria && muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
+                <ion-badge item-end color="warning">
                   {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
                 </ion-badge>
-            </ng-template>
-            · QR:{{muestra.muestra_qr}}
-
-
-
-            <span style="float:right;" *ngIf="muestra.nota">
-              <ion-badge *ngIf="muestra.nota.nota_nombre=='A'" color="primary" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
-              <ion-badge *ngIf="muestra.nota.nota_nombre=='B'" color="success" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
-              <ion-badge *ngIf="muestra.nota.nota_nombre=='C'" color="warning" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
-              <ion-badge *ngIf="muestra.nota.nota_nombre=='O'" color="danger" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
-              <ion-badge *ngIf="muestra.nota.nota_nombre=='X'" color="dark" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
-            </span>
-          </h2>
-          <h3>{{(muestra.productor)?muestra.productor.productor_nombre:'Sin productor'}}</h3>
-          <p>
-            {{(muestra.variedad)?muestra.variedad.variedad_nombre:'Sin variedad'}}
-            <br>
-            {{(muestra.region)?muestra.region.region_nombre:'Sin región'}}
-          </p>
-        </ion-label>
-      </ion-item>
-
-      <ion-item-options side="start">
-        <ion-item-option color="danger">Eliminar</ion-item-option>
-        <ion-item-option color="info">Anular</ion-item-option>
-      </ion-item-options>
+              </ng-template>  
+              <ng-template #Standard>
+                  <ion-badge item-end color="primary">
+                    {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
+                  </ion-badge>
+              </ng-template>
+              · QR:{{muestra.muestra_qr}}
   
-      <ion-item-options side="end">
-        <ion-item-option (click)="irEditarMuestra(muestra)">Editar</ion-item-option>
-      </ion-item-options>
+  
+  
+              <span style="float:right;" *ngIf="muestra.nota" (click)="irEditarMuestra(muestra)">
+                <ion-badge *ngIf="muestra.nota.nota_nombre=='A'" color="primary" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+                <ion-badge *ngIf="muestra.nota.nota_nombre=='B'" color="success" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+                <ion-badge *ngIf="muestra.nota.nota_nombre=='C'" color="warning" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+                <ion-badge *ngIf="muestra.nota.nota_nombre=='O'" color="danger" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+                <ion-badge *ngIf="muestra.nota.nota_nombre=='X'" color="dark" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+              </span>
+            </h2>
+            <h3>{{(muestra.productor)?muestra.productor.productor_nombre:'Sin productor'}}</h3>
+            <p>
+              {{(muestra.variedad)?muestra.variedad.variedad_nombre:'Sin variedad'}}
+              <br>
+              {{(muestra.region)?muestra.region.region_nombre:'Sin región'}}
+            </p>
+          </ion-label>
+        </ion-item>
+  
+        <ion-item-options side="start">
+          <ion-item-option (click)="eliminarMuestra(muestra)" color="danger">Eliminar</ion-item-option>
+          <ion-item-option (click)="anularMuestra(muestra)" color="info">Anular</ion-item-option>
+        </ion-item-options>
     
-
-    </ion-item-sliding>
+        <ion-item-options side="end">
+          <ion-item-option (click)="irEditarMuestra(muestra)">Editar</ion-item-option>
+        </ion-item-options>
+      
+  
+      </ion-item-sliding>
+    </ng-container>
   </ion-list>
 
 
@@ -71,6 +73,6 @@
 
 <ion-footer padding>
   <ion-button fill="solid" expand="block" color="light" (click)="irHome()">
-    Volver
+    Volver al inicio
   </ion-button>
 </ion-footer>

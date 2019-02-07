@@ -38,6 +38,10 @@ export class ApiService {
     }
   }
 
+  checkForEvents () {
+    this.offlineManagerService.checkForEvents();
+  }
+
   obtenerDatosParametricosMuestras (forceRefresh: boolean = false): Observable<any> {
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || !forceRefresh) {
       if ( DEBUG ) {
@@ -108,7 +112,7 @@ export class ApiService {
         let toast = this.toastCtrl.create({
           message: 'No estás conectado a internet, datos obtenidos desde la base de datos local',
           duration :2000,
-          position: 'bottom'
+          position: 'middle'
         });
         toast.then(toast => toast.present());
         //console.log(`Datos obtenidos desde la base de datos local:`);
@@ -157,7 +161,7 @@ export class ApiService {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, datos obtenidos desde la base de datos local`,
           duration :5000,
-          position: 'bottom'
+          position: 'middle'
         });
         toast.then(toast => toast.present());
         //console.log(data);
@@ -180,9 +184,9 @@ export class ApiService {
 
             if ( DEBUG ) {
               let toast = this.toastCtrl.create({
-                message: `${err}`,
+                message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
                 duration :5000,
-                position: 'bottom'
+                position: 'middle'
               });
               toast.then(toast => toast.present());
               //console.log(err);
@@ -207,13 +211,13 @@ export class ApiService {
      * Si el usuario está trabajando con las muestras, se guardan en una base local
      */
     //if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || true) {
-    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || true) {
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
       //console.log(data);
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, datos obtenidos desde la base de datos local`,
           duration :2000,
-          position: 'bottom'
+          position: 'middle'
         });
         toast.then(toast => toast.present());
         //console.log(data);
@@ -248,7 +252,7 @@ export class ApiService {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
           duration :2000,
-          position: 'bottom'
+          position: 'middle'
         });
         toast.then(toast => toast.present());
         //console.log(data);
@@ -277,7 +281,7 @@ export class ApiService {
               let toast = this.toastCtrl.create({
                 message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
                 duration :2000,
-                position: 'bottom'
+                position: 'middle'
               });
               toast.then(toast => toast.present());
               //console.log(data);
@@ -292,13 +296,13 @@ export class ApiService {
 
   actualizarMuestra (muestra): Observable<any> {
     let url = `${API_URL}/mobile/muestras/update`;
-    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {//  || true
       //console.log(data);
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
           duration :3000,
-          position: 'bottom'
+          position: 'middle'
         });
         toast.then(toast => toast.present());
         console.log(muestra);
@@ -327,7 +331,7 @@ export class ApiService {
               let toast = this.toastCtrl.create({
                 message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
                 duration :2000,
-                position: 'bottom'
+                position: 'middle'
               });
               toast.then(toast => toast.present());
               //console.log(data);
@@ -342,10 +346,107 @@ export class ApiService {
 
 
 
+  eliminarMuestra (muestra): Observable<any> {
+    let url = `${API_URL}/mobile/muestras/delete`;
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {//  || true
+      //console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
+          duration :3000,
+          position: 'middle'
+        });
+        toast.then(toast => toast.present());
+        //console.log(muestra);
+      }
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', muestra));
+    } else {
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `Muestra eliminada`,
+          duration :1000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, muestra).pipe(
+        catchError(err => {
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `Ocurrió un error durante la eliminacion, se guardara esta acción para su posterior envio`,
+                duration :2000,
+                position: 'middle'
+              });
+              toast.then(toast => toast.present());
+              //console.log(data);
+            }
+            this.offlineManagerService.storeRequest(url, 'POST', muestra);
+            throw new Error(err); 
+        })
+      );
+
+    }
+  }
 
 
 
+  anularMuestra (muestra): Observable<any> {
+    let url = `${API_URL}/mobile/muestras/cancel`;
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {//  || true
+      //console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
+          duration :3000,
+          position: 'middle'
+        });
+        toast.then(toast => toast.present());
+        //console.log(muestra);
+      }
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', muestra));
+    } else {
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `Muestra anulada`,
+          duration :1000,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, muestra).pipe(
+        catchError(err => {
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `Ocurrió un error durante la anulación, se guardara esta acción para su posterior envio`,
+                duration :2000,
+                position: 'middle'
+              });
+              toast.then(toast => toast.present());
+              //console.log(data);
+            }
+            this.offlineManagerService.storeRequest(url, 'POST', muestra);
+            throw new Error(err); 
+        })
+      );
 
+    }
+  }
 
   
 

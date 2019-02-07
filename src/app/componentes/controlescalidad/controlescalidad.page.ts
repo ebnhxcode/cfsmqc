@@ -145,7 +145,7 @@ export class ControlescalidadPage implements OnInit {
         let toast = this.toastCtrl.create({
           message: 'Carga completa',
           duration :500,
-          position: 'bottom'
+          position: 'top'
         });
         toast.then(toast => toast.present());
         //console.log(res);
@@ -172,14 +172,10 @@ export class ControlescalidadPage implements OnInit {
       this.loading.dismiss();
 
       if (res.length > 1) { //si viene mas de un objeto es por que hay que buscarlo en los datos locales
-
-        //console.log(res);
         this.muestra = res.filter((m) => { return m.muestra_qr == this.muestra_qr;})[0];
-
       } else {
         this.muestra = res.muestra; 
-      }
-
+      } //console.log(res);
 
       if (!this.muestra) { 
         if ( DEBUG ) {
@@ -188,12 +184,11 @@ export class ControlescalidadPage implements OnInit {
             duration :500,
             position: 'bottom'
           });
-          toast.then(toast => toast.present());
-          //console.log(res);
+          toast.then(toast => toast.present()); //console.log(res);
+           
         }
-      } else {
-       
-        console.log(this.muestra);
+      } else { //console.log(this.muestra);
+
         //this.apiService.setLocalData('muestrasTemp', this.muestra);
 
         this.region_id = this.muestra.region_id;
@@ -255,7 +250,7 @@ export class ControlescalidadPage implements OnInit {
       
 
 
-
+      this.apiService.checkForEvents();
 
       return;
       
@@ -417,13 +412,13 @@ export class ControlescalidadPage implements OnInit {
 
     this.options = new RequestOptions({ headers: this.headers });
     */
-   
+
     control = Object.assign({muestra_id:this.muestra.muestra_id}, control);
 
     this.controlJson = control;
 
     this.apiService.actualizarMuestra(this.controlJson).subscribe(res => {
-      this.muestra = res.muestra;
+      this.muestra = this.controlJson;
 
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
@@ -433,7 +428,10 @@ export class ControlescalidadPage implements OnInit {
         });
         toast.then(toast => toast.present());
       }
-      this.irCalidadCondicionMenu(this.muestra);
+
+      //console.log(res);
+
+      this.irCalidadCondicionMenu(this.controlJson);
 
     });
 
@@ -493,6 +491,10 @@ export class ControlescalidadPage implements OnInit {
 
   irHome () {
     this.navCtrl.navigateForward('/home');
+  }
+
+  irListaMuestras () {
+    this.navCtrl.navigateForward('/listasmuestras');
   }
 
   public calcularTolerancia () {    

@@ -47,11 +47,17 @@ export class CalidadcondicionmenuPage implements OnInit {
     this.cargarInformacionInicial();
   }
 
-  cargarInformacionInicial () {
+  cargarInformacionInicial (refresh = false, refresher?) {
 
 
     this.obtenerMuestra(this.muestra_id);
     this.obtenerCalificacionMuestra(this.muestra_id);
+    setTimeout(() => {
+      if (refresher) {
+        refresher.target.complete();
+      }
+    }, 2000);
+
     // Carga la muestra con el id que viene 
 
     //console.log(this.muestra_id);

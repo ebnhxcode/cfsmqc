@@ -10,6 +10,10 @@
 
 <ion-content padding>
 
+  <ion-refresher slot="fixed" (ionRefresh)="cargarInformacionInicial(true, $event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+
   <form 
     *ngIf="muestra"
     [formGroup]="control" 
@@ -375,7 +379,8 @@
 
 
 <ion-footer padding>
-  <ion-button fill="solid" expand="block" color="light" (click)="irHome()">
-    Volver
+  <!--<ion-button fill="solid" expand="block" color="light" (click)="irHome()">-->
+  <ion-button fill="solid" expand="block" color="light" (click)="irListaMuestras()">
+    Volver a muestras
   </ion-button>
 </ion-footer>

@@ -49,6 +49,9 @@ export class OfflineManagerService {
              * Parsea y valida si hay algo para enviar
              */
             let storedObj = JSON.parse(storedOperations);
+
+            console.log('mostrando los objetos de los eventos pendientes');
+            console.log(storedObj);
             if (storedObj && storedObj.length > 0) {
                return this.sendRequest(storedObj).pipe(
                   finalize( () => {

@@ -47,6 +47,21 @@ export class ListasmuestrasPage implements OnInit {
   }
 
 
+  eliminarMuestra (muestra) {
+    this.apiService.eliminarMuestra(muestra).subscribe(res => {
+      this.muestras.splice(this.muestras.indexOf(muestra), 1);
+    });
+  }
+
+
+  anularMuestra (muestra) {
+    this.apiService.anularMuestra(muestra).subscribe(res => {
+      this.muestras.splice(this.muestras.indexOf(muestra), 1);
+    });
+  }
+
+
+
   cargarInformacionInicial (refresh = false, refresher?) {
 
     /*
