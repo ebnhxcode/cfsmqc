@@ -5,6 +5,10 @@ import { NavController, LoadingController, AlertController, NavParams, Platform,
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
 import { Http, Headers, RequestOptions } from '@angular/http';
 
+
+import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
+
+
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
@@ -108,6 +112,12 @@ export class ControlescalidadPage implements OnInit {
   
   loading:any;
 
+  optionsBarcode: BarcodeScannerOptions;
+  encodedText:string='';
+  encodedData:any={};
+  scannedData:any={};
+  scan:any='';
+
   private error_messages = {
     'muestra_qr': [
       { type: 'required', message: 'Codigo QR requerido' },
@@ -179,6 +189,7 @@ export class ControlescalidadPage implements OnInit {
     private activatedRoute: ActivatedRoute,
     private apiService: ApiService,
     private platform: Platform,
+    private barcodeScanner: BarcodeScanner,
     private http: Http
   ){
     const muestra_fecha_por_defecto = new Date().toISOString();
@@ -373,6 +384,28 @@ export class ControlescalidadPage implements OnInit {
     // this.control.calculo_total = (this.control.region_id + this.control.productor_id + this.control.especie_id + this.control.variedad_id ) / 4;
     // console.log(this.control.calculo_total);
 
+  }
+
+  public escanearPallet () {
+
+    this.optionsBarcode = {
+      prompt: 'Porfavor escanee el código QR'
+    }
+
+    this.barcodeScanner.scan(this.optionsBarcode).then((data)=>{
+      
+      this.scannedData = data; //JSON.stringify(data);
+      if (this.scannedData) { //alert(this.scannedData);alert(JSON.stringify(this.scannedData));
+        this.control.controls["lote_codigo"].setValue(this.scannedData.text);
+        this.control.value.lote_codigo = this.scannedData.text;
+
+      }
+      //console.log(this.scannedData);
+      
+    },(err)=>{
+      console.log(err);
+    });
+    
   }
 
   private async presentCargandoControlCalidad () { 

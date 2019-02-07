@@ -429,11 +429,26 @@
         position="stacked">
           Nro Pallet
       </ion-label>
-      <ion-input
-        type="number" 
-        placeholder="Pallet"
-        formControlName="lote_codigo">
-      </ion-input>
+
+
+      <ion-grid style="padding-top: 30%;">
+        <ion-row>
+          <ion-col col-6 col-sm>
+              <ion-button fill="solid" expand="block" color="primary" (click)="escanearPallet()">
+                <ion-icon slot="start" name="qr-scanner"></ion-icon>
+                SCANNEAR PALLET
+              </ion-button>
+          </ion-col>
+          <ion-col col-6 col-sm>
+            <ion-input
+              type="number" 
+              placeholder="Pallet"
+              formControlName="lote_codigo">
+            </ion-input>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+
     </ion-item>
     <ng-container>
       <div *ngFor="let error of error_messages.lote_codigo">
