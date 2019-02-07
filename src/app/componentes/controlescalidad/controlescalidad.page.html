@@ -32,6 +32,16 @@
         formControlName="muestra_qr">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_qr">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_qr').hasError(error.type) 
+            && (control.get('muestra_qr').dirty 
+            || control.get('muestra_qr').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
+
 
     <ion-item>
       <ion-label 
@@ -45,6 +55,15 @@
         formControlName="muestra_fecha">
       </ion-datetime>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_fecha">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_fecha').hasError(error.type) 
+            && (control.get('muestra_fecha').dirty 
+            || control.get('muestra_fecha').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
 
     <ion-item>
@@ -66,6 +85,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.region_id">
+        <ion-item class="error-messages" *ngIf="control.get('region_id').hasError(error.type) 
+            && (control.get('region_id').dirty 
+            || control.get('region_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
 
     <ion-item>
@@ -89,7 +117,15 @@
         </ng-container>
       </ion-select>
     </ion-item>
-
+    <ng-container>
+      <div *ngFor="let error of error_messages.productor_id">
+        <ion-item class="error-messages" *ngIf="control.get('productor_id').hasError(error.type) 
+            && (control.get('productor_id').dirty 
+            || control.get('productor_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -109,7 +145,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-
+    <ng-container>
+      <div *ngFor="let error of error_messages.especie_id">
+        <ion-item class="error-messages" *ngIf="control.get('especie_id').hasError(error.type) 
+            && (control.get('especie_id').dirty 
+            || control.get('especie_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -129,6 +173,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.variedad_id">
+        <ion-item class="error-messages" *ngIf="control.get('variedad_id').hasError(error.type) 
+            && (control.get('variedad_id').dirty 
+            || control.get('variedad_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -149,7 +202,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-
+    <ng-container>
+      <div *ngFor="let error of error_messages.calibre_id">
+        <ion-item class="error-messages" *ngIf="control.get('calibre_id').hasError(error.type) 
+            && (control.get('calibre_id').dirty 
+            || control.get('calibre_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
 
     <ion-list>
@@ -164,7 +225,15 @@
         </ion-item>
       </ion-radio-group>
     </ion-list>
-    
+    <ng-container>
+      <div *ngFor="let error of error_messages.categoria_id">
+        <ion-item class="error-messages" *ngIf="control.get('categoria_id').hasError(error.type) 
+            && (control.get('categoria_id').dirty 
+            || control.get('categoria_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
     <!--
     <ion-item>
       <ion-label position="stacked">Categoría</ion-label>
@@ -204,8 +273,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-
-
+    <ng-container>
+      <div *ngFor="let error of error_messages.embalaje_id">
+        <ion-item class="error-messages" *ngIf="control.get('embalaje_id').hasError(error.type) 
+            && (control.get('embalaje_id').dirty 
+            || control.get('embalaje_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
 
   
@@ -228,7 +304,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-
+    <ng-container>
+      <div *ngFor="let error of error_messages.etiqueta_id">
+        <ion-item class="error-messages" *ngIf="control.get('etiqueta_id').hasError(error.type) 
+            && (control.get('etiqueta_id').dirty 
+            || control.get('etiqueta_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
 
   
@@ -245,6 +329,15 @@
         formControlName="muestra_peso">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_peso">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_peso').hasError(error.type) 
+            && (control.get('muestra_peso').dirty 
+            || control.get('muestra_peso').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -257,6 +350,15 @@
         formControlName="muestra_bolsas">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_bolsas">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_bolsas').hasError(error.type) 
+            && (control.get('muestra_bolsas').dirty 
+            || control.get('muestra_bolsas').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -269,6 +371,15 @@
         formControlName="muestra_racimos">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_racimos">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_racimos').hasError(error.type) 
+            && (control.get('muestra_racimos').dirty 
+            || control.get('muestra_racimos').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -281,6 +392,15 @@
         formControlName="muestra_brix">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_brix">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_brix').hasError(error.type) 
+            && (control.get('muestra_brix').dirty 
+            || control.get('muestra_brix').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
 
     <ion-item>
@@ -294,6 +414,15 @@
         formControlName="muestra_desgrane">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.muestra_desgrane">
+        <ion-item class="error-messages" *ngIf="control.get('muestra_desgrane').hasError(error.type) 
+            && (control.get('muestra_desgrane').dirty 
+            || control.get('muestra_desgrane').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
 
     <ion-item>
       <ion-label 
@@ -306,6 +435,15 @@
         formControlName="lote_codigo">
       </ion-input>
     </ion-item>
+    <ng-container>
+      <div *ngFor="let error of error_messages.lote_codigo">
+        <ion-item class="error-messages" *ngIf="control.get('lote_codigo').hasError(error.type) 
+            && (control.get('lote_codigo').dirty 
+            || control.get('lote_codigo').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
   
     <ion-item>
       <ion-label 
@@ -325,7 +463,15 @@
         </ion-select-option>
       </ion-select>
     </ion-item>
-  
+    <ng-container>
+      <div *ngFor="let error of error_messages.estado_muestra_id">
+        <ion-item class="error-messages" *ngIf="control.get('estado_muestra_id').hasError(error.type) 
+            && (control.get('estado_muestra_id').dirty 
+            || control.get('estado_muestra_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
     
 
     <!--
@@ -360,13 +506,23 @@
         </ion-item>
       </ion-radio-group>
     </ion-list>
-
+    <ng-container>
+      <div *ngFor="let error of error_messages.apariencia_id">
+        <ion-item class="error-messages" *ngIf="control.get('apariencia_id').hasError(error.type) 
+            && (control.get('apariencia_id').dirty 
+            || control.get('apariencia_id').touched)">
+          {{ error.message }}
+        </ion-item>
+      </div>
+    </ng-container>
+    
 
     <ion-button 
       fill="solid" 
       expand="block" 
       color="primary" 
       type="submit" 
+      [disabled]="!control.valid && !muestra.muestra_fecha && !muestra.muestra_qr "
       >
       <!--[disabled]="!control.valid && !muestra.muestra_fecha"-->
       Guardar y Continuar

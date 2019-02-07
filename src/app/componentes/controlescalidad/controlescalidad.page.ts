@@ -252,23 +252,23 @@ export class ControlescalidadPage implements OnInit {
 
         this.control = this.formBuilder.group({
           muestra_qr: new FormControl({value: this.muestra.muestra_qr,disabled:true}, Validators.required),
-          muestra_fecha: new FormControl({value: this.muestra.muestra_fecha,disabled:true}, Validators.required),
-          region_id: new FormControl({value: this.muestra.region_id,disabled:true}, Validators.required),
-          productor_id: new FormControl({value: this.muestra.productor_id,disabled:true}, Validators.required),
-          especie_id: new FormControl({value: this.muestra.especie_id,disabled:true}, Validators.required),
-          variedad_id: new FormControl({value: this.muestra.variedad_id,disabled:true}, Validators.required),
-          calibre_id: new FormControl({value: this.muestra.calibre_id,disabled:true}, Validators.required),
-          categoria_id: new FormControl({value: this.muestra.categoria_id,disabled:true}, Validators.required), 
-          embalaje_id: new FormControl({value: this.muestra.embalaje_id,disabled:true}, Validators.required),
-          etiqueta_id: new FormControl({value: this.muestra.etiqueta_id,disabled:true}, Validators.required),
-          muestra_peso: new FormControl({value: this.muestra.muestra_peso,disabled:true}, Validators.required),
-          muestra_bolsas: new FormControl({value: this.muestra.muestra_bolsas,disabled:true}, Validators.required),
-          muestra_racimos: new FormControl({value: this.muestra.muestra_racimos,disabled:true}, Validators.required),
-          muestra_brix: new FormControl({value: this.muestra.muestra_brix,disabled:true}, Validators.required),
-          muestra_desgrane: new FormControl({value: this.muestra.muestra_desgrane,disabled:true}, Validators.required),
-          lote_codigo: new FormControl({value: this.muestra.lote_codigo,disabled:true}, Validators.required),
-          estado_muestra_id: new FormControl({value: this.muestra.estado_muestra_id,disabled:true}, Validators.required),
-          apariencia_id: new FormControl({value: this.muestra.apariencia_id,disabled:true}, Validators.required)
+          muestra_fecha: new FormControl({value: this.muestra.muestra_fecha,disabled:false}, Validators.required),
+          region_id: new FormControl({value: this.muestra.region_id,disabled:false}, Validators.required),
+          productor_id: new FormControl({value: this.muestra.productor_id,disabled:false}, Validators.required),
+          especie_id: new FormControl({value: this.muestra.especie_id,disabled:false}, Validators.required),
+          variedad_id: new FormControl({value: this.muestra.variedad_id,disabled:false}, Validators.required),
+          calibre_id: new FormControl({value: this.muestra.calibre_id,disabled:false}, Validators.required),
+          categoria_id: new FormControl({value: this.muestra.categoria_id,disabled:false}, Validators.required), 
+          embalaje_id: new FormControl({value: this.muestra.embalaje_id,disabled:false}, Validators.required),
+          etiqueta_id: new FormControl({value: this.muestra.etiqueta_id,disabled:false}, Validators.required),
+          muestra_peso: new FormControl({value: this.muestra.muestra_peso,disabled:false}, Validators.required),
+          muestra_bolsas: new FormControl({value: this.muestra.muestra_bolsas,disabled:false}, Validators.required),
+          muestra_racimos: new FormControl({value: this.muestra.muestra_racimos,disabled:false}, Validators.required),
+          muestra_brix: new FormControl({value: this.muestra.muestra_brix,disabled:false}, Validators.required),
+          muestra_desgrane: new FormControl({value: this.muestra.muestra_desgrane,disabled:false}, Validators.required),
+          lote_codigo: new FormControl({value: this.muestra.lote_codigo,disabled:false}, Validators.required),
+          estado_muestra_id: new FormControl({value: this.muestra.estado_muestra_id,disabled:false}, Validators.required),
+          apariencia_id: new FormControl({value: this.muestra.apariencia_id,disabled:false}, Validators.required)
           //calculo_total: [null, Validators.required]
         });
 
