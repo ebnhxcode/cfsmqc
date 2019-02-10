@@ -12,8 +12,8 @@ import { HttpClient } from '@angular/common/http';
 
 
 // API REST.
-import { cfsmBackendConfig } from '../../../../servicios/apirest/cfsm-backend-config';
-import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-config';
+import { cfsmBackendConfig } from '../../../../../../../../servicios/apirest/cfsm-backend-config';
+import { authBasicConfig } from '../../../../../../../../servicios/authbasic/auth-basic-config';
 
 
 @Component({

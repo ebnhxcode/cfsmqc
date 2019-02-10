@@ -8,8 +8,8 @@ import { ModalformulariocalidadcondicionPage } from './modals/modalformulariocal
 import { ActivatedRoute } from '@angular/router';
 
   // API REST.
-  import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
-  import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
+  import { cfsmBackendConfig } from '../../../../../servicios/apirest/cfsm-backend-config';
+  import { authBasicConfig } from '../../../../../servicios/authbasic/auth-basic-config';
 
 @Component({
   selector: 'app-calidadcondicion',

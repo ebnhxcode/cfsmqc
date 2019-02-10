@@ -64,6 +64,8 @@ export class HomePage {
       
       this.scannedData = data; //JSON.stringify(data);
       if (this.scannedData) { //alert(this.scannedData);alert(JSON.stringify(this.scannedData));
+        this.router.navigate(['ingresarqr', this.scannedData.text]);
+        return;
         this.navCtrl.navigateForward(`/controlescalidad/${this.scannedData.text}`);
       }
       //console.log(this.scannedData);

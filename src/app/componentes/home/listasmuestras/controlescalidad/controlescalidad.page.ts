@@ -14,10 +14,10 @@ import { HttpClient } from '@angular/common/http';
 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
-import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
+import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-config';
 import { ActivatedRoute } from '@angular/router';
 
-import { ApiService } from '../../services/api/api.service';
+import { ApiService } from '../../../../services/api/api.service';
 
 const DEBUG = true;
 

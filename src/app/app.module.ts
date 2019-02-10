@@ -18,9 +18,9 @@ import { authPassportConfig } from './servicios/authbasic/auth-passport-config';
 import { AngularFireModule } from '@angular/fire';
 import { AngularFireAuthModule } from '@angular/fire/auth';
 import { HttpModule } from '@angular/http';
-import { ModalformulariocalidadPageModule } from './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module';
-import { ModalformulariocondicionPageModule } from './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module';
-import { ModalformulariocalidadcondicionPageModule } from './componentes/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module';
+import { ModalformulariocalidadPageModule } from './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module';
+import { ModalformulariocondicionPageModule } from './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module';
+import { ModalformulariocalidadcondicionPageModule } from './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module';
 
 // QR/BAR Scanner libs
 import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
@@ -48,7 +48,7 @@ import { IonicStorageModule } from '@ionic/storage';
     }),
     
     HttpClientModule,
-    IonicStorageModule.forRoot(),
+    IonicStorageModule.forRoot(), /** funciones con sqlite */
 
     AppRoutingModule,
     AngularFireModule.initializeApp(firebaseConfig.firebase),

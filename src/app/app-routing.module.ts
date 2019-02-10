@@ -1,34 +1,112 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { AuthGuardService } from './services/authentication/auth-guard.service';
 
 const routes: Routes = [
+  /**
+   * Default route redirect
+   */
   {
     path: '',
     redirectTo: 'login',
     pathMatch: 'full'
   },
-  { path: 'login', loadChildren: './componentes/login/login.module#LoginPageModule' },
-  { path: 'mantenedor', loadChildren: './componentes/mantenedor/mantenedor.module#MantenedorPageModule' },
-  { path: 'login', loadChildren: './componentes/login/login.module#LoginPageModule' },
-  { path: 'home', loadChildren: './componentes/home/home.module#HomePageModule' },
-  { path: 'home/:?scan', loadChildren: './componentes/home/home.module#HomePageModule' },
-  { path: 'autoayuda', loadChildren: './componentes/autoayuda/autoayuda.module#AutoayudaPageModule' },
-  { path: 'reportes', loadChildren: './componentes/reportes/reportes.module#ReportesPageModule' },
-  { path: 'controlescalidad/:muestra_qr', loadChildren: './componentes/controlescalidad/controlescalidad.module#ControlescalidadPageModule' },
-  { path: 'opciones', loadChildren: './componentes/opciones/opciones.module#OpcionesPageModule' },
-  { path: 'registro', loadChildren: './componentes/registro/registro.module#RegistroPageModule' },
-  { path: 'calidadcondicionmenu/:muestra_id', loadChildren: './componentes/calidadcondicionmenu/calidadcondicionmenu.module#CalidadcondicionmenuPageModule' },
-  { path: 'listasmuestras', loadChildren: './componentes/listasmuestras/listasmuestras.module#ListasmuestrasPageModule' },
-  { path: 'ingresarqr', loadChildren: './componentes/ingresarqr/ingresarqr.module#IngresarqrPageModule' },
-  { path: 'calculocalidad/:muestra_id', loadChildren: './componentes/calculocalidad/calculocalidad.module#CalculocalidadPageModule' },
-  { path: 'calculocondicion/:muestra_id', loadChildren: './componentes/calculocondicion/calculocondicion.module#CalculocondicionPageModule' },
+
+  /**
+   * Public routes, for login and register
+   */
+  { 
+    path: 'login', 
+    loadChildren: './public/login/login.module#LoginPageModule' 
+  },
+  { 
+    path: 'registro',
+    loadChildren: './public/registro/registro.module#RegistroPageModule' 
+  },
+
+  /**
+   * Prueba para el login con ionic
+   */
+  {
+    path: 'members',
+    //canActivate: [AuthGuardService],
+    loadChildren: './members/member-routing.module#MemberRoutingModule'
+  },
 
 
 
-  /* Paths modals */
-  { path: 'modalformulariocalidad', loadChildren: './componentes/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module#ModalformulariocalidadPageModule' },
-  { path: 'modalformulariocondicion', loadChildren: './componentes/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module#ModalformulariocondicionPageModule' },
-  { path: 'modalformulariocalidadcondicion', loadChildren: './componentes/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module#ModalformulariocalidadcondicionPageModule' },
+  /**
+   * Authenticated user|member routes for root or main routes
+   */
+  { 
+    path: 'mantenedor', 
+    loadChildren: './componentes/mantenedor/mantenedor.module#MantenedorPageModule' 
+  },
+  { 
+    path: 'home',
+    loadChildren: './componentes/home/home.module#HomePageModule' 
+  },
+  { 
+    path: 'home/:?scan',
+    loadChildren: './componentes/home/home.module#HomePageModule' 
+  },
+  { 
+    path: 'autoayuda',
+    loadChildren: './componentes/autoayuda/autoayuda.module#AutoayudaPageModule' 
+  },
+  { 
+    path: 'reportes',
+    loadChildren: './componentes/reportes/reportes.module#ReportesPageModule' 
+  },
+  { 
+    path: 'opciones',
+    loadChildren: './componentes/opciones/opciones.module#OpcionesPageModule' 
+  },
+
+
+
+  /**
+  * Specific routes for module system based, in this case QC of proof
+  */
+  { 
+    path: 'ingresarqr',
+    loadChildren: './componentes/home/ingresarqr/ingresarqr.module#IngresarqrPageModule' 
+  },
+  { 
+    path: 'listasmuestras',
+    loadChildren: './componentes/home/listasmuestras/listasmuestras.module#ListasmuestrasPageModule' 
+  },
+  { 
+    path: 'controlescalidad/:muestra_qr',
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/controlescalidad.module#ControlescalidadPageModule' 
+  },
+  { 
+    path: 'calidadcondicionmenu/:muestra_id',
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calidadcondicionmenu.module#CalidadcondicionmenuPageModule' 
+  },
+  { 
+    path: 'modalformulariocalidadcondicion', 
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module#ModalformulariocalidadcondicionPageModule' 
+  },
+
+  { 
+    path: 'calculocalidad/:muestra_id',
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/calculocalidad.module#CalculocalidadPageModule' 
+  },
+  { 
+    path: 'modalformulariocalidad', 
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module#ModalformulariocalidadPageModule' 
+  },
+  { 
+    path: 'calculocondicion/:muestra_id',
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/calculocondicion.module#CalculocondicionPageModule' 
+  },
+  { 
+    path: 'modalformulariocondicion', 
+    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module#ModalformulariocondicionPageModule' 
+  },
+
+  
 ];
 
 @NgModule({

@@ -1,32 +1,36 @@
 import { Component, OnInit } from '@angular/core';
-
 import { NavController, LoadingController, AlertController, ModalController, NavParams } from "@ionic/angular";
 
 import { Http, Headers, RequestOptions } from '@angular/http';
 
-import { ModalformulariocondicionPage } from './modals/modalformulariocondicion/modalformulariocondicion.page';
+import { ModalformulariocalidadPage } from './modals/modalformulariocalidad/modalformulariocalidad.page';
 import { ActivatedRoute } from '@angular/router';
 
+
+
   // API REST.
-  import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
-  import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
+  import { cfsmBackendConfig } from '../../../../../../servicios/apirest/cfsm-backend-config';
+  import { authBasicConfig } from '../../../../../../servicios/authbasic/auth-basic-config';
 
 @Component({
-  selector: 'app-calculocondicion',
-  templateUrl: './calculocondicion.page.html',
-  styleUrls: ['./calculocondicion.page.scss'],
+  selector: 'app-calculocalidad',
+  templateUrl: './calculocalidad.page.html',
+  styleUrls: ['./calculocalidad.page.scss'],
 })
-export class CalculocondicionPage implements OnInit {
+export class CalculocalidadPage implements OnInit {
 
-  url_base = authBasicConfig.url_base_qa;
-  headers = new Headers(authBasicConfig.headers);
-  options = new RequestOptions({ headers: this.headers });
+
+url_base = authBasicConfig.url_base_qa;
+headers = new Headers(authBasicConfig.headers);
+options = new RequestOptions({ headers: this.headers });
 
   defectos = [
   ];
 
   muestra_id:any='';
   muestra:any={};
+
+
 
   constructor(
     public navCtrl: NavController,
@@ -35,9 +39,10 @@ export class CalculocondicionPage implements OnInit {
     public modalCtrl: ModalController,
     public activatedRoute: ActivatedRoute,
     public http: Http
-  ) { 
+  ) {
     this.muestra_id = this.activatedRoute.snapshot.paramMap.get('muestra_id');
   }
+
 
   ngOnInit() {
     this.cargarInformacionInicial();
@@ -81,16 +86,18 @@ export class CalculocondicionPage implements OnInit {
 
   }
 
-  irCalidadCondicionMenu () {
+  irCalidadCondicionMenu (muestra_id) {
     this.navCtrl.navigateForward(`/calidadcondicionmenu/${this.muestra_id}`);
   }
+
   irHome () {
     this.navCtrl.navigateForward('/home'); 
   }
 
-  async abrirModalFormularioCondicion () {
+
+  async abrirModalFormularioCalidad () {
     const modal = await this.modalCtrl.create({
-      component: ModalformulariocondicionPage
+      component: ModalformulariocalidadPage
     });
     modal.present();
   }

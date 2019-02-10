@@ -24,9 +24,9 @@ import { HttpClient } from '@angular/common/http';
 
 // API REST.
 //import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
-import { authPassportConfig } from '../../servicios/authbasic/auth-passport-config';
+import { authPassportConfig } from '../../../servicios/authbasic/auth-passport-config';
 
-import { ApiService } from '../../services/api/api.service';
+import { ApiService } from '../../../services/api/api.service';
 
 @Component({
   selector: 'app-listasmuestras',
