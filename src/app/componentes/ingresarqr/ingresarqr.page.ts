@@ -14,6 +14,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // API REST.
 import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ingresarqr',
@@ -33,6 +34,7 @@ export class IngresarqrPage implements OnInit {
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,
+    private router: Router,
     public http: Http
   ) { 
     this.nueva_muestra = this.formBuilder.group({
@@ -73,7 +75,10 @@ export class IngresarqrPage implements OnInit {
           //console.log(res.json().muestra);
           const muestra = res.json().muestra;
           //console.log(muestra);
-          this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
+
+          this.router.navigate(['controlescalidad', muestra.muestra_qr]);
+
+          //this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
 
 
         },

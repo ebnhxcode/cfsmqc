@@ -1,10 +1,17 @@
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
-import { NavController, LoadingController, NavParams, MenuController } from "@ionic/angular";
+import { NavController, MenuController } from "@ionic/angular";
 
+/**
+ * Modulos de uso de scanner QR y Barra
+ */
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
-import { ActivatedRoute } from '@angular/router';
+/**
+ * Router
+ */
+import { Router, ActivatedRoute } from '@angular/router';
+
+
 
 
 @Component({
@@ -70,6 +77,14 @@ export class HomePage {
   }
 
   ingresarQRMuestra () { // encode
+
+
+    this.router.navigate(['ingresarqr']);
+
+
+    return;
+
+    
     this.navCtrl.navigateForward('/ingresarqr');
     
     return;
@@ -88,6 +103,9 @@ export class HomePage {
    * Funciones del submenú
    */
   irListadosMuestras () {
+
+    this.router.navigate(['listasmuestras']);
+    return;
     this.navCtrl.navigateForward('/listasmuestras');
   }
 
