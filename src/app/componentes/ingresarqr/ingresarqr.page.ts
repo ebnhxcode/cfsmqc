@@ -1,18 +1,27 @@
 import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController, NavParams } from "@ionic/angular";
+import { 
+  //NavController, 
+  LoadingController, 
+  AlertController, 
+  //NavParams 
+} from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { 
+  Http, 
+  Headers, 
+  RequestOptions 
+} from '@angular/http';
 
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+//import { Injectable } from '@angular/core';
+//import { HttpClient } from '@angular/common/http';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 
 // API REST.
-import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
+//import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authBasicConfig } from '../../servicios/authbasic/auth-basic-config';
 import { Router } from '@angular/router';
 
@@ -30,7 +39,7 @@ export class IngresarqrPage implements OnInit {
   nueva_muestra:FormGroup;
 
   constructor(
-    public navCtrl: NavController,
+    //public navCtrl: NavController,
     public alertCtrl: AlertController, 
     public loadingCtrl: LoadingController,
     public formBuilder: FormBuilder,

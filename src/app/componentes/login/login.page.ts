@@ -5,7 +5,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LaravelPassportService } from 'laravel-passport';
 
-import { NavController, LoadingController, NavParams, AlertController, ToastController, MenuController, Platform } from "@ionic/angular";
+import { NavController, 
+  LoadingController, 
+  //NavParams, 
+  //AlertController, 
+  ToastController, 
+  MenuController, 
+  //Platform 
+} from "@ionic/angular";
 
 import { Router } from '@angular/router';
 
@@ -20,8 +27,8 @@ export class LoginPage implements OnInit {
 
   private credenciales:FormGroup;
   private loading:any;
-  private toast:any;
-  private alert:any;
+  //private toast:any;
+  //private alert:any;
 
   private error_messages = {
     'email': [
@@ -44,12 +51,12 @@ export class LoginPage implements OnInit {
     private formBuilder: FormBuilder,
     private laravelPassportService: LaravelPassportService,
     private loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    //private alertCtrl: AlertController,
     private toastCtrl: ToastController,
-    private navCtrl: NavController,
+    //private navCtrl: NavController,
     private menuCtrl: MenuController,
     private apiService: ApiService,
-    private platform: Platform,
+    //private platform: Platform,
     private router: Router
   ){
     //this.menuCtrl.enable(false, 'MenuCfsmqc');
@@ -234,7 +241,7 @@ export class LoginPage implements OnInit {
   }
 
   public irRegistrar () {
-    this.navCtrl.navigateForward('/registro');
+    //this.navCtrl.navigateForward('/registro');
   }
 
   public resetearClave () {

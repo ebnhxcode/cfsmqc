@@ -92,6 +92,19 @@ export class ApiService {
     }
   }
 
+  consultarMuestras (forceRefresh): Observable<any> {
+    if ( DEBUG && !forceRefresh ) {
+      let toast = this.toastCtrl.create({
+        message: 'Consultando muestras desde dispositivo',
+        duration :2000,
+        position: 'middle'
+      });
+      toast.then(toast => toast.present());
+      //console.log(`Datos obtenidos desde la base de datos local:`);
+    }
+    return from(this.getLocalData('muestras'));
+  }
+
   obtenerMuestras (forceRefresh: boolean = false): Observable<any> {
 
     /*

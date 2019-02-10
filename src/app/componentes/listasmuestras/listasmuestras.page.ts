@@ -1,8 +1,21 @@
-import { Component, OnInit } from '@angular/core';
-import { NavController, LoadingController, AlertController, NavParams, Platform } from "@ionic/angular";
+import { 
+  Component, 
+  OnInit 
+} from '@angular/core';
+import { 
+  NavController, 
+  LoadingController, 
+  AlertController, 
+  //NavParams, 
+  Platform 
+} from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { 
+  //Http, 
+  Headers, 
+  RequestOptions 
+} from '@angular/http';
 
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -10,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
 
 
 // API REST.
-import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
+//import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authPassportConfig } from '../../servicios/authbasic/auth-passport-config';
 
 import { ApiService } from '../../services/api/api.service';
@@ -32,33 +45,21 @@ export class ListasmuestrasPage implements OnInit {
 
   constructor(
     private navCtrl: NavController,
-    private alertCtrl: AlertController, 
+    //private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
     private apiService: ApiService,
     private platform: Platform,
-    private http: Http
+    //private http: Http
   ) { }
 
   ngOnInit() {
     this.platform.ready().then( () => {
-      this.cargarInformacionInicial(true);
-    });
-    
-  }
-
-
-  eliminarMuestra (muestra) {
-    this.apiService.eliminarMuestra(muestra).subscribe(res => {
-      this.muestras.splice(this.muestras.indexOf(muestra), 1);
+      this.cargarInformacionInicial(false);
     });
   }
 
 
-  anularMuestra (muestra) {
-    this.apiService.anularMuestra(muestra).subscribe(res => {
-      this.muestras.splice(this.muestras.indexOf(muestra), 1);
-    });
-  }
+
 
 
 
@@ -77,11 +78,20 @@ export class ListasmuestrasPage implements OnInit {
 
     /* NUEVO */
       this.presentCargandoMuestras();
-      this.apiService.obtenerMuestras(refresh).subscribe(res => {
-        this.loading.dismiss();
-        this.muestras = res;
-        if (refresher) {
-          refresher.target.complete();
+
+      this.apiService.consultarMuestras(refresh).subscribe(res => {
+        
+        if (res.length > 0 && refresh == false) {
+          this.loading.dismiss();
+          this.muestras = res;
+        } else {
+          this.apiService.obtenerMuestras(refresh).subscribe(res => {
+            this.loading.dismiss();
+            this.muestras = res;
+            if (refresher) {
+              refresher.target.complete();
+            }
+          });
         }
       });
 
@@ -112,6 +122,19 @@ export class ListasmuestrasPage implements OnInit {
     
   }
 
+
+  eliminarMuestra (muestra) {
+    this.apiService.eliminarMuestra(muestra).subscribe(res => {
+      this.muestras.splice(this.muestras.indexOf(muestra), 1);
+    });
+  }
+
+
+  anularMuestra (muestra) {
+    this.apiService.anularMuestra(muestra).subscribe(res => {
+      this.muestras.splice(this.muestras.indexOf(muestra), 1);
+    });
+  }
 
 
   irHome () {
