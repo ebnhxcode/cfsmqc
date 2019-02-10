@@ -5,7 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { LaravelPassportService } from 'laravel-passport';
 
-import { NavController, 
+import { 
+  //NavController, 
   LoadingController, 
   //NavParams, 
   //AlertController, 
@@ -17,6 +18,7 @@ import { NavController,
 import { Router } from '@angular/router';
 
 import { ApiService } from '../../services/api/api.service';
+import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -56,6 +58,7 @@ export class LoginPage implements OnInit {
     //private navCtrl: NavController,
     private menuCtrl: MenuController,
     private apiService: ApiService,
+    private authService: AuthenticationService,
     //private platform: Platform,
     private router: Router
   ){
@@ -142,7 +145,8 @@ export class LoginPage implements OnInit {
           this.loading.dismiss();
           localStorage.setItem('tokens', JSON.stringify(res));
           localStorage.setItem('credencialesUsuario', JSON.stringify(credencialesUsuario)); // Para la autenticacion cuando recupere la conexion
-          this.router.navigate(['home']);
+          this.authService.login();
+          //this.router.navigate(['home']);
         },
         err => { console.log(err); },
         ()=>{}
@@ -171,7 +175,8 @@ export class LoginPage implements OnInit {
               this.loading.dismiss();
               localStorage.setItem('tokens', JSON.stringify(res));
               localStorage.setItem('credencialesUsuario', JSON.stringify(credenciales)); // Para la autenticacion cuando recupere la conexion
-              this.router.navigate(['home']);
+              this.authService.login();
+              //this.router.navigate(['home']);
               //this.headers.append('Authorization', 'Basic ' + info.token);
               //this.http.post(`${this.url_base}/datosUsuario`, credenciales, this.options).subscribe( data => { console.log(data); } );
               
