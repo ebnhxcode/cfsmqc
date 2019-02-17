@@ -64,9 +64,12 @@ export class HomePage {
       
       this.scannedData = data; //JSON.stringify(data);
       if (this.scannedData) { //alert(this.scannedData);alert(JSON.stringify(this.scannedData));
-        this.router.navigate(['ingresarqr', this.scannedData.text]);
+
+        this.router.navigate(['members', 'ingresarqr', this.scannedData.text]);
+        /*
         return;
         this.navCtrl.navigateForward(`/controlescalidad/${this.scannedData.text}`);
+        */
       }
       //console.log(this.scannedData);
       
@@ -81,12 +84,12 @@ export class HomePage {
   ingresarQRMuestra () { // encode
 
 
-    this.router.navigate(['ingresarqr']);
+    this.router.navigate(['members', 'ingresarqr']);
 
 
+    /*
     return;
 
-    
     this.navCtrl.navigateForward('/ingresarqr');
     
     return;
@@ -95,6 +98,7 @@ export class HomePage {
     },(err)=>{
       console.log(err);
     });
+    */
 
     
   }
@@ -106,9 +110,12 @@ export class HomePage {
    */
   irListadosMuestras () {
 
-    this.router.navigate(['listasmuestras']);
+    this.router.navigate(['members', 'listasmuestras']);
+
+    /*
     return;
     this.navCtrl.navigateForward('/listasmuestras');
+    */
   }
 
 

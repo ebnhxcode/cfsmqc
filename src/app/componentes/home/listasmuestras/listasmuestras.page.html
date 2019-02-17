@@ -9,9 +9,17 @@
 
 <ion-content padding>
 
+  <!--
+  <ion-searchbar (ionInput)="filtrarMuestras($event)" [(ngModel)]="textoBusqueda" placeholder="Filtrar"></ion-searchbar>
+  -->
+  <div class="titulo" margin-top margin-bottom *ngIf="muestras">
+    <span> Total -&nbsp;<small>{{ muestras.length }} muestras</small></span>
+  </div>
+
   <ion-refresher slot="fixed" (ionRefresh)="cargarInformacionInicial(true, $event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
+  
 
   <!-- {{ muestras | json }} -->
 
@@ -74,8 +82,11 @@
 
 </ion-content>
 
+
+<!--
 <ion-footer padding>
   <ion-button fill="solid" expand="block" color="light" (click)="irHome()">
     Volver al inicio
   </ion-button>
 </ion-footer>
+-->

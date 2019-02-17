@@ -196,7 +196,7 @@ export class LoginPage implements OnInit {
             });
             toast.then( toast => toast.present());
             // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
-            this.router.navigate(['home']);
+            this.router.navigate(['members', 'home']);
         }
 
       } else {

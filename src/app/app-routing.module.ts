@@ -29,7 +29,7 @@ const routes: Routes = [
    */
   {
     path: 'members', /** Las rutas deben pasar por este path para checkear sesion propia de la app */
-    canActivate: [AuthGuardService], /** Middleware */
+    //canActivate: [AuthGuardService], /** Middleware => que es un servicio que se inyecta y se antepone como barrera */
     loadChildren: './members/member-routing.module#MemberRoutingModule' /** Path del enrutador con sesion */
   },
 

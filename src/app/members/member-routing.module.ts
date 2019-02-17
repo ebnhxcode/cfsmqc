@@ -18,23 +18,23 @@ const routes: Routes = [
   },
   { 
     path: 'home',
-    loadChildren: './componentes/home/home.module#HomePageModule' 
+    loadChildren: '../componentes/home/home.module#HomePageModule' 
   },
   { 
     path: 'home/:?scan',
-    loadChildren: './componentes/home/home.module#HomePageModule' 
+    loadChildren: '../componentes/home/home.module#HomePageModule' 
   },
   { 
     path: 'autoayuda',
-    loadChildren: './componentes/autoayuda/autoayuda.module#AutoayudaPageModule' 
+    loadChildren: '../componentes/autoayuda/autoayuda.module#AutoayudaPageModule' 
   },
   { 
     path: 'reportes',
-    loadChildren: './componentes/reportes/reportes.module#ReportesPageModule' 
+    loadChildren: '../componentes/reportes/reportes.module#ReportesPageModule' 
   },
   { 
     path: 'opciones',
-    loadChildren: './componentes/opciones/opciones.module#OpcionesPageModule' 
+    loadChildren: '../componentes/opciones/opciones.module#OpcionesPageModule' 
   },
 
 
@@ -44,40 +44,40 @@ const routes: Routes = [
   */
   { 
     path: 'ingresarqr',
-    loadChildren: './componentes/home/ingresarqr/ingresarqr.module#IngresarqrPageModule' 
+    loadChildren: '../componentes/home/ingresarqr/ingresarqr.module#IngresarqrPageModule' 
   },
   { 
     path: 'listasmuestras',
-    loadChildren: './componentes/home/listasmuestras/listasmuestras.module#ListasmuestrasPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/listasmuestras.module#ListasmuestrasPageModule' 
   },
   { 
     path: 'controlescalidad/:muestra_qr',
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/controlescalidad.module#ControlescalidadPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/controlescalidad.module#ControlescalidadPageModule' 
   },
   { 
     path: 'calidadcondicionmenu/:muestra_id',
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calidadcondicionmenu.module#CalidadcondicionmenuPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calidadcondicionmenu.module#CalidadcondicionmenuPageModule' 
   },
   { 
     path: 'modalformulariocalidadcondicion', 
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module#ModalformulariocalidadcondicionPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.module#ModalformulariocalidadcondicionPageModule' 
   },
 
   { 
     path: 'calculocalidad/:muestra_id',
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/calculocalidad.module#CalculocalidadPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/calculocalidad.module#CalculocalidadPageModule' 
   },
   { 
     path: 'modalformulariocalidad', 
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module#ModalformulariocalidadPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocalidad/modals/modalformulariocalidad/modalformulariocalidad.module#ModalformulariocalidadPageModule' 
   },
   { 
     path: 'calculocondicion/:muestra_id',
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/calculocondicion.module#CalculocondicionPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/calculocondicion.module#CalculocondicionPageModule' 
   },
   { 
     path: 'modalformulariocondicion', 
-    loadChildren: './componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module#ModalformulariocondicionPageModule' 
+    loadChildren: '../componentes/home/listasmuestras/controlescalidad/calidadcondicionmenu/calculocondicion/modals/modalformulariocondicion/modalformulariocondicion.module#ModalformulariocondicionPageModule' 
   },
 
   

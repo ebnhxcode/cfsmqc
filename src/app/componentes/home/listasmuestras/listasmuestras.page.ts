@@ -3,9 +3,9 @@ import {
   OnInit 
 } from '@angular/core';
 import { 
-  NavController, 
+  //NavController, 
   LoadingController, 
-  AlertController, 
+  //AlertController, 
   //NavParams, 
   Platform 
 } from "@ionic/angular";
@@ -17,8 +17,8 @@ import {
   RequestOptions 
 } from '@angular/http';
 
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+//import { Injectable } from '@angular/core';
+//import { HttpClient } from '@angular/common/http';
 
 
 
@@ -27,6 +27,7 @@ import { HttpClient } from '@angular/common/http';
 import { authPassportConfig } from '../../../servicios/authbasic/auth-passport-config';
 
 import { ApiService } from '../../../services/api/api.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-listasmuestras',
@@ -41,14 +42,17 @@ export class ListasmuestrasPage implements OnInit {
 
   private loading:any;
   muestras: any[];
+  textoBusqueda: any;
+  buscando: boolean;
 
 
   constructor(
-    private navCtrl: NavController,
+    //private navCtrl: NavController,
     //private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
     private apiService: ApiService,
     private platform: Platform,
+    private router: Router
     //private http: Http
   ) { }
 
@@ -77,11 +81,9 @@ export class ListasmuestrasPage implements OnInit {
 
 
     /* NUEVO */
-      this.presentCargandoMuestras();
-
+    this.presentCargandoMuestras().then( () => {
       this.apiService.consultarMuestras(refresh).subscribe(res => {
-        
-        if (res.length > 0 && refresh == false) {
+        if (res && res.length > 0 && refresh == false) {
           this.loading.dismiss();
           this.muestras = res;
         } else {
@@ -94,6 +96,9 @@ export class ListasmuestrasPage implements OnInit {
           });
         }
       });
+    });
+
+
 
     /* /NUEVO */
 
@@ -123,6 +128,25 @@ export class ListasmuestrasPage implements OnInit {
   }
 
 
+
+
+  filtrarMuestras(ev: any):void{
+    this.buscando = true;
+    setTimeout(()=>{
+      //console.log(ev.target.value);
+      //this.muestras = [];
+      //this.cargarInformacionInicial(false);
+      this.muestras = this.muestras.filter((muestra) => {
+        return (
+          muestra.muestra_nombre.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1 ||
+          muestra.apariencia.apariencia_nombre.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1 ||
+          muestra.muestra_qr.toLowerCase().indexOf(ev.target.value.toLowerCase()) > -1
+        );
+      });
+      this.buscando = false;
+    },2500);
+  }
+
   eliminarMuestra (muestra) {
     this.apiService.eliminarMuestra(muestra).subscribe(res => {
       this.muestras.splice(this.muestras.indexOf(muestra), 1);
@@ -138,7 +162,10 @@ export class ListasmuestrasPage implements OnInit {
 
 
   irHome () {
+    this.router.navigate(['members', 'home']);
+    /*
     this.navCtrl.navigateForward('/home');
+    */
     
   }
 
@@ -146,7 +173,11 @@ export class ListasmuestrasPage implements OnInit {
     /**
      * Le mando el QR por que aprobecho de usar esa misma opcion cuando se escanea la muestra
      */
+    this.router.navigate(['members', `/controlescalidad/${muestra.muestra_qr}`]);
+    /*
     this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
+    */
+    
   }
 
   private async presentCargandoMuestras () { 
