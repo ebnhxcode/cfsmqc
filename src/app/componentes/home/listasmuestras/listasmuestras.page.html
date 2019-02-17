@@ -12,8 +12,14 @@
   <!--
   <ion-searchbar (ionInput)="filtrarMuestras($event)" [(ngModel)]="textoBusqueda" placeholder="Filtrar"></ion-searchbar>
   -->
-  <div class="titulo" margin-top margin-bottom *ngIf="muestras">
-    <span> Total -&nbsp;<small>{{ muestras.length }} muestras</small></span>
+  <div class="titulo" margin-top margin-bottom text-center>
+    <ng-container *ngIf="buscando">
+      <small style="font-size: 0.55em;">Desliza hacia abajo para cargar más muestras</small>
+    </ng-container>
+    <hr>
+    <ng-container *ngIf="muestras">
+      Total -&nbsp;{{ muestras.length }} muestras
+    </ng-container>
   </div>
 
   <ion-refresher slot="fixed" (ionRefresh)="cargarInformacionInicial(true, $event)">
@@ -22,8 +28,6 @@
   
 
   <!-- {{ muestras | json }} -->
-
-
   <ion-list>
     <ng-container *ngFor="let muestra of muestras">
       <ion-item-sliding>
@@ -61,10 +65,12 @@
           </ion-label>
         </ion-item>
   
+        <!--
         <ion-item-options side="start">
-          <ion-item-option color="danger">Eliminar</ion-item-option><!--(click)="eliminarMuestra(muestra)"-->
-          <ion-item-option color="info">Anular</ion-item-option><!--(click)="anularMuestra(muestra)"-->
+          <ion-item-option color="danger" (click)="eliminarMuestra(muestra)">Eliminar</ion-item-option>
+          <ion-item-option color="info" (click)="anularMuestra(muestra)">Anular</ion-item-option>
         </ion-item-options>
+        -->
     
         <ion-item-options side="end">
           <ion-item-option (click)="irEditarMuestra(muestra)">Editar</ion-item-option>

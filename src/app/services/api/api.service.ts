@@ -147,7 +147,7 @@ export class ApiService {
               position: 'bottom'
             });
             toast.then(toast => toast.present());
-            console.log(`Datos obtenidos desde la base de datos externa:`);
+            //console.log(`Datos obtenidos desde la base de datos externa:`);
             //console.log(res);
           }
 

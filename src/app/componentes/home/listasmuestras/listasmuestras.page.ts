@@ -44,6 +44,7 @@ export class ListasmuestrasPage implements OnInit {
   muestras: any[];
   textoBusqueda: any;
   buscando: boolean;
+  esPrimeraCarga: boolean=true;
 
 
   constructor(
@@ -70,6 +71,7 @@ export class ListasmuestrasPage implements OnInit {
   cargarInformacionInicial (refresh = false, refresher?) {
 
     /*
+    // Sirve para cuando se intenta autenticar y se necesita enviar el token
     const tokens = JSON.parse(localStorage.getItem('tokens'))
 
     this.headers.append('Authorization', `${tokens.token_type} ${tokens.access_token}`);
@@ -79,24 +81,47 @@ export class ListasmuestrasPage implements OnInit {
 
     //console.log(this.options);
 
+    this.esPrimeraCarga = (
+      JSON.parse(localStorage.getItem('esPrimeraCarga')) === null
+      || JSON.parse(localStorage.getItem('esPrimeraCarga')) === 'true'
+    ) ? true:false;
+    
 
     /* NUEVO */
+    // Muestra el loader
     this.presentCargandoMuestras().then( () => {
+
+      if (this.esPrimeraCarga) {
+        this.loading.dismiss();
+        localStorage.setItem('esPrimeraCarga', JSON.stringify('false'));
+        return this.cargarInformacionInicial(true);
+      }
+
+      
+      // Solicita muestras al servicio para que internamente lo resuelva
       this.apiService.consultarMuestras(refresh).subscribe(res => {
-        if (res && res.length > 0 && refresh == false) {
-          this.loading.dismiss();
-          this.muestras = res;
-        } else {
-          this.apiService.obtenerMuestras(refresh).subscribe(res => {
+        // Valida si vienen datos y si variable refresh es falso para obtener 
+        // las muestras que estaban suscritas a espera de carga con el servicio de la api
+
+          if (res && res.length > 0 && refresh == false) {
+            console.log('Habian datos en local, cargando esos datos');
             this.loading.dismiss();
             this.muestras = res;
-            if (refresher) {
-              refresher.target.complete();
-            }
-          });
-        }
+          } else {
+            this.apiService.obtenerMuestras(refresh).subscribe(res => {  
+              this.loading.dismiss();
+              this.muestras = res;
+              if (refresher) {
+                refresher.target.complete();
+              }
+            });
+          }
+
       });
     });
+
+
+
 
 
 
