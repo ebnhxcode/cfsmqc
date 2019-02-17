@@ -14,7 +14,7 @@ const routes: Routes = [
    */
   { 
     path: 'mantenedor', 
-    loadChildren: './componentes/mantenedor/mantenedor.module#MantenedorPageModule' 
+    loadChildren: '../componentes/mantenedor/mantenedor.module#MantenedorPageModule' 
   },
   { 
     path: 'home',
