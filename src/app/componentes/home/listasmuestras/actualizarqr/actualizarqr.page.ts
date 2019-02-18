@@ -6,15 +6,11 @@ import {
   //NavParams 
 } from "@ionic/angular";
 
-//import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
 import { 
   Http, 
   Headers, 
   RequestOptions 
 } from '@angular/http';
-
-//import { Injectable } from '@angular/core';
-//import { HttpClient } from '@angular/common/http';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -22,45 +18,46 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 // API REST.
 //import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
-import { authBasicConfig } from '../../../servicios/authbasic/auth-basic-config';
+import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-config';
 import { Router } from '@angular/router';
 
+
+
 @Component({
-  selector: 'app-ingresarqr',
-  templateUrl: './ingresarqr.page.html',
-  styleUrls: ['./ingresarqr.page.scss'],
+  selector: 'app-actualizarqr',
+  templateUrl: './actualizarqr.page.html',
+  styleUrls: ['./actualizarqr.page.scss'],
 })
-export class IngresarqrPage implements OnInit {
+export class ActualizarqrPage implements OnInit {
 
   url_base = authBasicConfig.url_base_qa;
   headers = new Headers(authBasicConfig.headers);
   options = new RequestOptions({ headers: this.headers });
 
-  nueva_muestra:FormGroup;
+  actualizar_muestra:FormGroup;
 
   constructor(
-    //public navCtrl: NavController,
     private alertCtrl: AlertController, 
     //private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
     private router: Router,
     private http: Http
-  ) { 
-    this.nueva_muestra = this.formBuilder.group({
+  ) {
+    this.actualizar_muestra = this.formBuilder.group({
       muestra_qr: ['', Validators.required]
     });
-  }
+   }
 
   ngOnInit() {
-  }
 
+  }
 
 
   guardarQRContinuar () {
 
 
     
-    const nueva_muestra = this.nueva_muestra.value;
+    const actualizar_muestra = this.actualizar_muestra.value;
 
     //console.log(nueva_muestra);
     //return;

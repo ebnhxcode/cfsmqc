@@ -13,7 +13,7 @@
   <ion-searchbar (ionInput)="filtrarMuestras($event)" [(ngModel)]="textoBusqueda" placeholder="Filtrar"></ion-searchbar>
   -->
   <div class="titulo" margin-top margin-bottom text-center>
-    <ng-container *ngIf="buscando">
+    <ng-container>
       <small style="font-size: 0.55em;">Desliza hacia abajo para cargar más muestras</small>
     </ng-container>
     <hr>

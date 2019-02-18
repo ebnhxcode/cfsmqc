@@ -43,6 +43,10 @@ const routes: Routes = [
   * Specific routes for module system based, in this case QC of proof
   */
   { 
+    path: 'actualizarqr', 
+    loadChildren: '../componentes/home/listasmuestras/actualizarqr/actualizarqr.module#ActualizarqrPageModule' 
+  },
+  { 
     path: 'ingresarqr',
     loadChildren: '../componentes/home/ingresarqr/ingresarqr.module#IngresarqrPageModule' 
   },

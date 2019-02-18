@@ -1,0 +1,39 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>Actualizar Código QR</ion-title>
+        <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
+      </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <form 
+  [formGroup]="actualizar_muestra" 
+  (ngSubmit)="guardarQRContinuar()">
+
+  <ion-item>
+      <ion-label position="stacked">Código QR</ion-label>
+
+      <ion-input
+        type="number" 
+        placeholder="Codigo QR"
+        formControlName="muestra_qr">
+      </ion-input>
+    </ion-item>
+
+
+  <ion-button 
+    fill="solid" 
+    expand="block" 
+    color="primary"
+    type="submit" 
+    [disabled]="!actualizar_muestra.valid">
+    Guardar y Continuar
+  </ion-button>
+
+
+  </form>
+
+</ion-content>

@@ -198,7 +198,13 @@ export class ListasmuestrasPage implements OnInit {
     /**
      * Le mando el QR por que aprobecho de usar esa misma opcion cuando se escanea la muestra
      */
-    this.router.navigate(['members', `/controlescalidad/${muestra.muestra_qr}`]);
+    
+    console.log(muestra);
+    if (!muestra.muestra_qr) {
+      
+    }
+    //this.router.navigate([`/members/controlescalidad/${muestra.muestra_qr}`]);
+
     /*
     this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
     */
