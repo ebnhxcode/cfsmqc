@@ -8,7 +8,7 @@ import {
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
 import { 
-  Http, 
+  //Http, 
   Headers, 
   RequestOptions 
 } from '@angular/http';
@@ -23,6 +23,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 // API REST.
 //import { cfsmBackendConfig } from '../../servicios/apirest/cfsm-backend-config';
 import { authBasicConfig } from '../../../servicios/authbasic/auth-basic-config';
+
+import { ApiService } from '../../../services/api/api.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -36,15 +38,18 @@ export class IngresarqrPage implements OnInit {
   headers = new Headers(authBasicConfig.headers);
   options = new RequestOptions({ headers: this.headers });
 
+  private loading:any;
+
   nueva_muestra:FormGroup;
 
   constructor(
     //public navCtrl: NavController,
     private alertCtrl: AlertController, 
-    //private loadingCtrl: LoadingController,
+    private loadingCtrl: LoadingController,
     private formBuilder: FormBuilder,
+    private apiService: ApiService,
     private router: Router,
-    private http: Http
+    //private http: Http
   ) { 
     this.nueva_muestra = this.formBuilder.group({
       muestra_qr: ['', Validators.required]
@@ -58,7 +63,28 @@ export class IngresarqrPage implements OnInit {
 
   guardarQRContinuar () {
 
+    const nueva_muestra = this.nueva_muestra.value;
 
+    this.presentCreandoMuestra().then( () => {
+
+
+      this.apiService.crearMuestra(nueva_muestra, nueva_muestra).subscribe(res => {
+        
+        this.loading.dismiss();
+        // Valida si vienen datos y si variable refresh es falso para obtener 
+        // las muestras que estaban suscritas a espera de carga con el servicio de la api
+        //if (res.status == 200 && res.nueva_muestra) {
+          
+          this.router.navigate([`/members/controlescalidad/${nueva_muestra.muestra_qr}`]);
+        //}
+        //console.log(res);
+
+      });
+
+    });
+
+
+    /*
     
     const nueva_muestra = this.nueva_muestra.value;
 
@@ -86,6 +112,7 @@ export class IngresarqrPage implements OnInit {
           //console.log(muestra);
 
           this.router.navigate(['controlescalidad', muestra.muestra_qr]);
+          this.router.navigate(`/controlescalidad/${muestra.muestra_qr}`);
 
           //this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);
 
@@ -96,6 +123,8 @@ export class IngresarqrPage implements OnInit {
           this.errorMuestraQR();
         }
       );
+
+      */
   }
 
   async errorMuestraQR () {
@@ -108,6 +137,15 @@ export class IngresarqrPage implements OnInit {
     });
 
     alert.present();
+  }
+
+  private async presentCreandoMuestra () { 
+    this.loading = await this.loadingCtrl.create({
+      message: 'Guardando...',
+      spinner: 'crescent',
+      //duration: 2000
+    });
+    return await this.loading.present();
   }
 
 }

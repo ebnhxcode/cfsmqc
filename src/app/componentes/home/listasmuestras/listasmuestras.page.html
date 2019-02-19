@@ -30,8 +30,8 @@
   <!-- {{ muestras | json }} -->
   <ion-list>
     <ng-container *ngFor="let muestra of muestras">
-      <ion-item-sliding>
-        <ion-item>
+      <!--<ion-item-sliding>-->
+        <ion-item (click)="irEditarMuestra(muestra)">
           <ion-label>
             <h2>
               <ng-template [ngIf]="muestra.categoria && muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
@@ -44,9 +44,7 @@
                     {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
                   </ion-badge>
               </ng-template>
-              · QR:{{muestra.muestra_qr}}
-  
-  
+              · QR:{{muestra.muestra_qr}} 
   
               <span style="float:right;" *ngIf="muestra.nota" (click)="irEditarMuestra(muestra)">
                 <ion-badge *ngIf="muestra.nota.nota_nombre=='A'" color="primary" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
@@ -71,13 +69,14 @@
           <ion-item-option color="info" (click)="anularMuestra(muestra)">Anular</ion-item-option>
         </ion-item-options>
         -->
-    
+        <!--
         <ion-item-options side="end">
           <ion-item-option (click)="irEditarMuestra(muestra)">Editar</ion-item-option>
         </ion-item-options>
+        -->
       
   
-      </ion-item-sliding>
+      <!--</ion-item-sliding>-->
     </ng-container>
   </ion-list>
 

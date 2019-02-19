@@ -17,6 +17,7 @@ export class AppComponent {
       url: '/home',
       icon: 'home'
     },
+    /*
     {
       title: 'Scan QR',
       url: '/home/scan',
@@ -47,6 +48,7 @@ export class AppComponent {
       url: '/#!',
       icon: 'cog'
     },
+    */
     /*
     {
       title: 'Cerrar Sesión',

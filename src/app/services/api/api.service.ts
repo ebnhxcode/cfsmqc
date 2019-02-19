@@ -42,6 +42,10 @@ export class ApiService {
     this.offlineManagerService.checkForEvents();
   }
 
+  /**
+   * 
+   * @param forceRefresh 
+   */
   obtenerDatosParametricosMuestras (forceRefresh: boolean = false): Observable<any> {
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || !forceRefresh) {
       if ( DEBUG ) {
@@ -92,6 +96,10 @@ export class ApiService {
     }
   }
 
+  /**
+   * 
+   * @param forceRefresh 
+   */
   consultarMuestras (forceRefresh): Observable<any> {
     if ( DEBUG && !forceRefresh ) {
       let toast = this.toastCtrl.create({
@@ -105,6 +113,10 @@ export class ApiService {
     return from(this.getLocalData('muestras'));
   }
 
+  /**
+   * 
+   * @param forceRefresh 
+   */
   obtenerMuestras (forceRefresh: boolean = false): Observable<any> {
 
     /*
@@ -160,6 +172,10 @@ export class ApiService {
     
   }
 
+  /**
+   * 
+   * @param muestra_id 
+   */
   obtenerMuestra (muestra_id): Observable<any> {
 
     let url = `${API_URL}/mobile/muestras/show`;
@@ -213,6 +229,10 @@ export class ApiService {
 
   }
 
+  /**
+   * 
+   * @param muestra_qr 
+   */
   obtenerMuestraPorQR (muestra_qr): Observable<any>  {
 
     let url = `${API_URL}/mobile/muestras/showByQR`;
@@ -257,6 +277,63 @@ export class ApiService {
 
   }
 
+  /**
+   * 
+   * @param muestra_id
+   */
+  obtenerMuestraPorID (muestra_id): Observable<any>  {
+
+    let url = `${API_URL}/mobile/muestras/show`;
+    let data = {
+      muestra_id:muestra_id
+    };
+
+    /**
+     * Si el usuario está trabajando con las muestras, se guardan en una base local
+     */
+    //if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline || true) {
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
+      //console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, datos obtenidos desde la base de datos local`,
+          duration :2000,
+          position: 'middle'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+
+      return this.obtenerMuestras(true);
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      //return from(this.offlineManagerService.storeRequest(url, 'POST', data));
+    } else {
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, data).pipe(
+        catchError(err => {
+            this.offlineManagerService.storeRequest(url, 'POST', data);
+            throw new Error(err); 
+        })
+      );
+
+    }
+
+  }
+
+
+  /**
+   * Al crear la muestra valida el tipo de conexion (Online|Offline) y en funcion a ello
+   * decide si guardar en local la peticion al bus de eventos por sincronizar ó
+   * lo envia directamente al backend
+   * 
+   * @param muestra 
+   * @param data 
+   */
   crearMuestra (muestra, data): Observable<any> {
     let url = `${API_URL}/mobile/muestras/store`;
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {
@@ -264,7 +341,7 @@ export class ApiService {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
-          duration :2000,
+          duration :700,
           position: 'middle'
         });
         toast.then(toast => toast.present());
@@ -278,7 +355,7 @@ export class ApiService {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `Muestra enviada`,
-          duration :1000,
+          duration :700,
           position: 'bottom'
         });
         toast.then(toast => toast.present());
@@ -293,7 +370,7 @@ export class ApiService {
             if ( DEBUG ) {
               let toast = this.toastCtrl.create({
                 message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
-                duration :2000,
+                duration :700,
                 position: 'middle'
               });
               toast.then(toast => toast.present());
@@ -314,7 +391,7 @@ export class ApiService {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
-          duration :3000,
+          duration :700,
           position: 'middle'
         });
         toast.then(toast => toast.present());
@@ -328,7 +405,7 @@ export class ApiService {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `Muestra enviada`,
-          duration :1000,
+          duration :700,
           position: 'bottom'
         });
         toast.then(toast => toast.present());
@@ -343,7 +420,57 @@ export class ApiService {
             if ( DEBUG ) {
               let toast = this.toastCtrl.create({
                 message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
-                duration :2000,
+                duration :700,
+                position: 'middle'
+              });
+              toast.then(toast => toast.present());
+              //console.log(data);
+            }
+            this.offlineManagerService.storeRequest(url, 'POST', muestra);
+            throw new Error(err); 
+        })
+      );
+
+    }
+  }
+
+  actualizarSoloQRMuestra (muestra): Observable<any> {
+    let url = `${API_URL}/mobile/muestras/updateQR`;
+    if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {//  || true
+      //console.log(data);
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
+          duration :700,
+          position: 'middle'
+        });
+        toast.then(toast => toast.present());
+        console.log(muestra);
+      }
+      /**
+       * almacena el dato de forma local en sqlite
+       */
+      return from(this.offlineManagerService.storeRequest(url, 'POST', muestra));
+    } else {
+      if ( DEBUG ) {
+        let toast = this.toastCtrl.create({
+          message: `Muestra enviada`,
+          duration :700,
+          position: 'bottom'
+        });
+        toast.then(toast => toast.present());
+        //console.log(data);
+      }
+      /**
+       * actualiza muestra en el backend
+       * captura errores
+       */
+      return this.http.post(url, muestra).pipe(
+        catchError(err => {
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: `Ocurrió un error en el envío, se guardara esta acción para su posterior envio`,
+                duration :700,
                 position: 'middle'
               });
               toast.then(toast => toast.present());
@@ -358,7 +485,6 @@ export class ApiService {
   }
 
 
-
   eliminarMuestra (muestra): Observable<any> {
     let url = `${API_URL}/mobile/muestras/delete`;
     if (this.networkService.getCurrentNetworkStatus() == ConnectionStatus.Offline) {//  || true
@@ -366,7 +492,7 @@ export class ApiService {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `No estás conectado a internet, se guardara esta acción para su posterior envio`,
-          duration :3000,
+          duration :700,
           position: 'middle'
         });
         toast.then(toast => toast.present());
@@ -380,7 +506,7 @@ export class ApiService {
       if ( DEBUG ) {
         let toast = this.toastCtrl.create({
           message: `Muestra eliminada`,
-          duration :1000,
+          duration :700,
           position: 'bottom'
         });
         toast.then(toast => toast.present());

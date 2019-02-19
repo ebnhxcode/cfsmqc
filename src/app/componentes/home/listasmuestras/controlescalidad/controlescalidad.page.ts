@@ -1,21 +1,32 @@
 import { Component, OnInit } from '@angular/core';
 
-import { NavController, LoadingController, AlertController, NavParams, Platform, ToastController } from "@ionic/angular";
+import { 
+  //NavController, 
+  LoadingController, 
+  AlertController, 
+  //NavParams, 
+  Platform, 
+  ToastController 
+} from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { 
+  //Http, 
+  Headers, 
+  RequestOptions 
+} from '@angular/http';
 
 
 import { BarcodeScanner, BarcodeScannerOptions } from '@ionic-native/barcode-scanner/ngx';
 
 
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
 
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { authBasicConfig } from '../../../../servicios/authbasic/auth-basic-config';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { ApiService } from '../../../../services/api/api.service';
 
@@ -181,7 +192,7 @@ export class ControlescalidadPage implements OnInit {
   }
 
   constructor(
-    private navCtrl: NavController,
+    //private navCtrl: NavController,
     private alertCtrl: AlertController, 
     private toastCtrl: ToastController, 
     private loadingCtrl: LoadingController,
@@ -190,7 +201,8 @@ export class ControlescalidadPage implements OnInit {
     private apiService: ApiService,
     private platform: Platform,
     private barcodeScanner: BarcodeScanner,
-    private http: Http
+    private router: Router,
+    //private http: Http
   ){
     const muestra_fecha_por_defecto = new Date().toISOString();
   }
@@ -315,7 +327,7 @@ export class ControlescalidadPage implements OnInit {
       
 
 
-      this.apiService.checkForEvents();
+      //this.apiService.checkForEvents();
 
       return;
       
@@ -369,15 +381,18 @@ export class ControlescalidadPage implements OnInit {
   }
 
   irCalidadCondicionMenu (muestra) {
-    this.navCtrl.navigateForward(`/calidadcondicionmenu/${muestra.muestra_id}`);
+    this.router.navigate([`/members/calidadcondicionmenu/${muestra.muestra_id}`]);
+    //this.navCtrl.navigateForward(`/calidadcondicionmenu/${muestra.muestra_id}`);
   }
 
   irHome () {
-    this.navCtrl.navigateForward('/home');
+    this.router.navigate(['members', 'home']);
+    //this.navCtrl.navigateForward('/home');
   }
 
   irListaMuestras () {
-    this.navCtrl.navigateForward('/listasmuestras');
+    this.router.navigate(['members', 'listasmuestras']);
+    //this.navCtrl.navigateForward('/');
   }
 
   public calcularTolerancia () {    

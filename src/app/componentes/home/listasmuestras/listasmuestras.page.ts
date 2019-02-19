@@ -7,7 +7,8 @@ import {
   LoadingController, 
   //AlertController, 
   //NavParams, 
-  Platform 
+  Platform, 
+  ToastController
 } from "@ionic/angular";
 
 //import { Http, Headers, RequestOptions /*Response*/ } from '@angular/http';
@@ -51,6 +52,7 @@ export class ListasmuestrasPage implements OnInit {
     //private navCtrl: NavController,
     //private alertCtrl: AlertController, 
     private loadingCtrl: LoadingController,
+    private toastCtrl: ToastController,
     private apiService: ApiService,
     private platform: Platform,
     private router: Router
@@ -198,12 +200,19 @@ export class ListasmuestrasPage implements OnInit {
     /**
      * Le mando el QR por que aprobecho de usar esa misma opcion cuando se escanea la muestra
      */
-    
-    console.log(muestra);
+    //console.log(muestra);
     if (!muestra.muestra_qr) {
-      
+      let toast = this.toastCtrl.create({
+        message: `El código QR no ha sido ingresado, debe completar antes de continuar`,
+        duration :1500,
+        position: 'middle'
+      });
+      toast.then(toast => toast.present());  
+      return this.router.navigate([`/members/actualizarqr/${muestra.muestra_id}`]);
+    } else {
+      return this.router.navigate([`/members/controlescalidad/${muestra.muestra_qr}`]);
     }
-    //this.router.navigate([`/members/controlescalidad/${muestra.muestra_qr}`]);
+    
 
     /*
     this.navCtrl.navigateForward(`/controlescalidad/${muestra.muestra_qr}`);

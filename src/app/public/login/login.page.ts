@@ -148,7 +148,16 @@ export class LoginPage implements OnInit {
           this.authService.login();
           //this.router.navigate(['home']);
         },
-        err => { console.log(err); },
+        err => { 
+          //console.log(err); 
+          this.loading.dismiss();
+          let toast = this.toastCtrl.create({
+            message: 'Credenciales Invalidas',
+            duration: 1000,
+            position: 'bottom'
+          });
+          toast.then( toast => toast.present());
+        },
         ()=>{}
       );
 
@@ -181,7 +190,16 @@ export class LoginPage implements OnInit {
               //this.http.post(`${this.url_base}/datosUsuario`, credenciales, this.options).subscribe( data => { console.log(data); } );
               
             },
-            err => { console.log(err); },
+            err => { 
+              //console.log(err); 
+              this.loading.dismiss();
+              let toast = this.toastCtrl.create({
+                message: 'Credenciales Invalidas',
+                duration: 1000,
+                position: 'bottom'
+              });
+              toast.then( toast => toast.present());
+            },
             ()=>{}
           );
       }
@@ -191,7 +209,7 @@ export class LoginPage implements OnInit {
           this.credenciales.value.password == credencialesUsuario.password) {
             let toast = this.toastCtrl.create({
               message: 'Iniciando sesión.',
-              duration: 4000,
+              duration: 1000,
               position: 'bottom'
             });
             toast.then( toast => toast.present());

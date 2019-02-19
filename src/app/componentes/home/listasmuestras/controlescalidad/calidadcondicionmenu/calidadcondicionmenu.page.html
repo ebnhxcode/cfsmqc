@@ -1,10 +1,11 @@
-<!--
 <ion-header>
   <ion-toolbar>
     <ion-title>Calidad y Condición</ion-title>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
--->
 
 <ion-content padding>
 
@@ -52,7 +53,7 @@
         <ion-label>
 
           <h2>Calidad</h2>
-          <p>Ingresar defectos de calidad.</p>
+          <p>Ver más</p>
 
         </ion-label>
 
@@ -81,7 +82,7 @@
         </ion-avatar>
         <ion-label>
           <h2>Condición</h2>
-          <p>Ingresar defectos de condición.</p>
+          <p>Ver más</p>
         </ion-label>
 
       
@@ -128,10 +129,12 @@
       <!-- Numeros 1 y 2 indican condicion y calidad respectivamente -->
       <ion-fab-list side="top" (click)="abrirModalFormularioCalidadCondicion(1, 'Calidad', muestra_id)">
         <ion-img src="/assets/imgs/calidad.png" round ion-fab color="clear"></ion-img>
+        <span>Calidad</span>
       </ion-fab-list>
   
       <ion-fab-list side="start" (click)="abrirModalFormularioCalidadCondicion(2, 'Condición', muestra_id)">
         <ion-img src="/assets/imgs/condicion.png" round ion-fab color="clear"></ion-img>
+        <span>Condición</span>
       </ion-fab-list>
   
     </ion-fab>
@@ -139,8 +142,10 @@
 
 </ion-content>
 
+<!--
 <ion-footer padding>
   <ion-button fill="solid" expand="block" color="light" (click)="irControlCalidad(muestra_id)">
     Volver
   </ion-button>
 </ion-footer>
+-->

@@ -7,33 +7,106 @@
       </ion-toolbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content>
 
   <form 
-  [formGroup]="actualizar_muestra" 
-  (ngSubmit)="guardarQRContinuar()">
+    padding
+    [formGroup]="actualizar_muestra" 
+    (ngSubmit)="guardarQRContinuar()">
 
-  <ion-item>
-      <ion-label position="stacked">Código QR</ion-label>
+    <ion-item>
+        <ion-label position="stacked">Por favor ingrese código QR</ion-label>
 
-      <ion-input
-        type="number" 
-        placeholder="Codigo QR"
-        formControlName="muestra_qr">
-      </ion-input>
-    </ion-item>
+        <ion-input
+          type="number" 
+          placeholder="Codigo QR"
+          formControlName="muestra_qr">
+        </ion-input>
+      </ion-item>
 
 
-  <ion-button 
-    fill="solid" 
-    expand="block" 
-    color="primary"
-    type="submit" 
-    [disabled]="!actualizar_muestra.valid">
-    Guardar y Continuar
-  </ion-button>
+    <ion-button 
+      fill="solid" 
+      expand="block" 
+      color="primary"
+      type="submit" 
+      [disabled]="!actualizar_muestra.valid">
+      Guardar y Continuar
+    </ion-button>
 
 
   </form>
+
+  <ion-card *ngIf="muestra">
+
+    <ion-card-header>      
+      <ion-card-title></ion-card-title>
+      <ion-card-subtitle>Previsualización de la muestra</ion-card-subtitle>
+    </ion-card-header>
+    
+    <ion-card-content>
+      <ion-label *ngIf="muestra">
+        <h2>
+          <ng-template [ngIf]="muestra.categoria && muestra.categoria.categoria_nombre=='Premium'" [ngIfElse]="Standard">
+            <ion-badge item-end color="warning">
+              {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
+            </ion-badge>
+          </ng-template>  
+          <ng-template #Standard>
+              <ion-badge item-end color="primary">
+                {{(muestra.categoria)?muestra.categoria.categoria_nombre:'Sin categoría'}}
+              </ion-badge>
+          </ng-template> 
+    
+          <span style="float:right;" *ngIf="muestra.nota">
+            <ion-badge *ngIf="muestra.nota.nota_nombre=='A'" color="primary" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+            <ion-badge *ngIf="muestra.nota.nota_nombre=='B'" color="success" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+            <ion-badge *ngIf="muestra.nota.nota_nombre=='C'" color="warning" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+            <ion-badge *ngIf="muestra.nota.nota_nombre=='O'" color="danger" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+            <ion-badge *ngIf="muestra.nota.nota_nombre=='X'" color="dark" item-end>{{ muestra.nota.nota_nombre }}</ion-badge>
+          </span>
+          <span style="float:right;" *ngIf="!muestra.nota">Nota sin procesar</span>
+        </h2>
+        <h3>{{(muestra.productor)?muestra.productor.productor_nombre:'Sin productor'}}</h3>
+        <p>
+          Fecha: {{(muestra.muestra_fecha)?muestra.muestra_fecha:'Fecha sin ingresar'}}
+          <br>
+          QR: {{(muestra.muestra_qr)?muestra.muestra_qr:'QR sin ingresar'}}
+          <br>
+          Región: {{(muestra.region)?muestra.region.region_nombre:'Sin región'}}
+          <br>
+          Especie: {{(muestra.especie)?muestra.especie.especie_nombre:'Sin especie'}}
+          <br>
+          Variedad: {{(muestra.variedad)?muestra.variedad.variedad_nombre:'Sin variedad'}}
+          <br>
+          Calibre: {{(muestra.calibre)?muestra.calibre.calibre_nombre:'Sin calibre'}}
+          <br>
+          Embalaje: {{(muestra.embalaje)?muestra.embalaje.embalaje_nombre:'Sin embalaje'}}
+          <br>
+          Etiqueta: {{(muestra.etiqueta)?muestra.etiqueta.etiqueta_nombre:'Sin etiqueta'}}
+          <br>
+          Nota: {{(muestra.nota)?muestra.nota.nota_nombre:'Sin calificación'}}        
+          <br>
+          Cajas: {{(muestra.muestra_cajas)?muestra.muestra_cajas:'Sin cajas'}}
+          <br>
+          Lote: {{(muestra.lote_codigo)?muestra.lote_codigo:'Sin código de lote'}}
+          <br>
+          Peso: {{(muestra.muestra_peso)?muestra.muestra_peso:'Sin peso'}}
+          <br>
+          Estado: {{(muestra.muestra_estado)?muestra.muestra_estado.muestra_estado_nombre:'Sin estado'}}
+          <br>
+          Apariencia: {{(muestra.apariencia)?muestra.apariencia.apariencia_nombre:'Sin apariencia'}}
+          <br>
+          Bolsas: {{(muestra.muestra_bolsas)?muestra.muestra_bolsas:'Sin bolsas'}}
+          <br>
+          Racimos: {{(muestra.muestra_racimos)?muestra.muestra_racimos:'Sin racimos'}}
+          <br>
+          Brix: {{(muestra.muestra_brix)?muestra.muestra_brix:'Sin brix'}}
+          <br>
+          Desgrane: {{(muestra.muestra_desgrane)?muestra.muestra_desgrane:'Sin desgrane'}}
+        </p>
+      </ion-label>
+    </ion-card-content>
+  </ion-card>
 
 </ion-content>

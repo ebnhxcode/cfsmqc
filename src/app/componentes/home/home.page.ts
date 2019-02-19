@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, MenuController } from "@ionic/angular";
+import { 
+  //NavController, 
+  MenuController 
+} from "@ionic/angular";
 
 /**
  * Modulos de uso de scanner QR y Barra
@@ -28,7 +31,7 @@ export class HomePage {
   scan:any='';
 
   constructor (
-    private navCtrl: NavController,
+    //private navCtrl: NavController,
     private menuCtrl: MenuController,
     private router: Router,
     private activatedRoute: ActivatedRoute,
@@ -65,7 +68,7 @@ export class HomePage {
       this.scannedData = data; //JSON.stringify(data);
       if (this.scannedData) { //alert(this.scannedData);alert(JSON.stringify(this.scannedData));
 
-        this.router.navigate(['members', 'ingresarqr', this.scannedData.text]);
+        this.router.navigate([`/members/ingresarqr/${this.scannedData.text}`]);
         /*
         return;
         this.navCtrl.navigateForward(`/controlescalidad/${this.scannedData.text}`);
