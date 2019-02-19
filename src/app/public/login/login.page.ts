@@ -20,6 +20,8 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../services/api/api.service';
 import { AuthenticationService } from 'src/app/services/authentication/authentication.service';
 
+const DEBUG = false;
+
 @Component({
   selector: 'app-login',
   templateUrl: './login.page.html',
@@ -100,9 +102,12 @@ export class LoginPage implements OnInit {
         position: 'bottom'
       });
       toast.then( toast => toast.present());
-    } else {
+    } 
+    /*
+    else {
       this.login();
     }
+    */
 
     /*
     // Para que cachee los datos del usuario
@@ -167,14 +172,15 @@ export class LoginPage implements OnInit {
 
     let credencialesUsuario = JSON.parse(localStorage.getItem('credencialesUsuario'));
 
-    console.log(this.apiService.checkearConexionOnlineAplicacion());
+    //console.log(this.apiService.checkearConexionOnlineAplicacion());
     if ( this.apiService.checkearConexionOnlineAplicacion() === true ) {
 
-      
+      /*
       if (credencialesUsuario) {
         // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
         this.autoLogin(credencialesUsuario);
       } else {
+        */
         this.presentLogin();
         const credenciales = this.credenciales.value;
         this.laravelPassportService
@@ -202,17 +208,20 @@ export class LoginPage implements OnInit {
             },
             ()=>{}
           );
-      }
+      /*}*/
     } else {
       if (credencialesUsuario) {
         if (this.credenciales.value.email == credencialesUsuario.email && 
           this.credenciales.value.password == credencialesUsuario.password) {
-            let toast = this.toastCtrl.create({
-              message: 'Iniciando sesión.',
-              duration: 1000,
-              position: 'bottom'
-            });
-            toast.then( toast => toast.present());
+
+            if ( DEBUG ) {
+              let toast = this.toastCtrl.create({
+                message: 'Iniciando sesión.',
+                duration: 1000,
+                position: 'bottom'
+              });
+              toast.then( toast => toast.present());
+            }
             // Checkea si existen datos de usuario en local storage e inicia sesion con esos datos
             this.router.navigate(['members', 'home']);
         }

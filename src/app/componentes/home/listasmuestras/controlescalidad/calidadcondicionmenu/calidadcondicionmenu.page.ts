@@ -5,7 +5,7 @@ import { NavController, LoadingController, AlertController, ModalController, Nav
 import { Http, Headers, RequestOptions } from '@angular/http';
 
 import { ModalformulariocalidadcondicionPage } from './modals/modalformulariocalidadcondicion/modalformulariocalidadcondicion.page';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
   // API REST.
   import { cfsmBackendConfig } from '../../../../../servicios/apirest/cfsm-backend-config';
@@ -33,11 +33,12 @@ export class CalidadcondicionmenuPage implements OnInit {
   nota_global_muestra:any='';
 
   constructor(
-    public navCtrl: NavController,
-    public alertCtrl: AlertController, 
-    public loadingCtrl: LoadingController,
-    public modalCtrl: ModalController,
-    public activatedRoute: ActivatedRoute,
+    private navCtrl: NavController,
+    private alertCtrl: AlertController, 
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
     public http: Http
   ) {
     this.muestra_id = this.activatedRoute.snapshot.paramMap.get('muestra_id');
@@ -123,19 +124,23 @@ export class CalidadcondicionmenuPage implements OnInit {
   }
 
   irHome () {
-    this.navCtrl.navigateForward('/home'); 
+    this.router.navigate(['members', 'home']);
+    //this.navCtrl.navigateForward('/home'); 
   }
 
   irControlCalidad (muestra_id) {
-    this.navCtrl.navigateForward(`/controlescalidad/${this.muestra.muestra_qr}`);
+    this.router.navigate([`/members/controlescalidad/${this.muestra.muestra_qr}`]);
+    //this.navCtrl.navigateForward(`/controlescalidad/${this.muestra.muestra_qr}`);
   }
 
   irCalculoCondicion (muestra_id) {
-    this.navCtrl.navigateForward(`/calculocondicion/${muestra_id}`);
+    this.router.navigate([`/members/calculocondicion/${muestra_id}`]);
+    //this.navCtrl.navigateForward(`/calculocondicion/${muestra_id}`);
   }
 
   irCalculoCalidad (muestra_id) {
-    this.navCtrl.navigateForward(`/calculocalidad/${muestra_id}`);
+    this.router.navigate([`/members/calculocalidad/${muestra_id}`]);
+    //this.navCtrl.navigateForward(`/calculocalidad/${muestra_id}`);
   }
 
   async abrirModalFormularioCalidadCondicion (concepto_id, concepto_nombre, muestra_id) {
